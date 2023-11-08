@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UserRepository.DbContext
+namespace UserRepository.UserLogic
 {
-    public class UserContext
+    internal class UserLogic
     {
     }
 }

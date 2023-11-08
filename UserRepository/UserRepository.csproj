@@ -12,8 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UserLogic\" />
     <Folder Include="CvLogic\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UserDomain\UserDomain.csproj" />
   </ItemGroup>
 
 </Project>
