@@ -13,37 +13,41 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "User", "User", "{3F8EB5EE-C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Vacancie", "Vacancie", "{A4E46746-43A1-4FAC-9C8F-E9E1E68BD1DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CategoryAPI", "CategoryAPI\CategoryAPI.csproj", "{2FB1BC35-9431-40AD-85ED-0D02244712B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CategoryAPI", "CategoryAPI\CategoryAPI.csproj", "{2FB1BC35-9431-40AD-85ED-0D02244712B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CategoryDomain", "CategoryDomain\CategoryDomain.csproj", "{0DC78B2E-09B5-4FED-B5FD-CF7E42A5D1CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CategoryDomain", "CategoryDomain\CategoryDomain.csproj", "{0DC78B2E-09B5-4FED-B5FD-CF7E42A5D1CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CategoryRepository", "CategoryRepository\CategoryRepository.csproj", "{F9E0EE84-C7A8-40E6-BD4C-EC8172C1D4C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CategoryRepository", "CategoryRepository\CategoryRepository.csproj", "{F9E0EE84-C7A8-40E6-BD4C-EC8172C1D4C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CategoryService", "CategoryService\CategoryService.csproj", "{6D88F0F4-E50F-45C8-B75C-BF6EBDC48B06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CategoryService", "CategoryService\CategoryService.csproj", "{6D88F0F4-E50F-45C8-B75C-BF6EBDC48B06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompanyAPI", "CompanyAPI\CompanyAPI.csproj", "{9DC219FF-1EA8-477B-83E1-627D0D0F54D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompanyAPI", "CompanyAPI\CompanyAPI.csproj", "{9DC219FF-1EA8-477B-83E1-627D0D0F54D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompanyDomain", "CompanyDomain\CompanyDomain.csproj", "{23CFD536-C8D2-4B69-BC31-17DE18DD83B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompanyDomain", "CompanyDomain\CompanyDomain.csproj", "{23CFD536-C8D2-4B69-BC31-17DE18DD83B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompanyRepository", "CompanyRepository\CompanyRepository.csproj", "{ADFD04D3-497D-4191-8CAD-7915C5E35FE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompanyRepository", "CompanyRepository\CompanyRepository.csproj", "{ADFD04D3-497D-4191-8CAD-7915C5E35FE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompanyService", "CompanyService\CompanyService.csproj", "{518A704E-51AF-4152-8167-059C17CE1A06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompanyService", "CompanyService\CompanyService.csproj", "{518A704E-51AF-4152-8167-059C17CE1A06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserAPI", "UserAPI\UserAPI.csproj", "{625C075B-3442-489C-97AA-38445C4BA36E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserAPI", "UserAPI\UserAPI.csproj", "{625C075B-3442-489C-97AA-38445C4BA36E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserDomain", "UserDomain\UserDomain.csproj", "{05150096-A2E1-45E4-9C0A-DB6B320B2E8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserDomain", "UserDomain\UserDomain.csproj", "{05150096-A2E1-45E4-9C0A-DB6B320B2E8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserRepository", "UserRepository\UserRepository.csproj", "{D78A066B-ABBC-4A42-8773-914913B87757}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserRepository", "UserRepository\UserRepository.csproj", "{D78A066B-ABBC-4A42-8773-914913B87757}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService", "UserService\UserService.csproj", "{96BF6494-D2FA-44A9-B4F0-6A41DDA8B49B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserService", "UserService\UserService.csproj", "{96BF6494-D2FA-44A9-B4F0-6A41DDA8B49B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacancieAPI", "VacancieAPI\VacancieAPI.csproj", "{1DEBD455-F792-47BA-A236-B77F8E456580}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacancieAPI", "VacancieAPI\VacancieAPI.csproj", "{1DEBD455-F792-47BA-A236-B77F8E456580}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacancieDomain", "VacancieDomain\VacancieDomain.csproj", "{35EAD6DF-FBE9-4EBC-A1D4-B2958EC2AEEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacancieDomain", "VacancieDomain\VacancieDomain.csproj", "{35EAD6DF-FBE9-4EBC-A1D4-B2958EC2AEEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacancieRepository", "VacancieRepository\VacancieRepository.csproj", "{B82DA501-3253-49DC-9DA9-FEBDAEC9A773}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacancieRepository", "VacancieRepository\VacancieRepository.csproj", "{B82DA501-3253-49DC-9DA9-FEBDAEC9A773}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacancieService", "VacancieService\VacancieService.csproj", "{E23C1C34-1AEF-4992-9CCA-EF5F14D2A4EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacancieService", "VacancieService\VacancieService.csproj", "{E23C1C34-1AEF-4992-9CCA-EF5F14D2A4EB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Location", "Location", "{0948F793-4166-4EA3-A8E5-A8942D9B940A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationAPI", "LocationAPI\LocationAPI.csproj", "{6AC9722E-FF9B-451D-B450-8AB841E7AB04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -115,6 +119,10 @@ Global
 		{E23C1C34-1AEF-4992-9CCA-EF5F14D2A4EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E23C1C34-1AEF-4992-9CCA-EF5F14D2A4EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E23C1C34-1AEF-4992-9CCA-EF5F14D2A4EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AC9722E-FF9B-451D-B450-8AB841E7AB04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AC9722E-FF9B-451D-B450-8AB841E7AB04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AC9722E-FF9B-451D-B450-8AB841E7AB04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AC9722E-FF9B-451D-B450-8AB841E7AB04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -140,6 +148,8 @@ Global
 		{35EAD6DF-FBE9-4EBC-A1D4-B2958EC2AEEE} = {A4E46746-43A1-4FAC-9C8F-E9E1E68BD1DC}
 		{B82DA501-3253-49DC-9DA9-FEBDAEC9A773} = {A4E46746-43A1-4FAC-9C8F-E9E1E68BD1DC}
 		{E23C1C34-1AEF-4992-9CCA-EF5F14D2A4EB} = {A4E46746-43A1-4FAC-9C8F-E9E1E68BD1DC}
+		{0948F793-4166-4EA3-A8E5-A8942D9B940A} = {645AAE3B-B225-4B52-A322-6C01918CC1BD}
+		{6AC9722E-FF9B-451D-B450-8AB841E7AB04} = {0948F793-4166-4EA3-A8E5-A8942D9B940A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C8FCC14C-0EC8-493C-905A-808C231F52A6}

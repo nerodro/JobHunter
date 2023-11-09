@@ -1,4 +1,4 @@
-﻿namespace UserService
+﻿namespace LocationDomain
 {
     public class Class1
     {

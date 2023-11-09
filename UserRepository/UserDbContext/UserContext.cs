@@ -10,8 +10,6 @@ namespace UserRepository.UserDbContext
 {
     public class UserContext : DbContext
     {
-        public DbSet<CityModel> Cities { get; set; }
-        public DbSet<CountryModel> Country { get; set; }
         public DbSet<CvModel> Cv { get; set; }
         public DbSet<RoleModel> Role { get; set; }
         public DbSet<UserModel> User { get; set; }

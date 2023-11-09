@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using UserDomain.Models;
 
-namespace UserRepository.UserLogic
+namespace UserRepository.CvLogic
 {
-    public interface IUserLogic<T> where T : UserModel
+    public interface ICvLogic<T> where T : CvModel
     {
         IEnumerable<T> GetAll();
         T Get(long id);

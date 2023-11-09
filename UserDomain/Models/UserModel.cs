@@ -16,9 +16,7 @@ namespace UserDomain.Models
         public string Password { get; set; } = null!;
         public int Phone { get; set; }
         public int CityId { get; set; }
-        public virtual CityModel City { get; set; }
         public int CountryId { get; set; }
-        public virtual CountryModel Country { get; set; }
         public int RoleId { get; set; }
         public virtual RoleModel RoleModel { get; set; }
         public virtual List<CvModel> CvModel { get; set; }
@@ -26,8 +24,6 @@ namespace UserDomain.Models
         {
             CvModel = new List<CvModel>();
             RoleModel = new RoleModel();
-            City = new CityModel();
-            Country = new CountryModel();
         }
     }
 }

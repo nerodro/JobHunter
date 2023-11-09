@@ -11,4 +11,13 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CvService\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UserDomain\UserDomain.csproj" />
+    <ProjectReference Include="..\UserRepository\UserRepository.csproj" />
+  </ItemGroup>
+
 </Project>
