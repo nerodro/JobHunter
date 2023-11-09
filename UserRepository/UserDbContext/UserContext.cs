@@ -11,6 +11,7 @@ namespace UserRepository.UserDbContext
         public DbSet<LanguageModel> Language { get; set; }
         public UserContext(DbContextOptions<UserContext> options) : base(options)
         {
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
     }
