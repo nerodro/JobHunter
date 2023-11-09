@@ -12,10 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CvService\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\UserDomain\UserDomain.csproj" />
     <ProjectReference Include="..\UserRepository\UserRepository.csproj" />
   </ItemGroup>

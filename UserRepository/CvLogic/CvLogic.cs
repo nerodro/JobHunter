@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UserDomain.Models;
 using UserRepository.UserDbContext;
 
@@ -72,6 +67,18 @@ namespace UserRepository.CvLogic
         public IEnumerable<T> GetAll()
         {
             return _dbSet.AsEnumerable();
+        }
+
+        public void DeleteOfUser(List<T> entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            if (entity.Count() != 0)
+            {
+                _dbSet.RemoveRange(entity);
+            }
         }
     }
 }

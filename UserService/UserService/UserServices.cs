@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UserDomain.Models;
+﻿using UserDomain.Models;
 using UserRepository.UserLogic;
 
 namespace UserService.UserService
 {
-    public class UserService : IUserService
+    public class UserServices : IUserService
     {
         private IUserLogic<UserModel> _user;
-        public UserService(IUserLogic<UserModel> user)
+        public UserServices(IUserLogic<UserModel> user)
         {
             _user = user;
         }

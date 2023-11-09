@@ -16,4 +16,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\UserDomain\UserDomain.csproj" />
+    <ProjectReference Include="..\UserRepository\UserRepository.csproj" />
+    <ProjectReference Include="..\UserService\UserService.csproj" />
+  </ItemGroup>
+
 </Project>
