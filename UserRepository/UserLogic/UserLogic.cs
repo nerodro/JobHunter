@@ -1,14 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using UserDomain.Models;
-using UserRepository.UserDbContext;
+using UserRepository.UserContext;
 
 namespace UserRepository.UserLogic
 {
     public class UserLogic<T> : IUserLogic<T> where T : UserModel
     {
-        private readonly UserContext _userContext;
+        private readonly UserDbContext _userContext;
         private DbSet<T> _dbSet;
-        public UserLogic(UserContext context)
+        public UserLogic(UserDbContext context)
         {
             this._userContext = context;
             _dbSet = context.Set<T>();
@@ -25,7 +30,7 @@ namespace UserRepository.UserLogic
 
         public async Task Delete(T entity)
         {
-            if(entity == null)
+            if (entity == null)
             {
                 throw new ArgumentNullException("entity");
             }
@@ -33,15 +38,15 @@ namespace UserRepository.UserLogic
             await _userContext.SaveChangesAsync();
         }
 
-        public async Task<T> Get(long id)
+        public async Task<T> Get(int id)
         {
-            if(id != 0) 
+            if (id == 0)
             {
                 throw new ArgumentNullException("entity");
             }
             return await _dbSet.SingleOrDefaultAsync(x => x.Id == id);
         }
-       
+
         public void Remove(T entity)
         {
             if (entity == null)
@@ -68,6 +73,5 @@ namespace UserRepository.UserLogic
         {
             return _dbSet.AsEnumerable();
         }
-
     }
 }

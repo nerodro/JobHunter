@@ -1,84 +1,75 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using UserDomain.Models;
-using UserRepository.UserDbContext;
+using UserRepository.UserContext;
+using UserRepository.UserLogic;
 
 namespace UserRepository.CvLogic
 {
     public class CvLogic<T> : ICvLogic<T> where T : CvModel
     {
-        private readonly UserContext _userContext;
-        private DbSet<T> _dbSet;
-        public CvLogic(UserContext context)
+        private readonly UserDbContext context;
+        private DbSet<T> entities;
+        string errorMessage = string.Empty;
+
+        public CvLogic(UserDbContext context)
         {
-            this._userContext = context;
-            _dbSet = context.Set<T>();
+            this.context = context;
+            entities = context.Set<T>();
         }
-        public async Task Create(T entity)
+        public IEnumerable<T> GetAll()
+        {
+            return entities.AsEnumerable();
+        }
+
+        public T Get(long id)
+        {
+            return entities.SingleOrDefault(s => s.Id == id);
+        }
+        public void Create(T entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException("entity");
             }
-            await _dbSet.AddAsync(entity);
-            await _userContext.SaveChangesAsync();
+            entities.Add(entity);
+            context.SaveChanges();
         }
 
-        public async Task Delete(T entity)
+        public void Update(T entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException("entity");
             }
-            _dbSet.Remove(entity);
-            await _userContext.SaveChangesAsync();
+            context.SaveChanges();
         }
 
-        public async Task<T> Get(long id)
+        public void Delete(T entity)
         {
-            if (id != 0)
+            if (entity == null)
             {
                 throw new ArgumentNullException("entity");
             }
-            return await _dbSet.SingleOrDefaultAsync(x => x.Id == id);
+            entities.Remove(entity);
+            context.SaveChanges();
         }
-
         public void Remove(T entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException("entity");
             }
-            _dbSet.Remove(entity);
+            entities.Remove(entity);
         }
 
-        public async Task SaveChanges()
+        public void SaveChanges()
         {
-            await _userContext.SaveChangesAsync();
-        }
-
-        public async Task Update(T entity)
-        {
-            if (entity == null)
-            {
-                throw new ArgumentNullException("entity");
-            }
-            await _userContext.SaveChangesAsync();
-        }
-        public IAsyncEnumerable<T> GetAll()
-        {
-            return _dbSet.AsAsyncEnumerable();
-        }
-
-        public void DeleteOfUser(List<T> entity)
-        {
-            if (entity == null)
-            {
-                throw new ArgumentNullException("entity");
-            }
-            if (entity.Count() != 0)
-            {
-                _dbSet.RemoveRange(entity);
-            }
+            context.SaveChanges();
         }
     }
 }

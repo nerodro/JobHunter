@@ -1,14 +1,12 @@
-﻿using UserDomain.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace UserService.CvService
 {
     public interface ICvService
     {
-        IAsyncEnumerable<CvModel> GetAll();
-        Task<CvModel> GetCV(int id);
-        Task Create(CvModel cv);
-        Task Update(CvModel cv);
-        void DeleteOfUser(int id);
-        Task Delete(int id);
     }
 }

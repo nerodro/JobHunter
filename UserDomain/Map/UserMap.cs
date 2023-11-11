@@ -16,7 +16,6 @@ namespace UserDomain.Map
             entityTypeBuilder.Property(x => x.CityId).IsRequired();
             entityTypeBuilder.Property(x=> x.CountryId).IsRequired();
             entityTypeBuilder.Property(x => x.Password).IsRequired();
-            entityTypeBuilder.Property(x => x.RoleId).IsRequired();
         }
     }
 }

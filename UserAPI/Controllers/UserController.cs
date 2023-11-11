@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using UserAPI.ViewModel;
 using UserDomain.Models;
 using UserService.UserService;
@@ -15,7 +16,7 @@ namespace UserAPI.Controllers
             _userService = userService;
         }
         [HttpPost("CreateUser")]
-        public async Task<ActionResult<UserViewModel>> CreateUser(UserViewModel model)
+        public async Task<IActionResult> CreateUser(UserViewModel model)
         {
             UserModel user = new UserModel
             {
@@ -27,11 +28,12 @@ namespace UserAPI.Controllers
                 CountryId = model.CountryId,
                 Surname = model.Surname,
                 RoleId = model.RoleId,
+                Password = model.Password,
             };
-            if(model.Email != null && model.Name != null) 
+            if (model.Email != null && model.Name != null)
             {
                 await _userService.Create(user);
-                return CreatedAtAction("SingleUser", new { id = user.Id }, model);
+                return CreatedAtAction("UserProfile", new { id = user.Id }, model);
             }
             return BadRequest("Не все обязательные поля были заполнены");
         }

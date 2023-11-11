@@ -12,12 +12,12 @@
         public int CityId { get; set; }
         public int CountryId { get; set; }
         public int RoleId { get; set; }
-        public RoleModel Role { get; set; }
+        public virtual RoleModel Role { get; set; }
         public virtual List<CvModel> CvModel { get; set; }
         public UserModel()
         {
             CvModel = new List<CvModel>();
-            Role = new RoleModel();
+            //Role = new RoleModel();
         }
     }
 }
