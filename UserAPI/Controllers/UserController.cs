@@ -15,7 +15,7 @@ namespace UserAPI.Controllers
             _userService = userService;
         }
         [HttpPost("CreateUser")]
-        public ActionResult<UserViewModel> CreateUser(UserViewModel model)
+        public async Task<ActionResult<UserViewModel>> CreateUser(UserViewModel model)
         {
             UserModel user = new UserModel
             {
@@ -31,7 +31,7 @@ namespace UserAPI.Controllers
             };
             if(model.Email != null && model.Name != null) 
             {
-                _userService.Create(user);
+                await _userService.Create(user);
                 return CreatedAtAction("SingleUser", new { id = user.Id }, model);
             }
             return BadRequest("Не все обязательные поля были заполнены");

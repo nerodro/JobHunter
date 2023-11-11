@@ -10,27 +10,27 @@ namespace UserService.UserService
         {
             _user = user;
         }
-        public IEnumerable<UserModel> GetAll()
+        public IAsyncEnumerable<UserModel> GetAll()
         {
             return _user.GetAll();
         }
-        public UserModel GetUser(int id)
+        public async Task<UserModel> GetUser(int id)
         {
-            return _user.Get(id);
+            return await _user.Get(id);
         }
-        public void Create(UserModel user)
+        public async Task Create(UserModel user)
         {
-            _user.Create(user);
+            await _user.Create(user);
         }
-        public void Update(UserModel user)
+        public async Task Update(UserModel user)
         {
-            _user.Update(user);
+            await _user.Update(user);
         }
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            UserModel user = GetUser(id);
-            _user.Delete(user);
-            _user.SaveChanges();
+            UserModel user = await GetUser(id);
+            await _user.Delete(user);
+            await _user.SaveChanges();
         }
     }
 }
