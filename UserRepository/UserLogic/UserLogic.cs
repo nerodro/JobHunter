@@ -64,9 +64,9 @@ namespace UserRepository.UserLogic
             }
             await _userContext.SaveChangesAsync();
         }
-        public IAsyncEnumerable<T> GetAll()
+        public IEnumerable<T> GetAll()
         {
-            return _dbSet.AsAsyncEnumerable();
+            return _dbSet.AsEnumerable();
         }
 
     }

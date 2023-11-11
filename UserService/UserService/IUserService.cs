@@ -4,7 +4,7 @@ namespace UserService.UserService
 {
     public interface IUserService
     {
-        IAsyncEnumerable<UserModel> GetAll();
+        IEnumerable<UserModel> GetAll();
         Task<UserModel> GetUser(int id);
         Task Create(UserModel model);
         Task Update(UserModel user);

@@ -4,7 +4,7 @@ namespace UserRepository.UserLogic
 {
     public interface IUserLogic<T> where T : UserModel
     {
-        IAsyncEnumerable<T> GetAll();
+        IEnumerable<T> GetAll();
         Task<T> Get(long id);
         Task Create(T entity);
         Task Update(T entity);

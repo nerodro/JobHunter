@@ -10,7 +10,7 @@ namespace UserService.UserService
         {
             _user = user;
         }
-        public IAsyncEnumerable<UserModel> GetAll()
+        public IEnumerable<UserModel> GetAll()
         {
             return _user.GetAll();
         }
