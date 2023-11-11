@@ -13,32 +13,32 @@ namespace UserService.CvService
             _cvService = cvService;
             _userContext = userContext;
         }
-        public IEnumerable<CvModel> GetAll()
+        public IAsyncEnumerable<CvModel> GetAll()
         {
             return _cvService.GetAll();
         }
-        public CvModel GetCV(int id)
+        public async Task<CvModel> GetCV(int id)
         {
-            return _cvService.Get(id);
+            return await _cvService.Get(id);
         }
-        public void Create(CvModel cv)
+        public async Task Create(CvModel cv)
         {
-            _cvService.Create(cv);
+            await _cvService.Create(cv);
         }
-        public void Update(CvModel cv)
+        public async Task Update(CvModel cv)
         {
-            _cvService.Update(cv);
+            await _cvService.Update(cv);
         }
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            CvModel cv = GetCV(id);
-            _cvService.Delete(cv);
-            _cvService.SaveChanges();
+            CvModel cv = await GetCV(id);
+            await _cvService.Delete(cv);
+            await _cvService.SaveChanges();
         }
 
         public void DeleteOfUser(int id)
         {
-            List<CvModel> cvModels = _userContext.Cv.Where(x => x.UserId == id).ToList();
+            List<CvModel> cvModels =  _userContext.Cv.Where(x => x.UserId == id).ToList();
             _cvService.DeleteOfUser(cvModels);
         }
     }

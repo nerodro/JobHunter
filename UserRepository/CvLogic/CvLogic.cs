@@ -13,33 +13,33 @@ namespace UserRepository.CvLogic
             this._userContext = context;
             _dbSet = context.Set<T>();
         }
-        public void Create(T entity)
+        public async Task Create(T entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException("entity");
             }
-            _dbSet.Add(entity);
-            _userContext.SaveChanges();
+            await _dbSet.AddAsync(entity);
+            await _userContext.SaveChangesAsync();
         }
 
-        public void Delete(T entity)
+        public async Task Delete(T entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException("entity");
             }
             _dbSet.Remove(entity);
-            _userContext.SaveChanges();
+            await _userContext.SaveChangesAsync();
         }
 
-        public T Get(long id)
+        public async Task<T> Get(long id)
         {
             if (id != 0)
             {
                 throw new ArgumentNullException("entity");
             }
-            return _dbSet.SingleOrDefault(x => x.Id == id);
+            return await _dbSet.SingleOrDefaultAsync(x => x.Id == id);
         }
 
         public void Remove(T entity)
@@ -51,22 +51,22 @@ namespace UserRepository.CvLogic
             _dbSet.Remove(entity);
         }
 
-        public void SaveChanges()
+        public async Task SaveChanges()
         {
-            _userContext.SaveChanges();
+            await _userContext.SaveChangesAsync();
         }
 
-        public void Update(T entity)
+        public async Task Update(T entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException("entity");
             }
-            _userContext.SaveChanges();
+            await _userContext.SaveChangesAsync();
         }
-        public IEnumerable<T> GetAll()
+        public IAsyncEnumerable<T> GetAll()
         {
-            return _dbSet.AsEnumerable();
+            return _dbSet.AsAsyncEnumerable();
         }
 
         public void DeleteOfUser(List<T> entity)

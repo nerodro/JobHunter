@@ -4,13 +4,13 @@ namespace UserRepository.CvLogic
 {
     public interface ICvLogic<T> where T : CvModel
     {
-        IEnumerable<T> GetAll();
-        T Get(long id);
-        void Create(T entity);
-        void Update(T entity);
-        void Delete(T entity);
-        void DeleteOfUser(List<T> entity);
+        IAsyncEnumerable<T> GetAll();
+        Task<T> Get(long id);
+        Task Create(T entity);
+        Task Update(T entity);
+        Task Delete(T entity);
         void Remove(T entity);
-        void SaveChanges();
+        Task SaveChanges();
+        void DeleteOfUser(List<T> entity);
     }
 }
