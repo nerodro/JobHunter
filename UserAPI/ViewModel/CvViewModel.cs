@@ -1,10 +1,12 @@
-﻿using UserDomain.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using UserDomain.Models;
 
 namespace UserAPI.ViewModel
 {
     public class CvViewModel
     {
-        public int Id { get; set; }
+        [HiddenInput]
+        public Int64 Id { get; set; }
         public string JobNmae { get; set; } = null!;
         public string AboutMe { get; set; } = null!;
         public int UserId { get; set; }

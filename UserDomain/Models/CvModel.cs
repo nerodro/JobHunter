@@ -11,8 +11,8 @@
         public virtual LanguageModel Language { get; set; }
         public CvModel()
         {
-            User = new UserModel();
-            Language = new LanguageModel();
+            //User = new UserModel();
+            //Language = new LanguageModel();
         }
     }
 }
