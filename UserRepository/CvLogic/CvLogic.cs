@@ -12,64 +12,68 @@ namespace UserRepository.CvLogic
 {
     public class CvLogic<T> : ICvLogic<T> where T : CvModel
     {
-        private readonly UserDbContext context;
-        private DbSet<T> entities;
-        string errorMessage = string.Empty;
+        private readonly UserDbContext _userContext;
+        private DbSet<T> _dbSet;
 
         public CvLogic(UserDbContext context)
         {
-            this.context = context;
-            entities = context.Set<T>();
+            this._userContext = context;
+            _dbSet = context.Set<T>();
         }
-        public IEnumerable<T> GetAll()
-        {
-            return entities.AsEnumerable();
-        }
-
-        public T Get(long id)
-        {
-            return entities.SingleOrDefault(s => s.Id == id);
-        }
-        public void Create(T entity)
+        public async Task Create(T entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException("entity");
             }
-            entities.Add(entity);
-            context.SaveChanges();
+            await _dbSet.AddAsync(entity);
+            await _userContext.SaveChangesAsync();
         }
 
-        public void Update(T entity)
+        public async Task Delete(T entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException("entity");
             }
-            context.SaveChanges();
+            _dbSet.Remove(entity);
+            await _userContext.SaveChangesAsync();
         }
 
-        public void Delete(T entity)
+        public async Task<T> Get(int id)
         {
-            if (entity == null)
+            if (id == 0)
             {
                 throw new ArgumentNullException("entity");
             }
-            entities.Remove(entity);
-            context.SaveChanges();
+            return await _dbSet.SingleOrDefaultAsync(x => x.Id == id);
         }
+
         public void Remove(T entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException("entity");
             }
-            entities.Remove(entity);
+            _dbSet.Remove(entity);
         }
 
-        public void SaveChanges()
+        public async Task SaveChanges()
         {
-            context.SaveChanges();
+            await _userContext.SaveChangesAsync();
+        }
+
+        public async Task Update(T entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            await _userContext.SaveChangesAsync();
+        }
+        public IEnumerable<T> GetAll()
+        {
+            return _dbSet.AsEnumerable();
         }
     }
 }
