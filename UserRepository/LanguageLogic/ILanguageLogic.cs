@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using UserDomain.Models;
+
+namespace UserRepository.LanguageLogic
+{
+    public interface ILanguageLogic<T> where T : LanguageModel
+    {
+        IEnumerable<T> GetAll();
+        Task<T> Get(int id);
+        Task Create(T entity);
+        Task Update(T entity);
+        Task Delete(T entity);
+        void Remove(T entity);
+        Task SaveChanges();
+    }
+}
