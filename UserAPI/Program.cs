@@ -1,8 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using UserRepository.CvLogic;
+using UserRepository.LanguageLogic;
 using UserRepository.UserContext;
 using UserRepository.UserLogic;
 using UserService.CvService;
+using UserService.LanguageService;
 using UserService.UserService;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,8 +19,10 @@ builder.Services.AddDbContext<UserDbContext>(options => options.UseNpgsql(connec
 
 builder.Services.AddScoped(typeof(IUserLogic<>), typeof(UserLogic<>));
 builder.Services.AddScoped(typeof(ICvLogic<>), typeof(CvLogic<>));
+builder.Services.AddScoped(typeof(ILanguageLogic<>), typeof(LanguageLogic<>));
 builder.Services.AddTransient<IUserService, UserServices>();
 builder.Services.AddTransient<ICvService, CvService>();
+builder.Services.AddTransient<ILanguageService, LanguageService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
