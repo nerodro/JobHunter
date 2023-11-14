@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using UserAPI.ViewModel;
+using UserDomain.Models;
 using UserService.LanguageService;
 
 namespace UserAPI.Controllers
@@ -12,6 +14,75 @@ namespace UserAPI.Controllers
         {
             _language = language;
         }
-
+        [HttpPost("CreateLanguage")]
+        public async Task<IActionResult> CreateLanguage(LanguageViewModel model)
+        {
+            LanguageModel language = new LanguageModel
+            {
+                Language = model.LanguageName
+            };
+            if (model.LanguageName != null)
+            {
+                await _language.Create(language);
+                return CreatedAtAction("SingleLanguage", new { id = language.Id }, model);
+            }
+            return BadRequest("Не все обязательные поля были заполнены");
+        }
+        [HttpPut("EditLanguage/{id}")]
+        public async Task<ActionResult<LanguageViewModel>> EditLanguage(int id, LanguageViewModel model)
+        {
+            LanguageModel language = await _language.GetLanguage(id);
+            if (ModelState.IsValid)
+            {
+                language.Language = model.LanguageName;
+                if (model.LanguageName != null)
+                {
+                    await _language.Update(language);
+                    return Ok(model);
+                }
+            }
+            return BadRequest(ModelState);
+        }
+        [HttpDelete("DeleteLanguage/{id}")]
+        public async Task<ActionResult<LanguageViewModel>> DeleteLanguage(int id)
+        {
+            await _language.Delete(id);
+            return Ok("Язык успешно удален");
+        }
+        [HttpGet("GetOneLanguage/{id}")]
+        public async Task<ActionResult<LanguageViewModel>> SingleLanguage(int id)
+        {
+            LanguageViewModel model = new LanguageViewModel();
+            if (id != 0)
+            {
+                LanguageModel language = await _language.GetLanguage(id);
+                if (language != null)
+                {
+                    model.LanguageName = language.Language;
+                    model.Id = language.Id;
+                    return new ObjectResult(model);
+                }
+                return BadRequest("Язык не найден");
+            }
+            return BadRequest();
+        }
+        [HttpGet("GetAllLanguage")]
+        public IEnumerable<LanguageViewModel> Index()
+        {
+            List<LanguageViewModel> model = new List<LanguageViewModel>();
+            if (_language != null)
+            {
+                _language.GetAll().ToList().ForEach(u =>
+                {
+                    LanguageViewModel language = new LanguageViewModel
+                    {
+                        Id = u.Id,
+                        LanguageName = u.Language
+                    };
+                    model.Add(language);
+                });
+            }
+            return model;
+        }
     }
 }

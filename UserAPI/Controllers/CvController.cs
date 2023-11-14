@@ -2,6 +2,8 @@
 using UserAPI.ViewModel;
 using UserDomain.Models;
 using UserService.CvService;
+using UserService.LanguageService;
+using UserService.UserService;
 
 namespace UserAPI.Controllers
 {
@@ -10,9 +12,13 @@ namespace UserAPI.Controllers
     public class CvController : ControllerBase
     {
         private readonly ICvService _cvService;
-        public CvController(ICvService cvService)
+        private readonly ILanguageService _languageService;
+        private readonly IUserService _userService;
+        public CvController(ICvService cvService, ILanguageService languageService, IUserService userService)
         {
             _cvService = cvService;
+            _languageService = languageService;
+            _userService = userService;
         }
         [HttpPost("CreateCv")]
         public async Task<IActionResult> CreateCv(CvViewModel model)
@@ -66,6 +72,9 @@ namespace UserAPI.Controllers
                     model.AboutMe = CvEntity.AboutMe;
                     model.JobNmae = CvEntity.JobNmae;
                     model.LanguageId = CvEntity.LanguageId;
+                    model.LanguageName = await GetLanguageName(model.LanguageId);
+                    model.UserId = CvEntity.UserId;
+                    model.UserName = await GetUserName(model.UserId);
                     model.Id = CvEntity.Id;
                     return new ObjectResult(model);
                 }
@@ -93,6 +102,18 @@ namespace UserAPI.Controllers
                 });
             }
             return model;
+        }
+        private async Task<string> GetLanguageName(int id)
+        {
+            LanguageModel language = await _languageService.GetLanguage(id);
+            string name = language.Language;
+            return name;
+        }
+        private async Task<string> GetUserName(int id)
+        {
+            UserModel user = await _userService.GetUser(id);
+            string name = user.Name;
+            return name;
         }
     }
 }
