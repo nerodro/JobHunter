@@ -9,10 +9,5 @@
         public virtual UserModel User { get; set; }
         public int LanguageId { get; set; }
         public virtual LanguageModel Language { get; set; }
-        public CvModel()
-        {
-            //User = new UserModel();
-            //Language = new LanguageModel();
-        }
     }
 }
