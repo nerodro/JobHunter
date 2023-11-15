@@ -18,11 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="ViewModel\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\CategoryDomain\CategoryDomain.csproj" />
     <ProjectReference Include="..\CategoryRepository\CategoryRepository.csproj" />
     <ProjectReference Include="..\CategoryService\CategoryService.csproj" />
