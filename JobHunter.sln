@@ -47,13 +47,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationRepository", "Locat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationService", "LocationService\LocationService.csproj", "{9E676A49-8F05-488D-893A-8B52F5458739}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserDomain", "UserDomain\UserDomain.csproj", "{35088944-82E9-4025-8505-6A4633DFC289}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserDomain", "UserDomain\UserDomain.csproj", "{35088944-82E9-4025-8505-6A4633DFC289}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService", "UserService\UserService.csproj", "{121729EE-2D0F-4CAB-A356-34EB58994638}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserService", "UserService\UserService.csproj", "{121729EE-2D0F-4CAB-A356-34EB58994638}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserRepository", "UserRepository\UserRepository.csproj", "{BCFDBFC5-A753-4373-8C62-A1F4DED27539}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserRepository", "UserRepository\UserRepository.csproj", "{BCFDBFC5-A753-4373-8C62-A1F4DED27539}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserAPI", "UserAPI\UserAPI.csproj", "{EA9EFEDF-94CE-476C-9E94-1863485B3225}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserAPI", "UserAPI\UserAPI.csproj", "{EA9EFEDF-94CE-476C-9E94-1863485B3225}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

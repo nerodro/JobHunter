@@ -17,4 +17,15 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="ViewModel\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CategoryDomain\CategoryDomain.csproj" />
+    <ProjectReference Include="..\CategoryRepository\CategoryRepository.csproj" />
+    <ProjectReference Include="..\CategoryService\CategoryService.csproj" />
+  </ItemGroup>
+
 </Project>
