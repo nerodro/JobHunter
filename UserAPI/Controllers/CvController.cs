@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using UserAPI.ServiceGrpc;
 using UserAPI.ViewModel;
 using UserDomain.Models;
 using UserService.CvService;
@@ -14,11 +15,13 @@ namespace UserAPI.Controllers
         private readonly ICvService _cvService;
         private readonly ILanguageService _languageService;
         private readonly IUserService _userService;
-        public CvController(ICvService cvService, ILanguageService languageService, IUserService userService)
+        private readonly CategoryRpc _rpc;
+        public CvController(ICvService cvService, ILanguageService languageService, IUserService userService, CategoryRpc rpc)
         {
             _cvService = cvService;
             _languageService = languageService;
             _userService = userService;
+            _rpc = rpc;
         }
         [HttpPost("CreateCv")]
         public async Task<IActionResult> CreateCv(CvViewModel model)
@@ -102,6 +105,19 @@ namespace UserAPI.Controllers
                 });
             }
             return model;
+        }
+        [HttpGet("GetCategorey/{id}")]
+        public IActionResult GetCategory(int id)
+        {
+            var cat = _rpc.GetCategoryById(id);
+            if(cat != 0)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
         private async Task<string> GetLanguageName(int id)
         {

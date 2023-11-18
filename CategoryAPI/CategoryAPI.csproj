@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.25.1" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.59.0" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.59.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.60.0-pre1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.13" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
@@ -21,6 +28,9 @@
     <ProjectReference Include="..\CategoryDomain\CategoryDomain.csproj" />
     <ProjectReference Include="..\CategoryRepository\CategoryRepository.csproj" />
     <ProjectReference Include="..\CategoryService\CategoryService.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Protobuf Include="ServiceGrpc\GrpcCategory.proto" GrpcServices="Server" />
   </ItemGroup>
 
 </Project>

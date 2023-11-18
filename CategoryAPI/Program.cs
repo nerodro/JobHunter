@@ -1,3 +1,4 @@
+using CategoryAPI.ServiceGrpc;
 using CategoryRepository;
 using CategoryRepository.CategoryLogic;
 using CategoryService.CategoryService;
@@ -18,8 +19,11 @@ builder.Services.AddTransient<ICategoryService, CategoryServices>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddGrpc();
 
 var app = builder.Build();
+
+app.MapGrpcService<GrpcCategory>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
