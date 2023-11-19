@@ -20,13 +20,13 @@ namespace UserAPI.Controllers
         {
             UserModel user = new UserModel
             {
-                Email = model.Email,
-                Name = model.Name,
-                Patronomyc = model.Patronomyc,
+                Email = model.Email.Trim(),
+                Name = model.Name.Trim(),
+                Patronomyc = model.Patronomyc.Trim(),
                 Phone = model.Phone,
                 CityId = model.CityId,
                 CountryId = model.CountryId,
-                Surname = model.Surname,
+                Surname = model.Surname.Trim(),
                 RoleId = model.RoleId,
                 Password = model.Password,
             };
@@ -43,11 +43,11 @@ namespace UserAPI.Controllers
             UserModel userEntity = await _userService.GetUser(id);
             if (ModelState.IsValid)
             {
-                userEntity.Email = model.Email;
-                userEntity.Name = model.Name;
-                userEntity.Surname = model.Surname;
+                userEntity.Email = model.Email.Trim();
+                userEntity.Name = model.Name.Trim();
+                userEntity.Surname = model.Surname.Trim();
                 userEntity.Phone = model.Phone;
-                userEntity.Patronomyc = model.Patronomyc;
+                userEntity.Patronomyc = model.Patronomyc.Trim();
                 userEntity.CityId = model.CityId;
                 userEntity.CountryId = model.CountryId;
                 userEntity.RoleId = model.RoleId;

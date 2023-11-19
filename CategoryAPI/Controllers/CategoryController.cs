@@ -19,7 +19,7 @@ namespace CategoryAPI.Controllers
         {
             CategoryModel language = new CategoryModel
             {
-                CategoryName = model.CategoryName
+                CategoryName = model.CategoryName.Trim()
             };
             if (model.CategoryName != null)
             {
@@ -34,7 +34,7 @@ namespace CategoryAPI.Controllers
             CategoryModel category = await _categoryService.GetCategory(id);
             if (ModelState.IsValid)
             {
-                category.CategoryName = model.CategoryName;
+                category.CategoryName = model.CategoryName.Trim();
                 if (model.CategoryName != null)
                 {
                     await _categoryService.Update(category);

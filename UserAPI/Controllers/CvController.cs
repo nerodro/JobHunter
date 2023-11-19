@@ -30,8 +30,8 @@ namespace UserAPI.Controllers
             {
                 LanguageId = model.LanguageId,
                 UserId = model.UserId, 
-                AboutMe = model.AboutMe,
-                JobNmae = model.JobNmae,
+                AboutMe = model.AboutMe.Trim(),
+                JobNmae = model.JobNmae.Trim(),
             };
             if (model.JobNmae != null)
             {
@@ -46,8 +46,8 @@ namespace UserAPI.Controllers
             CvModel cv = await _cvService.GetCv(id);
             if (ModelState.IsValid)
             {
-                cv.AboutMe = model.AboutMe;
-                cv.JobNmae = model.JobNmae;
+                cv.AboutMe = model.AboutMe.Trim();
+                cv.JobNmae = model.JobNmae.Trim();
                 cv.LanguageId = model.LanguageId;
                 if (model.JobNmae != null)
                 {

@@ -2,6 +2,7 @@
 using CategoryDomain.Model;
 using CategoryService.CategoryService;
 using Grpc.Core;
+using Microsoft.AspNetCore.Http.HttpResults;
 using static CategoryServiceGrpc;
 
 namespace CategoryAPI.ServiceGrpc
@@ -15,22 +16,27 @@ namespace CategoryAPI.ServiceGrpc
         }
         public async override Task<CategoryResponseGrpc> GetCategoryById(CategoryRequestGrpc request, ServerCallContext context)
         {
-            // Ваша логика для получения категории по идентификатору
             int categoryId = request.CategoryId;
             CategoryModel model = await _categoryService.GetCategory(categoryId);
 
-            CategoryGrpc category = new CategoryGrpc
-            {
-                CategoryId = model.Id,
-                CategoryName = model.CategoryName
-            };
+            try
+            { 
+                CategoryGrpc category = new CategoryGrpc
+                {
+                    CategoryId = model.Id,
+                    CategoryName = model.CategoryName
+                };
+                var response = new CategoryResponseGrpc
+                {
+                    Category = category
+                };
 
-            var response = new CategoryResponseGrpc
+                return await Task.FromResult(response);
+            }
+            catch
             {
-                Category = category
-            };
-
-            return await Task.FromResult(response);
+                return null;
+            }
         }
     }
 }

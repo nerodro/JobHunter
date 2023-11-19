@@ -19,7 +19,7 @@ namespace UserAPI.Controllers
         {
             LanguageModel language = new LanguageModel
             {
-                Language = model.LanguageName
+                Language = model.LanguageName.Trim()
             };
             if (model.LanguageName != null)
             {
@@ -34,7 +34,7 @@ namespace UserAPI.Controllers
             LanguageModel language = await _language.GetLanguage(id);
             if (ModelState.IsValid)
             {
-                language.Language = model.LanguageName;
+                language.Language = model.LanguageName.Trim();
                 if (model.LanguageName != null)
                 {
                     await _language.Update(language);
