@@ -26,18 +26,13 @@ namespace UserAPI.Controllers
         [HttpPost("CreateCv")]
         public async Task<IActionResult> CreateCv(CvViewModel model)
         {
-            Task<int> catId = GetCategoryId(model.CategoryId);
-            if(catId.Result == 0)
-            {
-                return BadRequest("Указанная категория не найдена");
-            }
             CvModel cv = new CvModel
             {
                 LanguageId = model.LanguageId,
                 UserId = model.UserId, 
                 AboutMe = model.AboutMe.Trim(),
                 JobNmae = model.JobNmae.Trim(),
-                CategoryId = model.CategoryId,
+                CategoryId = GetCategoryId(model.CategoryId),
             };
             if (model.JobNmae != null)
             {
@@ -85,6 +80,7 @@ namespace UserAPI.Controllers
                     model.UserId = CvEntity.UserId;
                     model.UserName = await GetUserName(model.UserId);
                     model.Id = CvEntity.Id;
+                    model.CategoryId = CvEntity.CategoryId;
                     return new ObjectResult(model);
                 }
                 return BadRequest("Резюме не найдено");
@@ -106,6 +102,7 @@ namespace UserAPI.Controllers
                         LanguageId = u.LanguageId,
                         AboutMe = u.AboutMe,
                         UserId = u.UserId,
+                        CategoryId = u.CategoryId,
                     };
                     model.Add(cv);
                 });
@@ -127,17 +124,10 @@ namespace UserAPI.Controllers
                 return BadRequest("Указанная категория не найдена");
             }
         }
-        private async Task<int> GetCategoryId(int id)
+        private int GetCategoryId(int id)
         {
             int category = _rpc.GetCategoryById(id);
-            if(category != 0)
-            {
-                return await Task.FromResult(category);
-            }
-            else
-            {
-                return await Task.FromResult(0);
-            }
+            return category;
         }
         private async Task<string> GetLanguageName(int id)
         {

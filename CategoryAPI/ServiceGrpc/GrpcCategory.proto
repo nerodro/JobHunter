@@ -15,5 +15,4 @@ message CategoryRequestGrpc {
 
 message CategoryResponseGrpc {
   CategoryGrpc category = 1;
-  string errorMessage = 2;
 }

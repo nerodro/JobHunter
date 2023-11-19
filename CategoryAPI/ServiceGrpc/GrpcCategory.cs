@@ -16,21 +16,12 @@ namespace CategoryAPI.ServiceGrpc
         }
         public async override Task<CategoryResponseGrpc> GetCategoryById(CategoryRequestGrpc request, ServerCallContext context)
         {
-            // Ваша логика для получения категории по идентификатору
             int categoryId = request.CategoryId;
             CategoryModel model = await _categoryService.GetCategory(categoryId);
 
             if (model == null)
             {
-                // Handle the case when the category is not found
-                // You can return an appropriate error response or take any other desired action
-                // For example:
-                var errorResponse = new CategoryResponseGrpc
-                {
-                    ErrorMessage = "Category not found"
-                };
-
-                return errorResponse;
+                throw new RpcException(new Status(StatusCode.Cancelled, "Запрашиваемая категория не найдена"));
             }
 
             CategoryGrpc category = new CategoryGrpc
