@@ -9,5 +9,6 @@
         public virtual UserModel User { get; set; }
         public int LanguageId { get; set; }
         public virtual LanguageModel Language { get; set; }
+        public int CategoryId { get; set; }
     }
 }

@@ -21,14 +21,11 @@ namespace UserAPI.ServiceGrpc
             };
 
             var response = _rpc.GetCategoryById(request);
-            if (response != null)
-            {
-                return (int)response.Category.CategoryId;
-            }
-            else
+            if (response.Category == null)
             {
                 return 0;
             }
+            return (int)response.Category.CategoryId;
         }
     }
 }
