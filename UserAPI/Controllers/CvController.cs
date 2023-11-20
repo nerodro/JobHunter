@@ -81,6 +81,7 @@ namespace UserAPI.Controllers
                     model.UserName = await GetUserName(model.UserId);
                     model.Id = CvEntity.Id;
                     model.CategoryId = CvEntity.CategoryId;
+                    model.CategoryName = await GetCategoryName(model.CategoryId);
                     return new ObjectResult(model);
                 }
                 return BadRequest("Резюме не найдено");
@@ -128,6 +129,12 @@ namespace UserAPI.Controllers
         {
             int category = _rpc.GetCategoryById(id);
             return category;
+        }
+        private async Task<string> GetCategoryName(int id)
+        {
+            var model = await _rpc.GetCategoryModel(id);
+            string CategoryName = model.CategoryName;
+            return CategoryName;
         }
         private async Task<string> GetLanguageName(int id)
         {

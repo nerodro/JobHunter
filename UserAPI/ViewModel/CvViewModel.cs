@@ -14,5 +14,6 @@ namespace UserAPI.ViewModel
         public int LanguageId { get; set; }
         public string LanguageName { get; set; } = null!;
         public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
     }
 }
