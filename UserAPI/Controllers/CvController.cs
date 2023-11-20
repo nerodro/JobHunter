@@ -28,7 +28,7 @@ namespace UserAPI.Controllers
         {
             CvModel cv = new CvModel
             {
-                LanguageId = model.LanguageId,
+                LanguageId = await GetLanguageId(model.LanguageId),
                 UserId = model.UserId, 
                 AboutMe = model.AboutMe.Trim(),
                 JobNmae = model.JobNmae.Trim(),
@@ -49,7 +49,7 @@ namespace UserAPI.Controllers
             {
                 cv.AboutMe = model.AboutMe.Trim();
                 cv.JobNmae = model.JobNmae.Trim();
-                cv.LanguageId = model.LanguageId;
+                cv.LanguageId = await GetLanguageId(model.LanguageId);
                 if (model.JobNmae != null)
                 {
                     await _cvService.UpdateCv(cv);
@@ -141,6 +141,12 @@ namespace UserAPI.Controllers
             LanguageModel language = await _languageService.GetLanguage(id);
             string name = language.Language;
             return name;
+        }
+        private async Task<int> GetLanguageId(int id)
+        {
+            LanguageModel language = await _languageService.GetLanguage(id);
+            int Id = language.Id;
+            return Id;
         }
         private async Task<string> GetUserName(int id)
         {
