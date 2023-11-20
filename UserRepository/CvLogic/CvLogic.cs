@@ -46,7 +46,12 @@ namespace UserRepository.CvLogic
             {
                 throw new ArgumentNullException("entity");
             }
-            return await _dbSet.SingleOrDefaultAsync(x => x.Id == id);
+            var cv = await _dbSet.SingleOrDefaultAsync(x => x.Id == id);
+            if (cv == null)
+            {
+                throw new ArgumentException($"Резюме с Id {id}, не найдено");
+            }
+            return cv;
         }
 
         public void Remove(T entity)

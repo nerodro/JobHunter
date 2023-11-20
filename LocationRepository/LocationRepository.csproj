@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <Folder Include="CountryLogic\" />
-    <Folder Include="CitryLogic\" />
   </ItemGroup>
 
 </Project>

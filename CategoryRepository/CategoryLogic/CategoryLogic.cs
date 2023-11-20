@@ -43,7 +43,12 @@ namespace CategoryRepository.CategoryLogic
             {
                 throw new ArgumentNullException("entity");
             }
-            return await _dbSet.SingleOrDefaultAsync(x => x.Id == id);
+            var category = await _dbSet.SingleOrDefaultAsync(x => x.Id == id);
+            if (category == null)
+            {
+                throw new ArgumentException($"Категорий с Id {id}, не найдено");
+            }
+            return category;
         }
 
         public void Remove(T entity)

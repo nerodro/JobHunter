@@ -1,59 +1,59 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using LocationDomain.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UserDomain.Models;
-using UserRepository.UserContext;
-using UserRepository.UserLogic;
 
-namespace UserRepository.LanguageLogic
+namespace LocationRepository.CitryLogic
 {
-    public class LanguageLogic<T> : ILanguageLogic<T> where T : LanguageModel
+    public class CityLogic<T> : ICityLogic<T> where T : CityModel
     {
-        private readonly UserDbContext _userContext;
+        private readonly LocationContext _locationContext;
         private DbSet<T> _dbSet;
-        public LanguageLogic(UserDbContext context)
+
+        public CityLogic(LocationContext context)
         {
-            this._userContext = context;
+            this._locationContext = context;
             _dbSet = context.Set<T>();
         }
-        public async Task Create(T entity)
+        public async Task CreateCity(T entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException("entity");
             }
             await _dbSet.AddAsync(entity);
-            await _userContext.SaveChangesAsync();
+            await _locationContext.SaveChangesAsync();
         }
 
-        public async Task Delete(T entity)
+        public async Task DeleteCity(T entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException("entity");
             }
             _dbSet.Remove(entity);
-            await _userContext.SaveChangesAsync();
+            await _locationContext.SaveChangesAsync();
         }
 
-        public async Task<T> Get(int id)
+        public async Task<T> GetCity(int id)
         {
             if (id == 0)
             {
                 throw new ArgumentNullException("entity");
             }
-            var language = await _dbSet.SingleOrDefaultAsync(x => x.Id == id);
-            if (language == null)
+            var city = await _dbSet.SingleOrDefaultAsync(x => x.Id == id);
+            if (city == null)
             {
-                throw new ArgumentException($"Язык с Id {id}, не найдено");
+                throw new ArgumentException($"Города с Id {id}, не найдено");
             }
-            return language;
+            return city;
+            
         }
 
-        public void Remove(T entity)
+        public void RemoveCity(T entity)
         {
             if (entity == null)
             {
@@ -64,18 +64,18 @@ namespace UserRepository.LanguageLogic
 
         public async Task SaveChanges()
         {
-            await _userContext.SaveChangesAsync();
+            await _locationContext.SaveChangesAsync();
         }
 
-        public async Task Update(T entity)
+        public async Task UpdateCity(T entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException("entity");
             }
-            await _userContext.SaveChangesAsync();
+            await _locationContext.SaveChangesAsync();
         }
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetAllCity()
         {
             return _dbSet.AsEnumerable();
         }

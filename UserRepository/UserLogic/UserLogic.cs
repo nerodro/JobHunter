@@ -44,7 +44,12 @@ namespace UserRepository.UserLogic
             {
                 throw new ArgumentNullException("entity");
             }
-            return await _dbSet.SingleOrDefaultAsync(x => x.Id == id);
+            var user = await _dbSet.SingleOrDefaultAsync(x => x.Id == id);
+            if (user == null)
+            {
+                throw new ArgumentException($"Пользователя с Id {id}, не найдено");
+            }
+            return user;
         }
 
         public void Remove(T entity)
