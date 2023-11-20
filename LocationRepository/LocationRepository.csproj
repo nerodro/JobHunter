@@ -12,4 +12,13 @@
     <PackageReference Include="RabbitMQ.Client" Version="6.6.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LocationDomain\LocationDomain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="CountryLogic\" />
+    <Folder Include="CitryLogic\" />
+  </ItemGroup>
+
 </Project>
