@@ -13,47 +13,47 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "User", "User", "{3F8EB5EE-C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Vacancie", "Vacancie", "{A4E46746-43A1-4FAC-9C8F-E9E1E68BD1DC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CategoryAPI", "CategoryAPI\CategoryAPI.csproj", "{2FB1BC35-9431-40AD-85ED-0D02244712B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CategoryAPI", "Services\Category\CategoryAPI\CategoryAPI.csproj", "{2FB1BC35-9431-40AD-85ED-0D02244712B1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompanyAPI", "CompanyAPI\CompanyAPI.csproj", "{9DC219FF-1EA8-477B-83E1-627D0D0F54D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompanyAPI", "Services\Company\CompanyAPI\CompanyAPI.csproj", "{9DC219FF-1EA8-477B-83E1-627D0D0F54D1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompanyDomain", "CompanyDomain\CompanyDomain.csproj", "{23CFD536-C8D2-4B69-BC31-17DE18DD83B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompanyDomain", "Services\Company\CompanyDomain\CompanyDomain.csproj", "{23CFD536-C8D2-4B69-BC31-17DE18DD83B7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompanyRepository", "CompanyRepository\CompanyRepository.csproj", "{ADFD04D3-497D-4191-8CAD-7915C5E35FE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompanyRepository", "Services\Company\CompanyRepository\CompanyRepository.csproj", "{ADFD04D3-497D-4191-8CAD-7915C5E35FE1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompanyService", "CompanyService\CompanyService.csproj", "{518A704E-51AF-4152-8167-059C17CE1A06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompanyService", "Services\Company\CompanyService\CompanyService.csproj", "{518A704E-51AF-4152-8167-059C17CE1A06}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacancieAPI", "VacancieAPI\VacancieAPI.csproj", "{1DEBD455-F792-47BA-A236-B77F8E456580}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacancieAPI", "Services\Vacancies\VacancieAPI\VacancieAPI.csproj", "{1DEBD455-F792-47BA-A236-B77F8E456580}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacancieDomain", "VacancieDomain\VacancieDomain.csproj", "{35EAD6DF-FBE9-4EBC-A1D4-B2958EC2AEEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacancieDomain", "Services\Vacancies\VacancieDomain\VacancieDomain.csproj", "{35EAD6DF-FBE9-4EBC-A1D4-B2958EC2AEEE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacancieRepository", "VacancieRepository\VacancieRepository.csproj", "{B82DA501-3253-49DC-9DA9-FEBDAEC9A773}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacancieRepository", "Services\Vacancies\VacancieRepository\VacancieRepository.csproj", "{B82DA501-3253-49DC-9DA9-FEBDAEC9A773}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacancieService", "VacancieService\VacancieService.csproj", "{E23C1C34-1AEF-4992-9CCA-EF5F14D2A4EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacancieService", "Services\Vacancies\VacancieService\VacancieService.csproj", "{E23C1C34-1AEF-4992-9CCA-EF5F14D2A4EB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Location", "Location", "{0948F793-4166-4EA3-A8E5-A8942D9B940A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationAPI", "LocationAPI\LocationAPI.csproj", "{6AC9722E-FF9B-451D-B450-8AB841E7AB04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationAPI", "Services\Location\LocationAPI\LocationAPI.csproj", "{6AC9722E-FF9B-451D-B450-8AB841E7AB04}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationDomain", "LocationDomain\LocationDomain.csproj", "{974B03C4-0ECC-4E63-A014-281CED321C7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationDomain", "Services\Location\LocationDomain\LocationDomain.csproj", "{974B03C4-0ECC-4E63-A014-281CED321C7A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationRepository", "LocationRepository\LocationRepository.csproj", "{92FE4E64-9DC6-4EE5-95D4-DE2409AC6804}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationRepository", "Services\Location\LocationRepository\LocationRepository.csproj", "{92FE4E64-9DC6-4EE5-95D4-DE2409AC6804}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationService", "LocationService\LocationService.csproj", "{9E676A49-8F05-488D-893A-8B52F5458739}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationService", "Services\Location\LocationService\LocationService.csproj", "{9E676A49-8F05-488D-893A-8B52F5458739}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserDomain", "UserDomain\UserDomain.csproj", "{35088944-82E9-4025-8505-6A4633DFC289}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserDomain", "Services\User\UserDomain\UserDomain.csproj", "{35088944-82E9-4025-8505-6A4633DFC289}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserService", "UserService\UserService.csproj", "{121729EE-2D0F-4CAB-A356-34EB58994638}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserService", "Services\User\UserService\UserService.csproj", "{121729EE-2D0F-4CAB-A356-34EB58994638}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserRepository", "UserRepository\UserRepository.csproj", "{BCFDBFC5-A753-4373-8C62-A1F4DED27539}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserRepository", "Services\User\UserRepository\UserRepository.csproj", "{BCFDBFC5-A753-4373-8C62-A1F4DED27539}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserAPI", "UserAPI\UserAPI.csproj", "{EA9EFEDF-94CE-476C-9E94-1863485B3225}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserAPI", "Services\User\UserAPI\UserAPI.csproj", "{EA9EFEDF-94CE-476C-9E94-1863485B3225}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CategoryDomain", "CategoryDomain\CategoryDomain.csproj", "{63475B75-A400-4AFA-B9FA-28FCE4A1E420}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CategoryDomain", "Services\Category\CategoryDomain\CategoryDomain.csproj", "{63475B75-A400-4AFA-B9FA-28FCE4A1E420}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CategoryRepository", "CategoryRepository\CategoryRepository.csproj", "{E0D35E09-345A-4E26-BE5C-C1F6EE9D4C74}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CategoryRepository", "Services\Category\CategoryRepository\CategoryRepository.csproj", "{E0D35E09-345A-4E26-BE5C-C1F6EE9D4C74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CategoryService", "CategoryService\CategoryService.csproj", "{2F58358D-8D82-4A36-BFF3-85C379E06398}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CategoryService", "Services\Category\CategoryService\CategoryService.csproj", "{2F58358D-8D82-4A36-BFF3-85C379E06398}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
