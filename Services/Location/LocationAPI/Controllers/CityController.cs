@@ -1,6 +1,7 @@
 ﻿using LocationAPI.ViewModel;
 using LocationDomain.Model;
 using LocationService.CityService;
+using LocationService.CountryService;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LocationAPI.Controllers
@@ -10,9 +11,11 @@ namespace LocationAPI.Controllers
     public class CityController : ControllerBase
     {
         private readonly ICityService _City;
-        public CityController(ICityService City)
+        private readonly ICountryService _Country;
+        public CityController(ICityService City, ICountryService country)
         {
             _City = City;
+            _Country = country;
         }
         [HttpPost("CreateCity")]
         public async Task<IActionResult> CreateCity(CityViewModel model)
@@ -49,7 +52,7 @@ namespace LocationAPI.Controllers
         public async Task<ActionResult<CityViewModel>> DeleteCity(int id)
         {
             await _City.DeleteCity(id);
-            return Ok("Язык успешно удален");
+            return Ok("Страна успешно удалена");
         }
         [HttpGet("GetOneCity/{id}")]
         public async Task<ActionResult<CityViewModel>> SingleCity(int id)
@@ -63,9 +66,10 @@ namespace LocationAPI.Controllers
                     model.CityName = City.CityName;
                     model.Id = City.Id;
                     model.CountryId = City.CountryId;
+                    model.CountryName = await GetCountryName(model.CountryId);
                     return new ObjectResult(model);
                 }
-                return BadRequest("Язык не найден");
+                return BadRequest("Страна не найдена");
             }
             return BadRequest();
         }
@@ -87,6 +91,12 @@ namespace LocationAPI.Controllers
                 });
             }
             return model;
+        }
+        private async Task<string> GetCountryName(int id)
+        {
+            CountryModel country = await _Country.GetCountry(id);
+            string name = country.CountryName;
+            return name;
         }
     }
 }

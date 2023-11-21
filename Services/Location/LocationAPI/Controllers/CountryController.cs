@@ -47,7 +47,7 @@ namespace LocationAPI.Controllers
         public async Task<ActionResult<CountryViewModel>> DeleteCountry(int id)
         {
             await _Country.DeleteCountry(id);
-            return Ok("Язык успешно удален");
+            return Ok("Город успешно удален");
         }
         [HttpGet("GetOneCountry/{id}")]
         public async Task<ActionResult<CountryViewModel>> SingleCountry(int id)
@@ -62,7 +62,7 @@ namespace LocationAPI.Controllers
                     model.Id = Country.Id;
                     return new ObjectResult(model);
                 }
-                return BadRequest("Язык не найден");
+                return BadRequest("Город не найден");
             }
             return BadRequest();
         }
