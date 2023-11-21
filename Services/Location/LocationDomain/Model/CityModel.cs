@@ -11,6 +11,6 @@ namespace LocationDomain.Model
         public int Id { get; set; }
         public string CityName { get; set; } = null!;
         public int CountryId { get; set; }
-        public virtual CountryModel Country { get; set; }
+        public virtual CountryModel  Country { get; set; }
     }
 }

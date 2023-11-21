@@ -1,4 +1,3 @@
-using CategoryAPI.ServiceGrpc;
 using Microsoft.EntityFrameworkCore;
 using UserAPI.ServiceGrpc;
 using UserRepository.CvLogic;
