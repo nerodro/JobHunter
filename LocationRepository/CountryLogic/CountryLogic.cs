@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LocationRepository.CountryLogic
 {
-    public class CountryLogic<T> : ICountryLogiccs<T> where T : CountryModel
+    public class CountryLogic<T> : ICountryLogic<T> where T : CountryModel
     {
         private readonly LocationContext _locationContext;
         private DbSet<T> _dbSet;

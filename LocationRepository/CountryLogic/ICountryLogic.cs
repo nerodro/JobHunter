@@ -2,7 +2,7 @@
 
 namespace LocationRepository.CountryLogic
 {
-    public interface ICountryLogiccs<T> where T : CountryModel
+    public interface ICountryLogic<T> where T : CountryModel
     {
         IEnumerable<T> GetAllCountry();
         Task<T> GetCountry(int id);
