@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LocationService.CityService
 {
-    internal interface ICityService
+    public interface ICityService
     {
         IEnumerable<CityModel> GetAllCity();
         Task<CityModel> GetCity(int id);

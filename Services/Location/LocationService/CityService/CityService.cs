@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LocationService.CityService
 {
-    internal class CityService : ICityService
+    public class CityService : ICityService
     {
         private readonly ICityLogic<CityModel> _cityService;
         public CityService(ICityLogic<CityModel> cityService)

@@ -24,9 +24,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="ViewModel\" />
     <Folder Include="LocationRpc\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LocationDomain\LocationDomain.csproj" />
+    <ProjectReference Include="..\LocationRepository\LocationRepository.csproj" />
+    <ProjectReference Include="..\LocationService\LocationService.csproj" />
   </ItemGroup>
 
 </Project>
