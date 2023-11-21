@@ -16,8 +16,4 @@
     <ProjectReference Include="..\LocationDomain\LocationDomain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="CountryLogic\" />
-  </ItemGroup>
-
 </Project>
