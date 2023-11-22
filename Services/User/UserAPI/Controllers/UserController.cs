@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using UserAPI.ServiceGrpc;
 using UserAPI.ViewModel;
 using UserDomain.Models;
 using UserService.UserService;
@@ -11,9 +12,11 @@ namespace UserAPI.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
-        public UserController(IUserService userService)
+        private readonly LocationRpc _rpc;
+        public UserController(IUserService userService, LocationRpc rpc)
         {
             _userService = userService;
+            _rpc = rpc;
         }
         [HttpPost("CreateUser")]
         public async Task<IActionResult> CreateUser(UserViewModel model)
@@ -24,8 +27,8 @@ namespace UserAPI.Controllers
                 Name = model.Name.Trim(),
                 Patronomyc = model.Patronomyc.Trim(),
                 Phone = model.Phone,
-                CityId = model.CityId,
-                CountryId = model.CountryId,
+                CityId = GetCityId(model.CityId),
+                CountryId = GetCountryId(model.CountryId),
                 Surname = model.Surname.Trim(),
                 RoleId = model.RoleId,
                 Password = model.Password,
@@ -48,8 +51,8 @@ namespace UserAPI.Controllers
                 userEntity.Surname = model.Surname.Trim();
                 userEntity.Phone = model.Phone;
                 userEntity.Patronomyc = model.Patronomyc.Trim();
-                userEntity.CityId = model.CityId;
-                userEntity.CountryId = model.CountryId;
+                userEntity.CityId = GetCityId(model.CityId);
+                userEntity.CountryId = GetCountryId(model.CountryId);
                 userEntity.RoleId = model.RoleId;
                 if (model.Email != null && model.Name != null)
                 {
@@ -108,6 +111,24 @@ namespace UserAPI.Controllers
                 });
             }
             return model;
+        }
+        private int GetCityId(int id)
+        {
+            var city = _rpc.GetCityById(id);
+            if(city.Exception != null)
+            {
+                throw new ArgumentException($"Города с Id {id}, не найдено");
+            }
+            return (int)city.Result.Id;
+        }
+        private int GetCountryId(int id)
+        {
+            var country = _rpc.GetCountryById(id);
+            if (country.Exception != null)
+            {
+                throw new ArgumentException($"Страна с Id {id}, не найдена");
+            }
+            return country.Id;
         }
     }
 }

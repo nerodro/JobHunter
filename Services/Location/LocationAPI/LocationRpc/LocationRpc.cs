@@ -22,7 +22,7 @@ namespace LocationAPI.LocationRpc
 
             if (model == null)
             {
-                throw new RpcException(new Status(StatusCode.Cancelled, "Запрашиваемая категория не найдена"));
+                throw new RpcException(new Status(StatusCode.Cancelled, "Запрашиваемый город не найден"));
             }
 
             CityGrpc City = new CityGrpc
@@ -34,7 +34,6 @@ namespace LocationAPI.LocationRpc
             {
                 City = City
             };
-
             return await Task.FromResult(response);
         }
         public async override Task<CountryResponseGrpc> GetCountryById(CountryRequestGrpc request, ServerCallContext context)
@@ -44,7 +43,7 @@ namespace LocationAPI.LocationRpc
 
             if (model == null)
             {
-                throw new RpcException(new Status(StatusCode.Cancelled, "Запрашиваемая категория не найдена"));
+                throw new RpcException(new Status(StatusCode.Cancelled, "Запрашиваемая страна не найдена"));
             }
 
             CountryGrpc Country = new CountryGrpc

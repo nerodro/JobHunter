@@ -50,7 +50,6 @@ namespace LocationRepository.CitryLogic
                 throw new ArgumentException($"Города с Id {id}, не найдено");
             }
             return city;
-            
         }
 
         public void RemoveCity(T entity)

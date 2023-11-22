@@ -23,6 +23,7 @@ builder.Services.AddScoped(typeof(ICvLogic<>), typeof(CvLogic<>));
 builder.Services.AddScoped(typeof(ILanguageLogic<>), typeof(LanguageLogic<>));
 
 builder.Services.AddScoped<CategoryRpc>();
+builder.Services.AddScoped<LocationRpc>();
 
 builder.Services.AddTransient<IUserService, UserServices>();
 builder.Services.AddTransient<ICvService, CvService>();
