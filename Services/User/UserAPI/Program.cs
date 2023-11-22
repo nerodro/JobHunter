@@ -35,6 +35,7 @@ builder.Services.AddGrpc();
 var app = builder.Build();
 
 app.MapGrpcService<CategoryRpc>();
+app.MapGrpcService<LocationRpc>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

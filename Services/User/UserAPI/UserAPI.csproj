@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ServiceGrpc\GrpcLocation.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Google.Protobuf" Version="3.25.1" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.59.0" />
     <PackageReference Include="Grpc.Net.Client" Version="2.59.0" />
@@ -31,6 +35,7 @@
   </ItemGroup>
   <ItemGroup>
     <Protobuf Include="ServiceGrpc\GrpcCategory.proto" GrpcServices="Client" />
+    <Protobuf Include="ServiceGrpc\GrpcLocation.proto" GrpcServices="Client" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+message CityGrpc {
+  int32 CityId = 1;
+  string CityName = 2;
+  int32 CountryId = 3;
+}
+
+service LocationServiceGrpc {
+  rpc GetCityById (CityRequestGrpc) returns (CityResponseGrpc);
+  rpc GetCountryById (CountryRequestGrpc) returns (CountryResponseGrpc);
+}
+
+message CityRequestGrpc {
+  int32 cityId = 1;
+}
+
+message CityResponseGrpc {
+  CityGrpc city = 1;
+}
+
+message CountryGrpc {
+  int32 CountryId = 1;
+  string CountryName = 2;
+}
+
+message CountryRequestGrpc {
+  int32 CountryId = 1;
+}
+
+message CountryResponseGrpc {
+  CountryGrpc country = 1;
+}

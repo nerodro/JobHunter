@@ -1,6 +1,8 @@
 ﻿using Grpc.Core;
+using LocationDomain.Model;
 using LocationService.CityService;
 using LocationService.CountryService;
+using static LocationServiceGrpc;
 
 namespace LocationAPI.LocationRpc
 {
@@ -31,6 +33,28 @@ namespace LocationAPI.LocationRpc
             var response = new CityResponseGrpc
             {
                 City = City
+            };
+
+            return await Task.FromResult(response);
+        }
+        public async override Task<CountryResponseGrpc> GetCountryById(CountryRequestGrpc request, ServerCallContext context)
+        {
+            int CountryId = request.CountryId;
+            CountryModel model = await _Country.GetCountry(CountryId);
+
+            if (model == null)
+            {
+                throw new RpcException(new Status(StatusCode.Cancelled, "Запрашиваемая категория не найдена"));
+            }
+
+            CountryGrpc Country = new CountryGrpc
+            {
+                CountryId = model.Id,
+                CountryName = model.CountryName
+            };
+            var response = new CountryResponseGrpc
+            {
+                Country = Country
             };
 
             return await Task.FromResult(response);

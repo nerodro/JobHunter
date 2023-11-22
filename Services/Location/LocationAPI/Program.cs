@@ -4,6 +4,7 @@ using LocationRepository.CountryLogic;
 using Microsoft.EntityFrameworkCore;
 using LocationService.CityService;
 using LocationService.CountryService;
+using LocationAPI.LocationRpc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,8 +25,12 @@ builder.Services.AddTransient<ICountryService, CountryService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddGrpc();
+
 
 var app = builder.Build();
+
+app.MapGrpcService<LocationRpc>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
