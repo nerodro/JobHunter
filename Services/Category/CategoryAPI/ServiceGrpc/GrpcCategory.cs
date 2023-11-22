@@ -2,7 +2,6 @@
 using CategoryDomain.Model;
 using CategoryService.CategoryService;
 using Grpc.Core;
-using Microsoft.AspNetCore.Http.HttpResults;
 using static CategoryServiceGrpc;
 
 namespace CategoryAPI.ServiceGrpc

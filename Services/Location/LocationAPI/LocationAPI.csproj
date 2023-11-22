@@ -11,6 +11,7 @@
   <ItemGroup>
     <PackageReference Include="Google.Protobuf" Version="3.25.1" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.59.0" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.59.0" />
     <PackageReference Include="Grpc.Tools" Version="2.60.0-pre1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -24,13 +25,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="LocationRpc\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\LocationDomain\LocationDomain.csproj" />
     <ProjectReference Include="..\LocationRepository\LocationRepository.csproj" />
     <ProjectReference Include="..\LocationService\LocationService.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+  <Protobuf Include="LocationRpc\GrpcLocation.proto" GrpcServices="Server" />
+</ItemGroup>
 
 </Project>

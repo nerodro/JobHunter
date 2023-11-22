@@ -25,7 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\CategoryAPI\CategoryAPI.csproj" />
     <ProjectReference Include="..\UserDomain\UserDomain.csproj" />
     <ProjectReference Include="..\UserRepository\UserRepository.csproj" />
     <ProjectReference Include="..\UserService\UserService.csproj" />
