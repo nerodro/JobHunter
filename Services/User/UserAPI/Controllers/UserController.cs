@@ -117,37 +117,21 @@ namespace UserAPI.Controllers
         private async Task<int> GetCityId(int id)
         {
             var city = await _rpc.GetCityById(id);
-            if(city == null)
-            {
-                throw new ArgumentException($"Города с Id {id}, не найдено");
-            }
             return (int)city.Id;
         }
         private async Task<int> GetCountryId(int id)
         {
             var country = await _rpc.GetCountryById(id);
-            if (country == null)
-            {
-                throw new ArgumentException($"Страна с Id {id}, не найдена");
-            }
             return (int)country.Id;
         }
         private async Task<string> GetCountryName(int id)
         {
             var country = await _rpc.GetCountryById(id);
-            if (country == null)
-            {
-                throw new ArgumentException($"Страна с Id {id}, не найдена");
-            }
             return country.CountryName;
         }
         private async Task<string> GetCityName(int id)
         {
             var city = await _rpc.GetCityById(id);
-            if (city == null)
-            {
-                throw new ArgumentException($"Страна с Id {id}, не найдена");
-            }
             return city.CityName;
         }
     }
