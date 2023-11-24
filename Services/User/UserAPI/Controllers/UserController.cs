@@ -95,7 +95,7 @@ namespace UserAPI.Controllers
             List<UserViewModel> model = new List<UserViewModel>();
             if (_userService != null)
             {
-                _userService.GetAll().ToList().ForEach(u =>
+                _userService.GetAll().ToList().ForEach(async u =>
                 {
                     UserViewModel user = new UserViewModel
                     {
@@ -107,7 +107,9 @@ namespace UserAPI.Controllers
                         CountryId = u.CountryId,
                         RoleId = u.RoleId,
                         Email = u.Email,
-                        Patronomyc = u.Patronomyc
+                        Patronomyc = u.Patronomyc,
+                        //CountryName = await GetCountryName(u.CountryId),
+                        //CityName = await GetCityName(u.CityId),
                     };
                     model.Add(user);
                 });
