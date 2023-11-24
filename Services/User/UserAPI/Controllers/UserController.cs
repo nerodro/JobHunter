@@ -27,8 +27,8 @@ namespace UserAPI.Controllers
                 Name = model.Name.Trim(),
                 Patronomyc = model.Patronomyc.Trim(),
                 Phone = model.Phone,
-                CityId = GetCityId(model.CityId),
-                CountryId = GetCountryId(model.CountryId),
+                CityId = await GetCityId(model.CityId),
+                CountryId = await GetCountryId(model.CountryId),
                 Surname = model.Surname.Trim(),
                 RoleId = model.RoleId,
                 Password = model.Password,
@@ -51,8 +51,8 @@ namespace UserAPI.Controllers
                 userEntity.Surname = model.Surname.Trim();
                 userEntity.Phone = model.Phone;
                 userEntity.Patronomyc = model.Patronomyc.Trim();
-                userEntity.CityId = GetCityId(model.CityId);
-                userEntity.CountryId = GetCountryId(model.CountryId);
+                userEntity.CityId = await GetCityId(model.CityId);
+                userEntity.CountryId = await GetCountryId(model.CountryId);
                 userEntity.RoleId = model.RoleId;
                 if (model.Email != null && model.Name != null)
                 {
@@ -80,7 +80,9 @@ namespace UserAPI.Controllers
                 model.Surname = userEntity.Surname;
                 model.Phone = userEntity.Phone;
                 model.CityId = userEntity.CityId;
+                model.CityName = await GetCityName(model.CityId);
                 model.CountryId = userEntity.CountryId;
+                model.CountryName = await GetCountryName(model.CountryId);
                 model.RoleId = userEntity.RoleId;
                 model.Email = userEntity.Email;
                 return new ObjectResult(model);
@@ -112,23 +114,41 @@ namespace UserAPI.Controllers
             }
             return model;
         }
-        private int GetCityId(int id)
+        private async Task<int> GetCityId(int id)
         {
-            var city = _rpc.GetCityById(id);
-            if(city.Exception != null)
+            var city = await _rpc.GetCityById(id);
+            if(city == null)
             {
                 throw new ArgumentException($"Города с Id {id}, не найдено");
             }
-            return (int)city.Result.Id;
+            return (int)city.Id;
         }
-        private int GetCountryId(int id)
+        private async Task<int> GetCountryId(int id)
         {
-            var country = _rpc.GetCountryById(id);
-            if (country.Exception != null)
+            var country = await _rpc.GetCountryById(id);
+            if (country == null)
             {
                 throw new ArgumentException($"Страна с Id {id}, не найдена");
             }
-            return country.Id;
+            return (int)country.Id;
+        }
+        private async Task<string> GetCountryName(int id)
+        {
+            var country = await _rpc.GetCountryById(id);
+            if (country == null)
+            {
+                throw new ArgumentException($"Страна с Id {id}, не найдена");
+            }
+            return country.CountryName;
+        }
+        private async Task<string> GetCityName(int id)
+        {
+            var city = await _rpc.GetCityById(id);
+            if (city == null)
+            {
+                throw new ArgumentException($"Страна с Id {id}, не найдена");
+            }
+            return city.CityName;
         }
     }
 }

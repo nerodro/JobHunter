@@ -133,26 +133,22 @@ namespace UserAPI.Controllers
         private async Task<string> GetCategoryName(int id)
         {
             var model = await _rpc.GetCategoryModel(id);
-            string CategoryName = model.CategoryName;
-            return CategoryName;
+            return model.CategoryName;
         }
         private async Task<string> GetLanguageName(int id)
         {
             LanguageModel language = await _languageService.GetLanguage(id);
-            string name = language.Language;
-            return name;
+            return language.Language;
         }
         private async Task<int> GetLanguageId(int id)
         {
             LanguageModel language = await _languageService.GetLanguage(id);
-            int Id = language.Id;
-            return Id;
+            return language.Id;
         }
         private async Task<string> GetUserName(int id)
         {
             UserModel user = await _userService.GetUser(id);
-            string name = user.Name;
-            return name;
+            return user.Name;
         }
     }
 }
