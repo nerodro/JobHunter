@@ -24,7 +24,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <Folder Include="CompanyGrpc\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CompanyDomain\CompanyDomain.csproj" />
+    <ProjectReference Include="..\CompanyRepository\CompanyRepository.csproj" />
+    <ProjectReference Include="..\CompanyService\CompanyService.csproj" />
   </ItemGroup>
 
 </Project>
