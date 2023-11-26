@@ -26,6 +26,7 @@ namespace CompanyAPI.Controllers
                 CountryId = model.CountryId,
                 Password = model.Password.Trim(),
                 Phone = model.Phone,
+                CategoryId = model.CategoryId,
             };
             if (model.CompanyName != null)
             {
@@ -46,6 +47,7 @@ namespace CompanyAPI.Controllers
                 Company.CountryId = model.CountryId;
                 Company.Password = model.Password.Trim();
                 Company.Phone = model.Phone;
+                Company.CategoryId = model.CategoryId;
                 if (model.CompanyName != null)
                 {
                     await _CompanyService.UpdateCompany(Company);
@@ -75,6 +77,7 @@ namespace CompanyAPI.Controllers
                     model.CityId = Company.CityId;
                     model.Phone = Company.Phone;
                     model.Email = Company.Email;
+                    model.CategoryId = Company.CategoryId;
                     return new ObjectResult(model);
                 }
                 return BadRequest("Компания не найдена");
@@ -97,6 +100,7 @@ namespace CompanyAPI.Controllers
                         CityId = u.CityId,
                         Phone = u.Phone,
                         Email = u.Email,
+                        CategoryId = u.CategoryId,
                     };
                     model.Add(Company);
                 });
