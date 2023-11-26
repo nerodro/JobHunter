@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace CompanyService.CompanyService
 {
-    internal class CompanyService : ICompanyService
+    public class CompanyServices : ICompanyService
     {
         private ICompanyLogic<CompanyModel> _Company;
-        public CompanyService(ICompanyLogic<CompanyModel> Company)
+        public CompanyServices(ICompanyLogic<CompanyModel> Company)
         {
             _Company = Company;
         }

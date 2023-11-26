@@ -16,5 +16,9 @@ namespace CompanyRepository
             //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Company;Username=postgres;Password=123;");
+        //}
     }
 }

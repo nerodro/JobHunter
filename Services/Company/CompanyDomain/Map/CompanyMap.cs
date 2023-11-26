@@ -19,6 +19,7 @@ namespace CompanyDomain.Map
             entityTypeBuilder.Property(x => x.Email).IsRequired();
             entityTypeBuilder.Property(x => x.Password).IsRequired();
             entityTypeBuilder.Property(x => x.Phone).IsRequired();
+            entityTypeBuilder.Property(x => x.CategoryId).IsRequired();
         }
     }
 }

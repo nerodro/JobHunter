@@ -14,7 +14,7 @@ string? connection = builder.Configuration.GetConnectionString("DefaultConnectio
 builder.Services.AddDbContext<CompanyContext>(options => options.UseNpgsql(connection));
 
 builder.Services.AddScoped(typeof(ICompanyLogic<>), typeof(CompanyLogic<>));
-builder.Services.AddTransient<ICompanyService, ICompanyService>();
+builder.Services.AddTransient<ICompanyService, CompanyServices>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
