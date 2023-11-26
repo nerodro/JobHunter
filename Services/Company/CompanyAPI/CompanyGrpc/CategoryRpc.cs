@@ -13,7 +13,7 @@ namespace CompanyAPI.ServiceGrpc
             var channel = GrpcChannel.ForAddress("https://localhost:7236");
             _rpc = new CategoryServiceGrpc.CategoryServiceGrpcClient(channel);
         }
-        public int GetCategoryById(int categoryId)
+        public async Task<CategoryViewModel> GetCategory(int categoryId)
         {
             var request = new CategoryRequestGrpc
             {
@@ -21,22 +21,12 @@ namespace CompanyAPI.ServiceGrpc
             };
 
             var response = _rpc.GetCategoryById(request);
-            return (int)response.Category.CategoryId;
-        }
-        public async Task<CategoryViewModel> GetCategoryModel(int categoryId)
-        {
-            var request = new CategoryRequestGrpc
-            {
-                CategoryId = categoryId
-            };
-
-            var response = _rpc.GetCategoryById(request);
-            CategoryViewModel model = new CategoryViewModel
+            CategoryViewModel category = new CategoryViewModel 
             {
                 Id = response.Category.CategoryId,
                 CategoryName = response.Category.CategoryName
             };
-            return model;
+            return category;
         }
     }
 }

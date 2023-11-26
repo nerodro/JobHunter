@@ -13,5 +13,6 @@ namespace CompanyAPI.ViewModel
         public int CityId { get; set; }
         public int CountryId { get; set; }
         public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
     }
 }

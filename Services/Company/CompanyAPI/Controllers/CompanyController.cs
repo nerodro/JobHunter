@@ -1,4 +1,5 @@
-﻿using CompanyAPI.ViewModel;
+﻿using CompanyAPI.ServiceGrpc;
+using CompanyAPI.ViewModel;
 using CompanyDomain.Model;
 using CompanyService.CompanyService;
 using Microsoft.AspNetCore.Mvc;
@@ -11,9 +12,11 @@ namespace CompanyAPI.Controllers
     public class CompanyController : ControllerBase
     {
         private readonly ICompanyService _CompanyService;
-        public CompanyController(ICompanyService CompanyService)
+        private readonly CategoryRpc _rpc;
+        public CompanyController(ICompanyService CompanyService, CategoryRpc categoryGrpc)
         {
             _CompanyService = CompanyService;
+            _rpc = categoryGrpc;
         }
         [HttpPost("CreateCompany")]
         public async Task<IActionResult> CreateCompany(CompanyViewModel model)
@@ -26,7 +29,7 @@ namespace CompanyAPI.Controllers
                 CountryId = model.CountryId,
                 Password = model.Password.Trim(),
                 Phone = model.Phone,
-                CategoryId = model.CategoryId,
+                CategoryId = await GetCategoryId(model.CategoryId),
             };
             if (model.CompanyName != null)
             {
@@ -47,7 +50,7 @@ namespace CompanyAPI.Controllers
                 Company.CountryId = model.CountryId;
                 Company.Password = model.Password.Trim();
                 Company.Phone = model.Phone;
-                Company.CategoryId = model.CategoryId;
+                Company.CategoryId = await GetCategoryId(model.CategoryId);
                 if (model.CompanyName != null)
                 {
                     await _CompanyService.UpdateCompany(Company);
@@ -78,6 +81,7 @@ namespace CompanyAPI.Controllers
                     model.Phone = Company.Phone;
                     model.Email = Company.Email;
                     model.CategoryId = Company.CategoryId;
+                    model.CategoryName = await GetCategoryName(Company.CategoryId);
                     return new ObjectResult(model);
                 }
                 return BadRequest("Компания не найдена");
@@ -106,6 +110,16 @@ namespace CompanyAPI.Controllers
                 });
             }
             return model;
+        }
+        private async Task<int> GetCategoryId(int id)
+        {
+            var category = await _rpc.GetCategory(id);
+            return (int)category.Id;
+        }
+        private async Task<string> GetCategoryName(int id)
+        {
+            var model = await _rpc.GetCategory(id);
+            return model.CategoryName;
         }
     }
 }

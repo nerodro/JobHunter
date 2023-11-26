@@ -1,3 +1,4 @@
+using CompanyAPI.ServiceGrpc;
 using CompanyRepository;
 using CompanyRepository.CompanyLogic;
 using CompanyService.CompanyService;
