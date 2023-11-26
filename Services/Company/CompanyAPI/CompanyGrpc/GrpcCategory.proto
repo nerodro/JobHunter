@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+message CategoryGrpc {
+  int32 categoryId = 1;
+  string categoryName = 2;
+}
+
+service CategoryServiceGrpc {
+  rpc GetCategoryById (CategoryRequestGrpc) returns (CategoryResponseGrpc);
+}
+
+message CategoryRequestGrpc {
+  int32 categoryId = 1;
+}
+
+message CategoryResponseGrpc {
+  CategoryGrpc category = 1;
+}
