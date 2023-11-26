@@ -9,6 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="CompanyGrpc\GrpcCategory.proto" />
+    <None Remove="CompanyGrpc\GrpcLocation.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Google.Protobuf" Version="3.25.1" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.59.0" />
     <PackageReference Include="Grpc.Tools" Version="2.60.0-pre1">
@@ -24,13 +29,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CompanyGrpc\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\CompanyDomain\CompanyDomain.csproj" />
     <ProjectReference Include="..\CompanyRepository\CompanyRepository.csproj" />
     <ProjectReference Include="..\CompanyService\CompanyService.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="CompanyGrpc\GrpcCategory.proto" GrpcServices="Client" />
+    <Protobuf Include="CompanyGrpc\GrpcLocation.proto" GrpcServices="Client" />
   </ItemGroup>
 
 </Project>
