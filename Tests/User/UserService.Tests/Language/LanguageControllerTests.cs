@@ -17,11 +17,9 @@ namespace JobJunster.Tests.Language
     public class LanguageControllerTests 
     {
         LanguageController _controller;
-        //ILanguageService _languageService;
         Mock<ILanguageService> _languageService;
         public LanguageControllerTests()
         {
-            //_languageService = new LanguageServiceFake();
             _languageService = new Mock<ILanguageService>();
             _controller = new LanguageController(_languageService.Object);
         }
@@ -60,15 +58,30 @@ namespace JobJunster.Tests.Language
         [TestMethod]
         public async Task TestDelete_Correct()
         {
+            _languageService.Setup(x => x.GetLanguage(1)).ReturnsAsync(new LanguageModel {Id = 1, Language = "Russ" });
+            var response = await _controller.DeleteLanguage(1);
+            var result = response.Result as OkObjectResult;
+            Assert.AreEqual(result.StatusCode, 200);
+        }
+        [TestMethod]
+        public async Task TestUpdate_Correct()
+        {
             LanguageViewModel viewModel = new LanguageViewModel()
             {
                 LanguageName = "France",
             };
-            var data = await _controller.CreateLanguage(viewModel) as CreatedAtActionResult;
-            var item = data.Value as LanguageModel;
-            var response = await _controller.DeleteLanguage((int)item.Id);
-            var result = response.Result as OkObjectResult;
-            Assert.AreEqual(result.StatusCode, 200);
+            _languageService.Setup(x => x.GetLanguage(1)).ReturnsAsync(new LanguageModel { Id = 1, Language = "Russ" });
+            var update =  await _controller.EditLanguage(1, viewModel) as OkObjectResult;
+            Assert.IsNotNull(update.Value);
+            var modelup = update.Value as LanguageViewModel;
+            if (modelup != null)
+            {
+                Assert.AreEqual(viewModel.LanguageName, modelup.LanguageName);
+            }
+            else
+            {
+                throw new Exception();
+            }
         }
         [TestMethod]
         public async Task TestDelete_Incorrect()
@@ -76,6 +89,13 @@ namespace JobJunster.Tests.Language
             var response = await _controller.DeleteLanguage(1488);
             var result = response.Result as BadRequestResult;
             Assert.AreEqual(result.StatusCode, 400);
+        }
+        [TestMethod]
+        public async Task TestGetAllt()
+        {
+            _languageService.Setup(x => x.GetLanguage(1)).ReturnsAsync(new LanguageModel { Id = 1, Language = "Russ" });
+            var res = _controller.Index();
+            Assert.IsNotNull(res);
         }
     }
 }

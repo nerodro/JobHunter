@@ -29,7 +29,7 @@ namespace UserAPI.Controllers
             return BadRequest("Не все обязательные поля были заполнены");
         }
         [HttpPut("EditLanguage/{id}")]
-        public async Task<ActionResult<LanguageViewModel>> EditLanguage(int id, LanguageViewModel model)
+        public async Task<IActionResult> EditLanguage(int id, LanguageViewModel model)
         {
             LanguageModel language = await _language.GetLanguage(id);
             if (ModelState.IsValid)
@@ -43,11 +43,26 @@ namespace UserAPI.Controllers
             }
             return BadRequest(ModelState);
         }
+        //[HttpPut("EditLanguage/{id}")]
+        //public async Task<ActionResult<LanguageViewModel>> EditLanguage(int id, LanguageViewModel model)
+        //{
+        //    LanguageModel language = await _language.GetLanguage(id);
+        //    if (ModelState.IsValid)
+        //    {
+        //        language.Language = model.LanguageName.Trim();
+        //        if (model.LanguageName != null)
+        //        {
+        //            await _language.Update(language);
+        //            return Ok(model);
+        //        }
+        //    }
+        //    return BadRequest(ModelState);
+        //}
         [HttpDelete("DeleteLanguage/{id}")]
         public async Task<ActionResult<LanguageViewModel>> DeleteLanguage(int id)
         {
-            var model = await SingleLanguage(id);
-            if (model.Value != null)
+            var model = await _language.GetLanguage(id);
+            if (model != null)
             {
                 await _language.Delete(id);
                 return Ok("Язык успешно удален");
