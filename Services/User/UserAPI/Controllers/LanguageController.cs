@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using UserAPI.ViewModel;
 using UserDomain.Models;
 using UserService.LanguageService;
@@ -24,7 +25,7 @@ namespace UserAPI.Controllers
             if (model.LanguageName != null)
             {
                 await _language.Create(language);
-                return CreatedAtAction("SingleLanguage", new { id = language.Id }, language);
+                return CreatedAtAction("SingleLanguage", new { id = language.Id }, model);
             }
             return BadRequest("Не все обязательные поля были заполнены");
         }
@@ -70,7 +71,7 @@ namespace UserAPI.Controllers
             return BadRequest();
         }
         [HttpGet("GetOneLanguage/{id}")]
-        public async Task<ActionResult<LanguageViewModel>> SingleLanguage(int id)
+        public async Task<IActionResult> SingleLanguage(int id)
         {
             LanguageViewModel model = new LanguageViewModel();
             if (id != 0)
@@ -80,12 +81,31 @@ namespace UserAPI.Controllers
                 {
                     model.LanguageName = language.Language;
                     model.Id = language.Id;
+                    //return Ok(model);
                     return new ObjectResult(model);
                 }
                 return BadRequest("Язык не найден");
             }
             return BadRequest();
         }
+        //[HttpGet("GetOneLanguage/{id}")]
+        //public async Task<ActionResult<LanguageViewModel>> SingleLanguage(int id)
+        //{
+        //    LanguageViewModel model = new LanguageViewModel();
+        //    if (id != 0)
+        //    {
+        //        LanguageModel language = await _language.GetLanguage(id);
+        //        if (language != null)
+        //        {
+        //            model.LanguageName = language.Language;
+        //            model.Id = language.Id;
+        //            //return Ok(model);
+        //            return new ObjectResult(model);
+        //        }
+        //        return BadRequest("Язык не найден");
+        //    }
+        //    return BadRequest();
+        //}
         [HttpGet("GetAllLanguage")]
         public IEnumerable<LanguageViewModel> Index()
         {
