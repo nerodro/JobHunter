@@ -24,7 +24,7 @@ namespace UserAPI.Controllers
             if (model.LanguageName != null)
             {
                 await _language.Create(language);
-                return CreatedAtAction("SingleLanguage", new { id = language.Id }, model);
+                return CreatedAtAction("SingleLanguage", new { id = language.Id }, language);
             }
             return BadRequest("Не все обязательные поля были заполнены");
         }
@@ -46,8 +46,13 @@ namespace UserAPI.Controllers
         [HttpDelete("DeleteLanguage/{id}")]
         public async Task<ActionResult<LanguageViewModel>> DeleteLanguage(int id)
         {
-            await _language.Delete(id);
-            return Ok("Язык успешно удален");
+            var model = await SingleLanguage(id);
+            if (model.Value != null)
+            {
+                await _language.Delete(id);
+                return Ok("Язык успешно удален");
+            }
+            return BadRequest();
         }
         [HttpGet("GetOneLanguage/{id}")]
         public async Task<ActionResult<LanguageViewModel>> SingleLanguage(int id)

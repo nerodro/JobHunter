@@ -55,7 +55,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CategoryRepository", "Servi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CategoryService", "Services\Category\CategoryService\CategoryService.csproj", "{2F58358D-8D82-4A36-BFF3-85C379E06398}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobJunster.Tests", "Tests\JobJunster.Tests\JobJunster.Tests.csproj", "{3D5AF69F-D913-4283-848F-82744922796C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService.Tests", "Tests\User\UserService.Tests\UserService.Tests.csproj", "{7F8E01D2-0AC8-4B48-AF8B-9BA51FA86711}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -134,10 +134,10 @@ Global
 		{2F58358D-8D82-4A36-BFF3-85C379E06398}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F58358D-8D82-4A36-BFF3-85C379E06398}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F58358D-8D82-4A36-BFF3-85C379E06398}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3D5AF69F-D913-4283-848F-82744922796C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3D5AF69F-D913-4283-848F-82744922796C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3D5AF69F-D913-4283-848F-82744922796C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3D5AF69F-D913-4283-848F-82744922796C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F8E01D2-0AC8-4B48-AF8B-9BA51FA86711}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F8E01D2-0AC8-4B48-AF8B-9BA51FA86711}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F8E01D2-0AC8-4B48-AF8B-9BA51FA86711}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F8E01D2-0AC8-4B48-AF8B-9BA51FA86711}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
