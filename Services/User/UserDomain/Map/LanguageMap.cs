@@ -8,7 +8,7 @@ namespace UserDomain.Map
         public LanguageMap(EntityTypeBuilder<LanguageModel> entityTypeBuilder) 
         { 
             entityTypeBuilder.HasKey(x => x.Id);
-            entityTypeBuilder.Property(x => x.Language).IsRequired();
+            entityTypeBuilder.Property(x => x.Language.Trim()).IsRequired();
         }
     }
 }
