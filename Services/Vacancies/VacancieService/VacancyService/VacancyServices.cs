@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using VacancieDomain.Model;
 using VacancieRepository.VacancieLogic;
+using VacancieService.VacancieService;
 
 namespace VacancieService.VacancyService
 {
-    public class VacancyService
+    public class VacancyServices : IVacancieService
     {
         private readonly IVacancieLogic<VacancieModel> _VacancieService;
-        public VacancyService(IVacancieLogic<VacancieModel> VacancieService)
+        public VacancyServices(IVacancieLogic<VacancieModel> VacancieService)
         {
             _VacancieService = VacancieService;
         }

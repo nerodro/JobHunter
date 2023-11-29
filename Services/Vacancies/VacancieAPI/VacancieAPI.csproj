@@ -27,4 +27,10 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\VacancieDomain\VacancieDomain.csproj" />
+    <ProjectReference Include="..\VacancieRepository\VacancieRepository.csproj" />
+    <ProjectReference Include="..\VacancieService\VacancieService.csproj" />
+  </ItemGroup>
+
 </Project>
