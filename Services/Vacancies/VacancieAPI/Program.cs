@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ResponseRepository.ResponseLogic;
 using VacancieAPI.ServiceGrpc;
+using VacancieAPI.VacancieRpc;
 using VacancieRepository;
 using VacancieRepository.ResponseLogic;
 using VacancieRepository.VacancieLogic;
@@ -22,6 +23,7 @@ builder.Services.AddScoped(typeof(IVacancieLogic<>), typeof(VacancieLogic<>));
 builder.Services.AddScoped(typeof(IResponseLogic<>), typeof(ResponseLogic<>));
 
 builder.Services.AddScoped<LocationRpc>();
+builder.Services.AddScoped<CompanyRpc>();
 
 builder.Services.AddTransient<IVacancieService, VacancyServices>();
 builder.Services.AddTransient<IResponseService, ResponseService>();
@@ -33,7 +35,7 @@ builder.Services.AddGrpc();
 var app = builder.Build();
 
 app.MapGrpcService<LocationRpc>();
-
+app.MapGrpcService<CompanyRpc>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

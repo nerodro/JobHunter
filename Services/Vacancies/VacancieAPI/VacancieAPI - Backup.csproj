@@ -9,7 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="VacancieRpc\GrpcCompany.proto" />
     <None Remove="VacancieRpc\GrpcLocation.proto" />
   </ItemGroup>
 
@@ -39,8 +38,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="VacancieRpc\GrpcCompany.proto" GrpcServices="Client" />
     <Protobuf Include="VacancieRpc\GrpcLocation.proto" GrpcServices="Client" />
+    <Protobuf Include="VacancieRpc\GrpcCompany.proto" GrpcServices="Client" />
   </ItemGroup>
 
 </Project>

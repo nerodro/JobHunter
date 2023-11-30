@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+message CompanyGrpcMode {
+  int32 CompanyId = 1;
+  string CompanyName = 2;
+}
+
+service CompanyServiceGrpc {
+  rpc GetCompanyById (CompanyRequestGrpc) returns (CompanyResponseGrpc);
+}
+
+message CompanyRequestGrpc {
+  int32 CompanyId = 1;
+}
+
+message CompanyResponseGrpc {
+  CompanyGrpcMode Company = 1;
+}

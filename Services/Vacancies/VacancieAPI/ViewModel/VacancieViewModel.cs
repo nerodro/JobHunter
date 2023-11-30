@@ -9,6 +9,7 @@ namespace VacancieAPI.ViewModel
         public string WorkName { get; set; } = null!;
         public string AboutWork { get; set; } = null!;
         public int CompanyId { get; set; }
+        public string CompanyName { get; set; } = null!;
         public int CityId { get; set; }
         public string CityName { get; set; } = null!;
         public int CountryId { get; set; }
