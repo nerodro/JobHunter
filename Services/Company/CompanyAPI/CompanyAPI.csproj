@@ -37,6 +37,7 @@
   <ItemGroup>
     <Protobuf Include="CompanyGrpc\GrpcCategory.proto" GrpcServices="Client" />
     <Protobuf Include="CompanyGrpc\GrpcLocation.proto" GrpcServices="Client" />
+    <Protobuf Include="CompanyGrpc\GrpcCompany.proto" GrpcServices="Server" />
   </ItemGroup>
 
   <ItemGroup>
