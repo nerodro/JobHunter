@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.Design;
+using VacancieAPI.ServiceGrpc;
 using VacancieAPI.ViewModel;
 using VacancieDomain.Model;
 using VacancieService.VacancieService;
@@ -11,17 +11,19 @@ namespace VacancieAPI.Controllers
     public class VacancieController : ControllerBase
     {
         private readonly IVacancieService _VacancieService;
-        public VacancieController(IVacancieService VacancieService)
+        private readonly LocationRpc _rpc;
+        public VacancieController(IVacancieService VacancieService, LocationRpc rpc)
         {
             _VacancieService = VacancieService;
+            _rpc = rpc;
         }
         [HttpPost("CreateVacancie")]
         public async Task<IActionResult> CreateVacancie(VacancieViewModel model)
         {
             VacancieModel language = new VacancieModel
             {
-                CityId = model.CityId,
-                CountryId = model.CountryId,
+                CityId = await GetCityId(model.CityId),
+                CountryId = await GetCountryId(model.CountryId),
                 AboutWork = model.AboutWork.Trim(),
                 WorkName = model.WorkName.Trim(),
                 CompanyId = model.CompanyId,
@@ -39,8 +41,8 @@ namespace VacancieAPI.Controllers
             VacancieModel Vacancie = await _VacancieService.GetVacancie(id);
             if (ModelState.IsValid)
             {
-                Vacancie.CityId = model.CityId;
-                Vacancie.CountryId = model.CountryId;
+                Vacancie.CityId = await GetCityId(model.CityId);
+                Vacancie.CountryId = await GetCountryId(model.CountryId);
                 Vacancie.AboutWork = model.AboutWork.Trim();
                 Vacancie.WorkName = model.WorkName.Trim();
                 Vacancie.CompanyId = model.CompanyId;
@@ -68,9 +70,11 @@ namespace VacancieAPI.Controllers
                 if (Vacancie != null)
                 {
 
-                    model.CityId = Vacancie.CityId;
+                    model.CityId =  Vacancie.CityId;
+                    model.CityName = await GetCityName(Vacancie.CityId);
                     model.CompanyId = Vacancie.CompanyId;
                     model.CountryId = Vacancie.CountryId;
+                    model.CountryName = await GetCountryName(Vacancie.CountryId);
                     model.AboutWork = model.AboutWork.Trim();
                     model.WorkName = model.WorkName.Trim();
                     model.Id = Vacancie.Id;
@@ -101,6 +105,26 @@ namespace VacancieAPI.Controllers
                 });
             }
             return model;
+        }
+        private async Task<int> GetCityId(int id)
+        {
+            var city = await _rpc.GetCityById(id);
+            return (int)city.Id;
+        }
+        private async Task<int> GetCountryId(int id)
+        {
+            var country = await _rpc.GetCountryById(id);
+            return (int)country.Id;
+        }
+        private async Task<string> GetCountryName(int id)
+        {
+            var country = await _rpc.GetCountryById(id);
+            return country.CountryName;
+        }
+        private async Task<string> GetCityName(int id)
+        {
+            var city = await _rpc.GetCityById(id);
+            return city.CityName;
         }
     }
 }
