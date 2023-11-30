@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ResponseRepository.ResponseLogic;
+using VacancieAPI.ServiceGrpc;
 using VacancieRepository;
 using VacancieRepository.ResponseLogic;
 using VacancieRepository.VacancieLogic;
@@ -20,6 +21,8 @@ builder.Services.AddDbContext<VacancyContext>(options => options.UseNpgsql(conne
 builder.Services.AddScoped(typeof(IVacancieLogic<>), typeof(VacancieLogic<>));
 builder.Services.AddScoped(typeof(IResponseLogic<>), typeof(ResponseLogic<>));
 
+builder.Services.AddScoped<LocationRpc>();
+
 builder.Services.AddTransient<IVacancieService, VacancyServices>();
 builder.Services.AddTransient<IResponseService, ResponseService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -28,6 +31,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddGrpc();
 
 var app = builder.Build();
+
+app.MapGrpcService<LocationRpc>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

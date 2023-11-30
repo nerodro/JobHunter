@@ -5,6 +5,7 @@
         public int Id { get; set; }
         public int CvId { get; set; }
         public int VacancieId { get; set; }
+        public virtual VacancieModel Vacancie { get; set; }
         public string Message { get; set; } = null!;
     }
 }
