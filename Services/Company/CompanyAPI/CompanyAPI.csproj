@@ -39,4 +39,8 @@
     <Protobuf Include="CompanyGrpc\GrpcLocation.proto" GrpcServices="Client" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="RabbitMq\" />
+  </ItemGroup>
+
 </Project>
