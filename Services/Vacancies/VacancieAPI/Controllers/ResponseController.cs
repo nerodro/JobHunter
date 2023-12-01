@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using VacancieAPI.VacancieRpc;
 using VacancieAPI.ViewModel;
 using VacancieDomain.Model;
 using VacancieService.ResponseService;
+using VacancieService.VacancieService;
 
 namespace VacancieAPI.Controllers
 {
@@ -10,16 +12,20 @@ namespace VacancieAPI.Controllers
     public class ResponseController : ControllerBase
     {
         private readonly IResponseService _ResponseService;
-        public ResponseController(IResponseService ResponseService)
+        private readonly CvRpc _rpc;
+        private readonly IVacancieService _VacancieService;
+        public ResponseController(IResponseService ResponseService, CvRpc cv, IVacancieService vacancie)
         {
             _ResponseService = ResponseService;
+            _rpc = cv;
+            _VacancieService = vacancie;
         }
         [HttpPost("CreateResponse")]
         public async Task<IActionResult> CreateResponse(ResponseViewModel model)
         {
             ResponseModel language = new ResponseModel
             {
-                CvId = model.CvId,
+                CvId = await GetCvId(model.CvId),
                 VacancieId = model.VacancieId,
                 Message = model.Message.Trim(),
             };
@@ -37,7 +43,6 @@ namespace VacancieAPI.Controllers
             if (ModelState.IsValid)
             {
                 Response.Message = model.Message.Trim();
-                Response.CvId = model.CvId;
                 Response.VacancieId = model.VacancieId;
                 if (model.CvId != 0 && model.VacancieId != 0)
                 {
@@ -64,7 +69,9 @@ namespace VacancieAPI.Controllers
                 {
                     model.Message = Response.Message;
                     model.CvId = Response.CvId;
+                    model.CvName = await GetCvName(Response.CvId);
                     model.VacancieId = Response.VacancieId;
+                    model.VacancieName = await GetVacancieName(Response.VacancieId);
                     model.Id = Response.Id;
                     return new ObjectResult(model);
                 }
@@ -91,6 +98,21 @@ namespace VacancieAPI.Controllers
                 });
             }
             return model;
+        }
+        private async Task<int> GetCvId(int id)
+        {
+            var cv = await _rpc.GetCv(id);
+            return (int)cv.Id;
+        }
+        private async Task<string> GetCvName(int id)
+        {
+            var cv = await _rpc.GetCv(id);
+            return cv.CvName;
+        }
+        public async Task<string> GetVacancieName(int id)
+        {
+            var vacancie = await _VacancieService.GetVacancie(id);
+            return vacancie.WorkName;
         }
     }
 }

@@ -36,6 +36,7 @@
   <ItemGroup>
     <Protobuf Include="ServiceGrpc\GrpcCategory.proto" GrpcServices="Client" />
     <Protobuf Include="ServiceGrpc\GrpcLocation.proto" GrpcServices="Client" />
+    <Protobuf Include="ServiceGrpc\GrpcCv.proto" GrpcServices="Server" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="RabbitMq\" />

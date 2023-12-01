@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="VacancieRpc\GrpcCompany.proto" />
+    <None Remove="VacancieRpc\GrpcCv.proto" />
     <None Remove="VacancieRpc\GrpcLocation.proto" />
   </ItemGroup>
 
@@ -40,6 +41,7 @@
 
   <ItemGroup>
     <Protobuf Include="VacancieRpc\GrpcCompany.proto" GrpcServices="Client" />
+    <Protobuf Include="VacancieRpc\GrpcCv.proto" GrpcServices="Client" />
     <Protobuf Include="VacancieRpc\GrpcLocation.proto" GrpcServices="Client" />
   </ItemGroup>
 

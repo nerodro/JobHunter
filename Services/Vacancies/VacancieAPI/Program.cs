@@ -24,6 +24,7 @@ builder.Services.AddScoped(typeof(IResponseLogic<>), typeof(ResponseLogic<>));
 
 builder.Services.AddScoped<LocationRpc>();
 builder.Services.AddScoped<CompanyRpc>();
+builder.Services.AddScoped<CvRpc>();
 
 builder.Services.AddTransient<IVacancieService, VacancyServices>();
 builder.Services.AddTransient<IResponseService, ResponseService>();
@@ -36,6 +37,7 @@ var app = builder.Build();
 
 app.MapGrpcService<LocationRpc>();
 app.MapGrpcService<CompanyRpc>();
+app.MapGrpcService<CvRpc>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

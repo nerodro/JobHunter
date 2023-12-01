@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+message CvGrpc {
+  int32 CvId = 1;
+  string CvName = 2;
+}
+
+service CvServiceGrpc {
+  rpc GetCvById (CvRequestGrpc) returns (CvResponseGrpc);
+}
+
+message CvRequestGrpc {
+  int32 CvId = 1;
+}
+
+message CvResponseGrpc {
+  CvGrpc Cv = 1;
+}
