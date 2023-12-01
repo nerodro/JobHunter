@@ -1,4 +1,5 @@
-﻿using CompanyAPI.ServiceGrpc;
+﻿using CompanyAPI.RabbitMq;
+using CompanyAPI.ServiceGrpc;
 using CompanyAPI.ViewModel;
 using CompanyDomain.Model;
 using CompanyService.CompanyService;
@@ -14,11 +15,13 @@ namespace CompanyAPI.Controllers
         private readonly ICompanyService _CompanyService;
         private readonly CategoryRpc _rpc;
         private readonly LocationRpc _Locrpc;
-        public CompanyController(ICompanyService CompanyService, CategoryRpc categoryGrpc, LocationRpc Locrpc)
+        private readonly ICompanyProducer _companyProducer;
+        public CompanyController(ICompanyService CompanyService, CategoryRpc categoryGrpc, LocationRpc Locrpc, CompanyProducer company)
         {
             _CompanyService = CompanyService;
             _rpc = categoryGrpc;
             _Locrpc = Locrpc;
+            _companyProducer = company;
         }
         [HttpPost("CreateCompany")]
         public async Task<IActionResult> CreateCompany(CompanyViewModel model)
@@ -89,6 +92,17 @@ namespace CompanyAPI.Controllers
                     return new ObjectResult(model);
                 }
                 return BadRequest("Компания не найдена");
+            }
+            return BadRequest();
+        }
+        [HttpGet("GetVacancy/{id}")]
+        public async Task<ActionResult<VacancieViewModel>> SingleVacancy(int id)
+        {
+            VacancieViewModel model = new VacancieViewModel();
+            model = await _companyProducer.TakeSingleVacancieForCompany(id);
+            if (model != null)
+            {
+                return model;
             }
             return BadRequest();
         }
