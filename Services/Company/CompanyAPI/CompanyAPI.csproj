@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -38,10 +38,6 @@
     <Protobuf Include="CompanyGrpc\GrpcCategory.proto" GrpcServices="Client" />
     <Protobuf Include="CompanyGrpc\GrpcLocation.proto" GrpcServices="Client" />
     <Protobuf Include="CompanyGrpc\GrpcCompany.proto" GrpcServices="Server" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="RabbitMq\" />
   </ItemGroup>
 
 </Project>
