@@ -1,3 +1,4 @@
+using CompanyAPI.RabbitMq;
 using CompanyAPI.ServiceGrpc;
 using CompanyRepository;
 using CompanyRepository.CompanyLogic;
@@ -16,6 +17,8 @@ builder.Services.AddDbContext<CompanyContext>(options => options.UseNpgsql(conne
 
 builder.Services.AddScoped(typeof(ICompanyLogic<>), typeof(CompanyLogic<>));
 builder.Services.AddTransient<ICompanyService, CompanyServices>();
+
+builder.Services.AddScoped<ICompanyProducer, CompanyProducer>();
 
 builder.Services.AddScoped<CategoryRpc>();
 builder.Services.AddScoped<LocationRpc>();
