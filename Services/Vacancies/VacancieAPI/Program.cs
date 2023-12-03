@@ -1,5 +1,8 @@
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
+using RabbitMQ.Client;
 using ResponseRepository.ResponseLogic;
+using VacancieAPI.RabbitMq;
 using VacancieAPI.ServiceGrpc;
 using VacancieAPI.VacancieRpc;
 using VacancieRepository;
@@ -19,12 +22,52 @@ string? connection = builder.Configuration.GetConnectionString("DefaultConnectio
 // добавляем контекст ApplicationContext в качестве сервиса в приложение
 builder.Services.AddDbContext<VacancyContext>(options => options.UseNpgsql(connection));
 
+
 builder.Services.AddScoped(typeof(IVacancieLogic<>), typeof(VacancieLogic<>));
+
 builder.Services.AddScoped(typeof(IResponseLogic<>), typeof(ResponseLogic<>));
+
+
+
+builder.Services.AddSingleton<IConnection>(factory =>
+{
+    var rabbitMqFactory = new ConnectionFactory() { HostName = "localhost" };
+    return rabbitMqFactory.CreateConnection();
+});
+
+builder.Services.AddSingleton<IModel>(provider =>
+{
+    var connection = provider.GetRequiredService<IConnection>();
+    return connection.CreateModel();
+});
+
+builder.Services.AddScoped<IVacancieProducercs, VacancieProducer>();
+
+builder.Services.AddSingleton<QueueListenerService>(provider =>
+{
+    var scopeFactory = provider.GetRequiredService<IServiceScopeFactory>();
+    using (var scope = scopeFactory.CreateScope())
+    {
+        var scopedProvider = scope.ServiceProvider;
+        var producer = scopedProvider.GetRequiredService<IVacancieProducercs>();
+
+        var listenerService = new QueueListenerService(producer);
+        return listenerService;
+    }
+});
+
+builder.Services.AddSingleton<IHostedService>(provider =>
+{
+    var listenerService = provider.GetRequiredService<QueueListenerService>();
+    return listenerService;
+});
+
 
 builder.Services.AddScoped<LocationRpc>();
 builder.Services.AddScoped<CompanyRpc>();
 builder.Services.AddScoped<CvRpc>();
+
+
 
 builder.Services.AddTransient<IVacancieService, VacancyServices>();
 builder.Services.AddTransient<IResponseService, ResponseService>();

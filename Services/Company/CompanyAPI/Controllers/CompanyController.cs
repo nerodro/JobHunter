@@ -16,7 +16,7 @@ namespace CompanyAPI.Controllers
         private readonly CategoryRpc _rpc;
         private readonly LocationRpc _Locrpc;
         private readonly ICompanyProducer _companyProducer;
-        public CompanyController(ICompanyService CompanyService, CategoryRpc categoryGrpc, LocationRpc Locrpc, CompanyProducer company)
+        public CompanyController(ICompanyService CompanyService, CategoryRpc categoryGrpc, LocationRpc Locrpc, ICompanyProducer company)
         {
             _CompanyService = CompanyService;
             _rpc = categoryGrpc;

@@ -71,7 +71,7 @@ namespace VacancieAPI.Controllers
                     model.CvId = Response.CvId;
                     model.CvName = await GetCvName(Response.CvId);
                     model.VacancieId = Response.VacancieId;
-                    model.VacancieName = await GetVacancieName(Response.VacancieId);
+                   // model.VacancieName = await GetVacancieName(Response.VacancieId);
                     model.Id = Response.Id;
                     return new ObjectResult(model);
                 }
@@ -109,10 +109,10 @@ namespace VacancieAPI.Controllers
             var cv = await _rpc.GetCv(id);
             return cv.CvName;
         }
-        public async Task<string> GetVacancieName(int id)
-        {
-            var vacancie = await _VacancieService.GetVacancie(id);
-            return vacancie.WorkName;
-        }
+        //public async Task<string> GetVacancieName(int id)
+        //{
+        //    var vacancie = await _VacancieService.GetVacancie(id);
+        //    return vacancie.WorkName;
+        //}
     }
 }

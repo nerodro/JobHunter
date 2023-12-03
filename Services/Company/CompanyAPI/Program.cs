@@ -1,3 +1,4 @@
+using CompanyAPI.CompanyGrpc;
 using CompanyAPI.RabbitMq;
 using CompanyAPI.ServiceGrpc;
 using CompanyRepository;
@@ -34,6 +35,7 @@ var app = builder.Build();
 
 app.MapGrpcService<CategoryRpc>();
 app.MapGrpcService<LocationRpc>();
+app.MapGrpcService<CompanyRpc>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

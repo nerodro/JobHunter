@@ -8,16 +8,14 @@ namespace CompanyAPI.RabbitMq
 {
     public class CompanyProducer : ICompanyProducer
     {
-        private readonly IModel _rabbitMqChannel;
-        public CompanyProducer(IModel rabbitMqChannel)
-        {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
-            var connection = factory.CreateConnection();
-            _rabbitMqChannel = connection.CreateModel();
+        private IModel _rabbitMqChannel;
+        //public CompanyProducer(IModel rabbitMqChannel)
+        //{
+            
 
-            // Создание очереди для отправки сообщений
-            _rabbitMqChannel.QueueDeclare("vacancy_requests_ask", false, false, false, null);
-        }
+        //    // Создание очереди для отправки сообщений
+            
+        //}
 
         public Task CreateVacancieForCompany<T>(VacancieViewModel model)
         {
@@ -41,9 +39,14 @@ namespace CompanyAPI.RabbitMq
 
         public async Task<VacancieViewModel> TakeSingleVacancieForCompany(int id)
         {
+            var factory = new ConnectionFactory() { HostName = "localhost" };
+            var connection = factory.CreateConnection();
+            _rabbitMqChannel = connection.CreateModel();
+            _rabbitMqChannel.QueueDeclare("vacancy_requests_ask", false, false, false, null);
+            _rabbitMqChannel.QueueDeclare("company_vacancies_response_queue", false, false, false, null);
             var request = new VacancieViewModel
             {
-                CompanyId = id,
+                Id = id,
             };
             var requestJson = JsonConvert.SerializeObject(request);
             var message = $"CompanyId:{id}";
@@ -54,7 +57,7 @@ namespace CompanyAPI.RabbitMq
             var properties =  _rabbitMqChannel.CreateBasicProperties();
             properties.ReplyTo = responseQueueName;
             properties.CorrelationId = correlationId;
-            _rabbitMqChannel.BasicPublish("", "vacancy_requests", properties, body);
+            _rabbitMqChannel.BasicPublish("", "vacancy_requests_ask", properties, body);
             var responseWaiter = new ManualResetEventSlim(false);
 
             VacancieViewModel modelvac = new VacancieViewModel();

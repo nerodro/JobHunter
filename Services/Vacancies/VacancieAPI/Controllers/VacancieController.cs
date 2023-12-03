@@ -1,9 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RabbitMQ.Client;
+using VacancieAPI.RabbitMq;
 using VacancieAPI.ServiceGrpc;
 using VacancieAPI.VacancieRpc;
 using VacancieAPI.ViewModel;
 using VacancieDomain.Model;
+using VacancieRepository;
 using VacancieService.VacancieService;
+using VacancieService.VacancyService;
 
 namespace VacancieAPI.Controllers
 {
@@ -139,6 +143,11 @@ namespace VacancieAPI.Controllers
         {
             var company = await _companyRpc.GetCompany(id);
             return company.CompanyName;
+        }
+        private IConnection GetRabbitMqConnection()
+        {
+            var factory = new ConnectionFactory() { HostName = "localhost" };
+            return factory.CreateConnection();
         }
     }
 }
