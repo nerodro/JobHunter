@@ -4,7 +4,11 @@ using CompanyAPI.ViewModel;
 using CompanyDomain.Model;
 using CompanyService.CompanyService;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using System.Numerics;
+using System.Text;
 
 namespace CompanyAPI.Controllers
 {
@@ -16,12 +20,17 @@ namespace CompanyAPI.Controllers
         private readonly CategoryRpc _rpc;
         private readonly LocationRpc _Locrpc;
         private readonly ICompanyProducer _companyProducer;
-        public CompanyController(ICompanyService CompanyService, CategoryRpc categoryGrpc, LocationRpc Locrpc, ICompanyProducer company)
+        private IModel _rabbitMqChannel;
+        public CompanyController(ICompanyService CompanyService, CategoryRpc categoryGrpc, LocationRpc Locrpc, ICompanyProducer company, IModel rabbitMqChannel)
         {
             _CompanyService = CompanyService;
             _rpc = categoryGrpc;
             _Locrpc = Locrpc;
             _companyProducer = company;
+            _rabbitMqChannel = rabbitMqChannel;
+            var factory = new ConnectionFactory() { HostName = "localhost" };
+            var connection = factory.CreateConnection();
+            _rabbitMqChannel = connection.CreateModel();
         }
         [HttpPost("CreateCompany")]
         public async Task<IActionResult> CreateCompany(CompanyViewModel model)
@@ -98,6 +107,7 @@ namespace CompanyAPI.Controllers
         [HttpGet("GetVacancy/{id}")]
         public async Task<ActionResult<VacancieViewModel>> SingleVacancy(int id)
         {
+
             VacancieViewModel model = new VacancieViewModel();
             model = await _companyProducer.TakeSingleVacancieForCompany(id);
             if (model != null)

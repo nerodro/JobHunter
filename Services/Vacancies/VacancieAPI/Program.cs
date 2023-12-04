@@ -68,8 +68,8 @@ builder.Services.AddScoped<CompanyRpc>();
 builder.Services.AddScoped<CvRpc>();
 
 
-
-builder.Services.AddTransient<IVacancieService, VacancyServices>();
+builder.Services.AddScoped<IVacancieService, VacancyServices>();
+//builder.Services.AddTransient<IVacancieService, VacancyServices>();
 builder.Services.AddTransient<IResponseService, ResponseService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

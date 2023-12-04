@@ -40,10 +40,6 @@ namespace UserService.Tests.Cv
             };
             var mockClient = new Mock<CategoryRpc>();
             mockClient.Setup(c => c.GetCategoryById(1)).Returns((int)categoryView.Id);
-
-            //_rpc.Setup(x => x.GetCategoryModel(1)).ReturnsAsync(new CategoryViewModel { Id = 1, CategoryName = "Test" });
-            //_rpc.Setup(x => x.GetCategoryModel(1)).ReturnsAsync(new CategoryViewModel { Id = 1, CategoryName = "Test" });
-            //_rpc.Setup(x => x.GetCategoryById(1)).Returns(new CategoryViewModel { Id = 1, CategoryName = "Test" });
             CvViewModel _viewModel = new CvViewModel
             {
                 Id = 1,

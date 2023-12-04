@@ -14,8 +14,6 @@ namespace VacancieRepository
         public DbSet<VacancieModel> Vacanies { get; set;}
         public VacancyContext(DbContextOptions<VacancyContext> options) : base(options)
         {
-            //Database.EnsureDeleted();
-            Database.EnsureCreated();
         }
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{

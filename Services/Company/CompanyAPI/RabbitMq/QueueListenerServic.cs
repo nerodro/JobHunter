@@ -1,12 +1,14 @@
-﻿namespace VacancieAPI.RabbitMq
+﻿using CompanyAPI.RabbitMq;
+
+namespace CompanyAPI.RabbitMq
 {
     public class QueueListenerService : IHostedService 
     {
-        private readonly IVacancieProducercs _vacancie;
+        private readonly ICompanyProducer _company;
 
-        public QueueListenerService(IVacancieProducercs vacancie)
+        public QueueListenerService(ICompanyProducer company)
         {
-            _vacancie = vacancie;
+            _company = company;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
@@ -14,7 +16,7 @@
 
             Task.Run(() =>
             {
-                _vacancie.SendSingleVacancie();
+               // _company.TakeSingleVacancieForCompany();
             }, cancellationToken);
 
             return Task.CompletedTask;

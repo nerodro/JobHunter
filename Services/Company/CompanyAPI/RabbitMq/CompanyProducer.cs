@@ -54,23 +54,28 @@ namespace CompanyAPI.RabbitMq
             var body = Encoding.UTF8.GetBytes(requestJson);
             var responseQueueName = _rabbitMqChannel.QueueDeclare().QueueName;
 
-            var properties =  _rabbitMqChannel.CreateBasicProperties();
+            var properties = _rabbitMqChannel.CreateBasicProperties();
             properties.ReplyTo = responseQueueName;
             properties.CorrelationId = correlationId;
             _rabbitMqChannel.BasicPublish("", "vacancy_requests_ask", properties, body);
             var responseWaiter = new ManualResetEventSlim(false);
 
-            VacancieViewModel modelvac = new VacancieViewModel();
-            var consumer = new AsyncEventingBasicConsumer(_rabbitMqChannel);
-            consumer.Received += async(model, ea) =>
+            VacancieViewModel modelvac = default(VacancieViewModel);
+            var consumer = new EventingBasicConsumer(_rabbitMqChannel);
+            consumer.Received += (model, ea) =>
             {
                 var responseMessage = Encoding.UTF8.GetString(ea.Body.ToArray());
-                var modelresp = JsonConvert.DeserializeObject<VacancieViewModel>(responseMessage);
+                var response = JsonConvert.DeserializeObject<VacancieViewModel>(responseMessage);
+                if (response != null)
+                {
+                    modelvac = response;
+                }
                 responseWaiter.Set();
             };
             _rabbitMqChannel.BasicConsume("company_vacancies_response_queue", true, consumer);
             if (!responseWaiter.Wait(TimeSpan.FromSeconds(10)))
             {
+                throw new Exception("Timeout waiting for vacancies response");
 
             }
             return modelvac;

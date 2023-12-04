@@ -5,6 +5,7 @@ using CompanyRepository;
 using CompanyRepository.CompanyLogic;
 using CompanyService.CompanyService;
 using Microsoft.EntityFrameworkCore;
+using RabbitMQ.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +20,21 @@ builder.Services.AddDbContext<CompanyContext>(options => options.UseNpgsql(conne
 builder.Services.AddScoped(typeof(ICompanyLogic<>), typeof(CompanyLogic<>));
 builder.Services.AddTransient<ICompanyService, CompanyServices>();
 
+
+builder.Services.AddSingleton<IConnection>(factory =>
+{
+    var rabbitMqFactory = new ConnectionFactory() { HostName = "localhost" };
+    return rabbitMqFactory.CreateConnection();
+});
+
+builder.Services.AddSingleton<IModel>(provider =>
+{
+    var connection = provider.GetRequiredService<IConnection>();
+    return connection.CreateModel();
+});
+
 builder.Services.AddScoped<ICompanyProducer, CompanyProducer>();
+
 
 builder.Services.AddScoped<CategoryRpc>();
 builder.Services.AddScoped<LocationRpc>();
