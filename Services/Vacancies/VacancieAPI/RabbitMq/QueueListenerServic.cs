@@ -14,7 +14,7 @@
 
             Task.Run(() =>
             {
-                _vacancie.SendSingleVacancieTest();
+                _vacancie.SendSingleVacancie();
             }, cancellationToken);
 
             return Task.CompletedTask;
