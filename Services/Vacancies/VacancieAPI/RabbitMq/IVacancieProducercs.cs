@@ -4,6 +4,7 @@ namespace VacancieAPI.RabbitMq
 {
     public interface IVacancieProducercs
     {
-        public Task SendSingleVacancie(); 
+        public Task SendSingleVacancie();
+        public Task SendSingleVacancieTest();
     }
 }

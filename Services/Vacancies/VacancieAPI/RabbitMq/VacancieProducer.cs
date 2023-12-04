@@ -48,8 +48,8 @@ namespace VacancieAPI.RabbitMq
                     optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Vacancy;Username=postgres;Password=123;");
                     using (var dbContext = new VacancyContext(optionsBuilder.Options))
                     {
-                        //var response = await _VacancieService.GetVacancie((int)request.Id);
-                        var response = dbContext.Vacanies.FirstOrDefault(x => x.CompanyId == request.Id);
+                        var response = await _VacancieService.GetVacancie((int)request.Id);
+                        //var response = dbContext.Vacanies.FirstOrDefault(x => x.CompanyId == request.Id);
                         dbContext.Dispose();
                         if (response != null)
                         {
@@ -64,10 +64,41 @@ namespace VacancieAPI.RabbitMq
                 _rabbitMqChannel.BasicConsume("vacancy_requests_ask", true, consumer);
             }
         }
+        public async Task SendSingleVacancieTest()
+        {
+            var connectionFactory = new ConnectionFactory() { HostName = "localhost" };
+
+            using (var connection = connectionFactory.CreateConnection())
+            using (var channel = connection.CreateModel())
+            {
+                // Создаем очередь ответов
+                channel.QueueDeclare("vacancy_requests_ask", false, false, false, null);
+                channel.QueueDeclare("company_vacancies_response_queue", false, false, false, null);
+
+                // Создаем обработчик для сообщений из очереди ответов
+                var consumer = new EventingBasicConsumer(channel);
+                consumer.Received += async (model, ea) =>
+                {
+                    // Получаем сообщение из очереди и десериализуем его в ответ
+                    var message = Encoding.UTF8.GetString(ea.Body.ToArray());
+                    var request = JsonConvert.DeserializeObject<VacancieViewModel>(message);
+                    VacancieModel res = new VacancieModel();
+                    var response = await _VacancieService.GetVacancie((int)request.Id);
+                    if (response != null)
+                    {
+                        var responseJson = JsonConvert.SerializeObject(response).ToArray();
+
+                        var properties = _rabbitMqChannel.CreateBasicProperties();
+
+                        _rabbitMqChannel.BasicPublish("", "company_vacancies_response_queue", properties, Encoding.UTF8.GetBytes(responseJson));
+                    }
+                };
+                _rabbitMqChannel.BasicConsume("vacancy_requests_ask", true, consumer);
+            }
+        }
 
         public void Dispose()
         {
-            // Удалите вызовы Dispose для _rabbitMqChannel и _rabbitMqConnection
         }
     }
 }

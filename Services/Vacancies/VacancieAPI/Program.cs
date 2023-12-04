@@ -20,7 +20,7 @@ builder.Services.AddControllers();
 string? connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
 // добавляем контекст ApplicationContext в качестве сервиса в приложение
-builder.Services.AddDbContext<VacancyContext>(options => options.UseNpgsql(connection));
+builder.Services.AddDbContext<VacancyContext>(options => options.UseNpgsql(connection), ServiceLifetime.Singleton);
 
 
 builder.Services.AddScoped(typeof(IVacancieLogic<>), typeof(VacancieLogic<>));

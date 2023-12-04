@@ -83,8 +83,8 @@ namespace VacancieAPI.Controllers
                     model.CompanyName = await GetCompanyName(Vacancie.CompanyId);
                     model.CountryId = Vacancie.CountryId;
                     model.CountryName = await GetCountryName(Vacancie.CountryId);
-                    model.AboutWork = model.AboutWork.Trim();
-                    model.WorkName = model.WorkName.Trim();
+                    model.AboutWork = Vacancie.AboutWork.Trim();
+                    model.WorkName = Vacancie.WorkName.Trim();
                     model.Id = Vacancie.Id;
                     return new ObjectResult(model);
                 }
