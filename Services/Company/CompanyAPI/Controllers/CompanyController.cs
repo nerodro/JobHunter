@@ -104,18 +104,7 @@ namespace CompanyAPI.Controllers
             }
             return BadRequest();
         }
-        [HttpGet("GetVacancy/{id}")]
-        public async Task<ActionResult<VacancieViewModel>> SingleVacancy(int id)
-        {
-
-            VacancieViewModel model = new VacancieViewModel();
-            model = await _companyProducer.TakeSingleVacancieForCompany(id);
-            if (model != null)
-            {
-                return model;
-            }
-            return BadRequest();
-        }
+        
         [HttpGet("GetAllCompany")]
         public IEnumerable<CompanyViewModel> Index()
         {
@@ -138,6 +127,35 @@ namespace CompanyAPI.Controllers
                 });
             }
             return model;
+        }
+        [HttpGet("GetVacancy/{id}")]
+        public async Task<ActionResult<VacancieViewModel>> SingleVacancy(int id)
+        {
+
+            VacancieViewModel model = new VacancieViewModel();
+            model = await _companyProducer.TakeSingleVacancieForCompany(id);
+            if (model != null)
+            {
+                return model;
+            }
+            return BadRequest();
+        }
+        [HttpPost("CreateVacancy")]
+        public async Task<IActionResult> CreateVacancy(VacancieViewModel model)
+        {
+            VacancieViewModel vacancy = new VacancieViewModel
+            {
+                CityId = await GetCityId(model.CityId),
+                CountryId = await GetCountryId(model.CountryId),
+                AboutWork = model.AboutWork.Trim(),
+                WorkName = model.WorkName.Trim(),
+                CompanyId = model.CompanyId,
+            };
+            if (model.CompanyName != null)
+            {
+                await _companyProducer.CreateVacancieForCompany(vacancy);
+            }
+            return BadRequest("Не все обязательные поля были заполнены");
         }
         private async Task<int> GetCategoryId(int id)
         {

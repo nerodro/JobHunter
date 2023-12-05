@@ -14,11 +14,12 @@ namespace CompanyAPI.RabbitMq
             var factory = new ConnectionFactory() { HostName = "localhost" };
             var connection = factory.CreateConnection();
             _rabbitMqChannel = connection.CreateModel();
-            _rabbitMqChannel.QueueDeclare("vacancy_requests_ask", false, false, false, null);
+            _rabbitMqChannel.QueueDeclare("vacancy_requests_get_vacancy", false, false, false, null);
+            _rabbitMqChannel.QueueDeclare("vacancy_requests_create_vacancy", false, false, false, null);
             _rabbitMqChannel.QueueDeclare("company_vacancies_response_queue", false, false, false, null);
         }
 
-        public Task CreateVacancieForCompany<T>(VacancieViewModel model)
+        public Task CreateVacancieForCompany(VacancieViewModel model)
         {
             var request = model;
             var requestJson = JsonConvert.SerializeObject(request);
@@ -29,7 +30,7 @@ namespace CompanyAPI.RabbitMq
             var properties = _rabbitMqChannel.CreateBasicProperties();
             properties.ReplyTo = responseQueueName;
             properties.CorrelationId = correlationId;
-            _rabbitMqChannel.BasicPublish("", "vacancy_requests_ask", properties, body);
+            _rabbitMqChannel.BasicPublish("", "vacancy_requests_create_vacancy", properties, body);
             var responseWaiter = new ManualResetEventSlim(false);
 
             string responsetext = default; 
