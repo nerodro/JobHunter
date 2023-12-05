@@ -9,47 +9,72 @@ namespace CompanyAPI.RabbitMq
     public class CompanyProducer : ICompanyProducer
     {
         private IModel _rabbitMqChannel;
-        //public CompanyProducer(IModel rabbitMqChannel)
-        //{
-            
-
-        //    // Создание очереди для отправки сообщений
-            
-        //}
-
-        public Task CreateVacancieForCompany<T>(VacancieViewModel model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteVacancieForCompany<T>(VacancieViewModel model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task EditVacancieForCompany<T>(VacancieViewModel model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task TakeAllVacanciesOfCompany<T>(List<VacancieViewModel> model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<VacancieViewModel> TakeSingleVacancieForCompany(int id)
+        public CompanyProducer(IModel rabbitMqChannel)
         {
             var factory = new ConnectionFactory() { HostName = "localhost" };
             var connection = factory.CreateConnection();
             _rabbitMqChannel = connection.CreateModel();
             _rabbitMqChannel.QueueDeclare("vacancy_requests_ask", false, false, false, null);
             _rabbitMqChannel.QueueDeclare("company_vacancies_response_queue", false, false, false, null);
+        }
+
+        public Task CreateVacancieForCompany<T>(VacancieViewModel model)
+        {
+            var request = model;
+            var requestJson = JsonConvert.SerializeObject(request);
+            var correlationId = Guid.NewGuid().ToString();
+            var body = Encoding.UTF8.GetBytes(requestJson);
+            var responseQueueName = _rabbitMqChannel.QueueDeclare().QueueName;
+
+            var properties = _rabbitMqChannel.CreateBasicProperties();
+            properties.ReplyTo = responseQueueName;
+            properties.CorrelationId = correlationId;
+            _rabbitMqChannel.BasicPublish("", "vacancy_requests_ask", properties, body);
+            var responseWaiter = new ManualResetEventSlim(false);
+
+            string responsetext = default; 
+            var consumer = new EventingBasicConsumer(_rabbitMqChannel);
+            consumer.Received += (model, ea) =>
+            {
+                var responseMessage = Encoding.UTF8.GetString(ea.Body.ToArray());
+                var response = JsonConvert.DeserializeObject(responseMessage).ToString();
+                if (response != null)
+                {
+                    responsetext = response;
+                }
+                responseWaiter.Set();
+            };
+            _rabbitMqChannel.BasicConsume("company_vacancies_response_queue", true, consumer);
+            if (!responseWaiter.Wait(TimeSpan.FromSeconds(10)))
+            {
+                throw new Exception("Timeout waiting for vacancies response");
+
+            }
+            return Task.CompletedTask;
+        }
+
+        public Task DeleteVacancieForCompany(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task EditVacancieForCompany(VacancieViewModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<VacancieViewModel>> TakeAllVacanciesOfCompany(List<VacancieViewModel> model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<VacancieViewModel> TakeSingleVacancieForCompany(int id)
+        {
             var request = new VacancieViewModel
             {
                 Id = id,
             };
             var requestJson = JsonConvert.SerializeObject(request);
-            var message = $"CompanyId:{id}";
             var correlationId = Guid.NewGuid().ToString();
             var body = Encoding.UTF8.GetBytes(requestJson);
             var responseQueueName = _rabbitMqChannel.QueueDeclare().QueueName;
