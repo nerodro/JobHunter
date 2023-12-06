@@ -35,6 +35,8 @@ namespace VacancieAPI.RabbitMq
             _rabbitMqChannel.QueueDeclare("company_vacancies_response_queue", false, false, false, null);
             _rabbitMqChannel.QueueDeclare("vacancy_requests_ask", false, false, false, null);
             _rabbitMqChannel.QueueDeclare("company_vacancies_response_create_queue", false, false, false, null);
+            _rabbitMqChannel.QueueDeclare("company_vacancies_response_edit_queue", false, false, false, null);
+            _rabbitMqChannel.QueueDeclare("company_vacancies_response_delete_queue", false, false, false, null);
         }
         public async Task SendSingleVacancie()
         {
@@ -92,7 +94,7 @@ namespace VacancieAPI.RabbitMq
 
                 var properties = _rabbitMqChannel.CreateBasicProperties();
 
-                _rabbitMqChannel.BasicPublish("", "company_vacancies_response_queue", properties, Encoding.UTF8.GetBytes(responseJson));
+                _rabbitMqChannel.BasicPublish("", "company_vacancies_response_delete_queue", properties, Encoding.UTF8.GetBytes(responseJson));
                 
             };
             _rabbitMqChannel.BasicConsume("vacancy_requests_delete_vacancy", true, consumer);
@@ -105,19 +107,14 @@ namespace VacancieAPI.RabbitMq
             {
                 var message = Encoding.UTF8.GetString(ea.Body.ToArray());
                 var request = JsonConvert.DeserializeObject<VacancieModel>(message);
-                if (request != null)
-                {
-                    request = await _VacancieService.GetVacancie(request.Id);
-                    if (request != null)
-                    {
-                        await _VacancieService.UpdateVacancie(request);
-                        var responseJson = JsonConvert.SerializeObject("Ok").ToString();
+                await _VacancieService.UpdateVacancie(request);
+                var responseJson = JsonConvert.SerializeObject("Ok").ToString();
 
-                        var properties = _rabbitMqChannel.CreateBasicProperties();
+                var properties = _rabbitMqChannel.CreateBasicProperties();
 
-                        _rabbitMqChannel.BasicPublish("", "company_vacancies_response_queue", properties, Encoding.UTF8.GetBytes(responseJson));
-                    }
-                }
+                _rabbitMqChannel.BasicPublish("", "company_vacancies_response_edit_queue", properties, Encoding.UTF8.GetBytes(responseJson));
+                
+                
             };
             _rabbitMqChannel.BasicConsume("vacancy_requests_edit_vacancy", true, consumer);
         }
