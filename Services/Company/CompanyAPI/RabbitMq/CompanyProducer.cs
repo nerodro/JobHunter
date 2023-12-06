@@ -18,8 +18,10 @@ namespace CompanyAPI.RabbitMq
             _rabbitMqChannel.QueueDeclare("vacancy_requests_edit_vacancy", false, false, false, null);
             _rabbitMqChannel.QueueDeclare("vacancy_requests_create_vacancy", false, false, false, null);
             _rabbitMqChannel.QueueDeclare("vacancy_requests_delete_vacancy", false, false, false, null);
-            _rabbitMqChannel.QueueDeclare("vacancy_requests_ask_Company", false, false, false, null);
+            _rabbitMqChannel.QueueDeclare("vacancy_requests_ask_company", false, false, false, null);
+            _rabbitMqChannel.QueueDeclare("vacancy_requests_ask", false, false, false, null);
             _rabbitMqChannel.QueueDeclare("company_vacancies_response_queue", false, false, false, null);
+            _rabbitMqChannel.QueueDeclare("company_vacancies_response_create_queue", false, false, false, null);
         }
 
         public Task<string> CreateVacancieForCompany(VacancieViewModel model)
@@ -48,7 +50,7 @@ namespace CompanyAPI.RabbitMq
                 }
                 responseWaiter.Set();
             };
-            _rabbitMqChannel.BasicConsume("company_vacancies_response_queue", true, consumer);
+            _rabbitMqChannel.BasicConsume("company_vacancies_response_create_queue", true, consumer);
             if (!responseWaiter.Wait(TimeSpan.FromSeconds(10)))
             {
                 throw new Exception("Timeout waiting for vacancies response");
@@ -130,7 +132,7 @@ namespace CompanyAPI.RabbitMq
             return Task.FromResult(responsetext);
         }
 
-        public Task<List<VacancieViewModel>> TakeAllVacanciesOfCompany(int companyId)
+        public IEnumerable<VacancieViewModel> TakeAllVacanciesOfCompany(int companyId)
         {
             var request = new VacancieViewModel
             {
@@ -144,7 +146,7 @@ namespace CompanyAPI.RabbitMq
             var properties = _rabbitMqChannel.CreateBasicProperties();
             properties.ReplyTo = responseQueueName;
             properties.CorrelationId = correlationId;
-            _rabbitMqChannel.BasicPublish("", "vacancy_requests_ask_Company", properties, body);
+            _rabbitMqChannel.BasicPublish("", "vacancy_requests_ask_company", properties, body);
             var responseWaiter = new ManualResetEventSlim(false);
 
             List<VacancieViewModel> modelvac = new List<VacancieViewModel>();
@@ -162,7 +164,7 @@ namespace CompanyAPI.RabbitMq
                 throw new Exception("Timeout waiting for vacancies response");
 
             }
-            return Task.FromResult(modelvac);
+            return modelvac;
         }
 
         public async Task<VacancieViewModel> TakeSingleVacancieForCompany(int id)

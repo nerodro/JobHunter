@@ -16,6 +16,9 @@
             {
                 _vacancie.SendSingleVacancie();
                 _vacancie.CreateNewVacancie();
+                _vacancie.UpdateVacancie();
+                _vacancie.DeleteVacancie();
+                _vacancie.SendVacancieForCompany();
             }, cancellationToken);
 
             return Task.CompletedTask;

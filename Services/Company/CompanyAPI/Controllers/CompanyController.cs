@@ -158,6 +158,36 @@ namespace CompanyAPI.Controllers
             }
             return BadRequest("Не все обязательные поля были заполнены");
         }
+        [HttpPut("EditVacancy")]
+        public async Task<IActionResult> EditVacancy(VacancieViewModel model)
+        {
+            VacancieViewModel vacancy = new VacancieViewModel
+            {
+                CityId = await GetCityId(model.CityId),
+                CountryId = await GetCountryId(model.CountryId),
+                AboutWork = model.AboutWork.Trim(),
+                WorkName = model.WorkName.Trim(),
+                CompanyId = model.CompanyId,
+            };
+            if (model.CompanyName != null)
+            {
+                string answer = await _companyProducer.EditVacancieForCompany(vacancy);
+                return Ok(answer);
+            }
+            return BadRequest("Не все обязательные поля были заполнены");
+        }
+        [HttpGet("GetVacancyForCompany/{companyId}")]
+        public IEnumerable<VacancieViewModel> AllForCompanyVacancy(int companyId)
+        {
+            var model = _companyProducer.TakeAllVacanciesOfCompany(companyId);
+            return model;
+        }
+        [HttpDelete("DeleteVacancy/{id}")]
+        public async Task<ActionResult<CompanyViewModel>> DeleteVacancy(int id)
+        {
+            await _companyProducer.DeleteVacancieForCompany(id);
+            return Ok("Вакансия успешно удалена");
+        }
         private async Task<int> GetCategoryId(int id)
         {
             var category = await _rpc.GetCategory(id);

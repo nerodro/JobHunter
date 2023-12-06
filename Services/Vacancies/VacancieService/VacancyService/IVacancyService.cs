@@ -14,5 +14,6 @@ namespace VacancieService.VacancieService
         Task CreateVacancie(VacancieModel Vacancie);
         Task UpdateVacancie(VacancieModel Vacancie);
         Task DeleteVacancie(int id);
+        IEnumerable<VacancieModel> GetForCompany(int companyId);
     }
 }

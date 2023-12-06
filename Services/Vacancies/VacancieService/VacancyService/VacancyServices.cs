@@ -38,5 +38,10 @@ namespace VacancieService.VacancyService
             await _VacancieService.Delete(Vacancie);
             await _VacancieService.SaveChanges();
         }
+
+        public IEnumerable<VacancieModel> GetForCompany(int companyId)
+        {
+            return _VacancieService.GetAll().Where(x => x.CompanyId == companyId);
+        }
     }
 }
