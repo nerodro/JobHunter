@@ -4,10 +4,10 @@ namespace CompanyAPI.RabbitMq
 {
     public interface ICompanyProducer
     {
-        public Task<IEnumerable<VacancieViewModel>> TakeAllVacanciesOfCompany(List<VacancieViewModel> model);
-        public Task CreateVacancieForCompany(VacancieViewModel model);
-        public Task DeleteVacancieForCompany(int id);
-        public Task EditVacancieForCompany(VacancieViewModel model);
+        public Task<List<VacancieViewModel>> TakeAllVacanciesOfCompany(int companyId);
+        public Task<string> CreateVacancieForCompany(VacancieViewModel model);
+        public Task<string> DeleteVacancieForCompany(int id);
+        public Task<string> EditVacancieForCompany(VacancieViewModel model);
         public Task<VacancieViewModel> TakeSingleVacancieForCompany(int id);
     }
 }

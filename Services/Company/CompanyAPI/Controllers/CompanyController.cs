@@ -153,7 +153,8 @@ namespace CompanyAPI.Controllers
             };
             if (model.CompanyName != null)
             {
-                await _companyProducer.CreateVacancieForCompany(vacancy);
+                string answer = await _companyProducer.CreateVacancieForCompany(vacancy);
+                return Ok(answer);
             }
             return BadRequest("Не все обязательные поля были заполнены");
         }

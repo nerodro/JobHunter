@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Grpc.Net.Testing.Moq.Naming;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using UserAPI.Controllers;
@@ -32,14 +33,13 @@ namespace UserService.Tests.Cv
         {
             _languageService.Setup(x => x.GetLanguage(1)).ReturnsAsync(new LanguageModel { Id = 1, Language = "Roma" });
             _userService.Setup(x => x.GetUser(1)).ReturnsAsync(new UserModel { Id = 1, Name = "Tom" });
-            //var _grpc = new Mock<CategoryServiceGrpc.CategoryServiceGrpcClient>();
-            CategoryViewModel categoryView = new CategoryViewModel() 
+            CategoryViewModel categoryView = new CategoryViewModel()
             {
                 Id = 1,
                 CategoryName = "Test"
             };
-            var mockClient = new Mock<CategoryRpc>();
-            mockClient.Setup(c => c.GetCategoryById(1)).Returns((int)categoryView.Id);
+            //var mockClient = new Mock<CategoryRpc>();
+            // mockClient.Setup(c => c.GetCategoryById(1)).Returns((int)categoryView.Id);
             CvViewModel _viewModel = new CvViewModel
             {
                 Id = 1,
