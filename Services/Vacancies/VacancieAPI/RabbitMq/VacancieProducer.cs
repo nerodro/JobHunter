@@ -37,6 +37,7 @@ namespace VacancieAPI.RabbitMq
             _rabbitMqChannel.QueueDeclare("company_vacancies_response_create_queue", false, false, false, null);
             _rabbitMqChannel.QueueDeclare("company_vacancies_response_edit_queue", false, false, false, null);
             _rabbitMqChannel.QueueDeclare("company_vacancies_response_delete_queue", false, false, false, null);
+            _rabbitMqChannel.QueueDeclare("company_vacancies_response_all_queue", false, false, false, null);
         }
         public async Task SendSingleVacancie()
         {
@@ -133,7 +134,7 @@ namespace VacancieAPI.RabbitMq
 
                     var properties = _rabbitMqChannel.CreateBasicProperties();
 
-                    _rabbitMqChannel.BasicPublish("", "company_vacancies_response_queue", properties, Encoding.UTF8.GetBytes(responseJson));
+                    _rabbitMqChannel.BasicPublish("", "company_vacancies_response_all_queue", properties, Encoding.UTF8.GetBytes(responseJson));
                 }
             };
             _rabbitMqChannel.BasicConsume("vacancy_requests_ask_company", true, consumer);

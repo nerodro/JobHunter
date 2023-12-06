@@ -24,6 +24,7 @@ namespace CompanyAPI.RabbitMq
             _rabbitMqChannel.QueueDeclare("company_vacancies_response_create_queue", false, false, false, null);
             _rabbitMqChannel.QueueDeclare("company_vacancies_response_edit_queue", false, false, false, null);
             _rabbitMqChannel.QueueDeclare("company_vacancies_response_delete_queue", false, false, false, null);
+            _rabbitMqChannel.QueueDeclare("company_vacancies_response_all_queue", false, false, false, null);
         }
 
         public Task<string> CreateVacancieForCompany(VacancieViewModel model)
@@ -156,11 +157,11 @@ namespace CompanyAPI.RabbitMq
             consumer.Received += (model, ea) =>
             {
                 var responseMessage = Encoding.UTF8.GetString(ea.Body.ToArray());
-                var response = JsonConvert.DeserializeObject<VacancieViewModel>(responseMessage);
-                modelvac.Add(response);
+                var response = JsonConvert.DeserializeObject<List<VacancieViewModel>>(responseMessage);
+                modelvac = response;
                 responseWaiter.Set();
             };
-            _rabbitMqChannel.BasicConsume("company_vacancies_response_queue", true, consumer);
+            _rabbitMqChannel.BasicConsume("company_vacancies_response_all_queue", true, consumer);
             if (!responseWaiter.Wait(TimeSpan.FromSeconds(10)))
             {
                 throw new Exception("Timeout waiting for vacancies response");
