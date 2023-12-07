@@ -110,21 +110,6 @@ namespace UserAPI.Controllers
             }
             return model;
         }
-
-        //Только тестовый метод, удалить перед окончанием работы над бэком
-        [HttpGet("GetCategorey/{id}")]
-        public IActionResult GetCategory(int id)
-        {
-            var cat = _rpc.GetCategoryById(id);
-            if(cat != 0)
-            {
-                return Ok();
-            }
-            else
-            {
-                return BadRequest("Указанная категория не найдена");
-            }
-        }
         private int GetCategoryId(int id)
         {
             int category = _rpc.GetCategoryById(id);

@@ -1,6 +1,7 @@
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using RabbitMQ.Client;
+using ResponseAPI.RabbitMq;
 using ResponseRepository.ResponseLogic;
 using VacancieAPI.RabbitMq;
 using VacancieAPI.ServiceGrpc;
@@ -42,6 +43,7 @@ builder.Services.AddSingleton<IModel>(provider =>
 });
 
 builder.Services.AddScoped<IVacancieProducercs, VacancieProducer>();
+builder.Services.AddScoped<IResponseProducer, ResponseProducer>();
 
 builder.Services.AddSingleton<QueueListenerService>(provider =>
 {
