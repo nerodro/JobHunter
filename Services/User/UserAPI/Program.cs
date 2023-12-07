@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using RabbitMQ.Client;
+using UserAPI.RabbitMq;
 using UserAPI.ServiceGrpc;
 using UserRepository.CvLogic;
 using UserRepository.LanguageLogic;
@@ -21,7 +23,19 @@ builder.Services.AddDbContext<UserDbContext>(options => options.UseNpgsql(connec
 builder.Services.AddScoped(typeof(IUserLogic<>), typeof(UserLogic<>));
 builder.Services.AddScoped(typeof(ICvLogic<>), typeof(CvLogic<>));
 builder.Services.AddScoped(typeof(ILanguageLogic<>), typeof(LanguageLogic<>));
+builder.Services.AddSingleton<IConnection>(factory =>
+{
+    var rabbitMqFactory = new ConnectionFactory() { HostName = "localhost" };
+    return rabbitMqFactory.CreateConnection();
+});
 
+builder.Services.AddSingleton<IModel>(provider =>
+{
+    var connection = provider.GetRequiredService<IConnection>();
+    return connection.CreateModel();
+});
+
+builder.Services.AddScoped<IResponseProducer, ResponseProducer>();
 builder.Services.AddScoped<CategoryRpc>();
 builder.Services.AddScoped<LocationRpc>();
 
