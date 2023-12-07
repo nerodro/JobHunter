@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RabbitMQ.Client;
+using UserAPI.RabbitMq;
 using UserAPI.ServiceGrpc;
 using UserAPI.ViewModel;
 using UserDomain.Models;
@@ -16,12 +18,19 @@ namespace UserAPI.Controllers
         private readonly ILanguageService _languageService;
         private readonly IUserService _userService;
         private readonly CategoryRpc _rpc;
-        public CvController(ICvService cvService, ILanguageService languageService, IUserService userService, CategoryRpc rpc)
+        private readonly IResponseProducer _responseProducer;
+        private IModel _rabbitMqChannel;
+        public CvController(ICvService cvService, ILanguageService languageService, IUserService userService, CategoryRpc rpc, IResponseProducer producer, IModel model)
         {
             _cvService = cvService;
             _languageService = languageService;
             _userService = userService;
             _rpc = rpc;
+            _responseProducer = producer;
+            _rabbitMqChannel = model;
+            var factory = new ConnectionFactory() { HostName = "localhost" };
+            var connection = factory.CreateConnection();
+            _rabbitMqChannel = connection.CreateModel();
         }
         [HttpPost("CreateCv")]
         public async Task<IActionResult> CreateCv(CvViewModel model)

@@ -58,9 +58,27 @@ builder.Services.AddSingleton<QueueListenerService>(provider =>
     }
 });
 
+builder.Services.AddSingleton<QueueListenerResponse>(provider =>
+{
+    var scopeFactory = provider.GetRequiredService<IServiceScopeFactory>();
+    using (var scope = scopeFactory.CreateScope())
+    {
+        var scopedProvider = scope.ServiceProvider;
+        var producer = scopedProvider.GetRequiredService<IResponseProducer>();
+
+        var listenerService = new QueueListenerResponse(producer);
+        return listenerService;
+    }
+});
+
 builder.Services.AddSingleton<IHostedService>(provider =>
 {
     var listenerService = provider.GetRequiredService<QueueListenerService>();
+    return listenerService;
+});
+builder.Services.AddSingleton<IHostedService>(provider =>
+{
+    var listenerService = provider.GetRequiredService<QueueListenerResponse>();
     return listenerService;
 });
 
@@ -71,7 +89,6 @@ builder.Services.AddScoped<CvRpc>();
 
 
 builder.Services.AddScoped<IVacancieService, VacancyServices>();
-//builder.Services.AddTransient<IVacancieService, VacancyServices>();
 builder.Services.AddTransient<IResponseService, ResponseService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
