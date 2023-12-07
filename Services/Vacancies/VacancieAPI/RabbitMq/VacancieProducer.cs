@@ -108,12 +108,17 @@ namespace VacancieAPI.RabbitMq
             {
                 var message = Encoding.UTF8.GetString(ea.Body.ToArray());
                 var request = JsonConvert.DeserializeObject<VacancieModel>(message);
-                await _VacancieService.UpdateVacancie(request);
-                var responseJson = JsonConvert.SerializeObject("Ok").ToString();
+                var mod = await _VacancieService.GetVacancie(request.Id);
+                if (mod != null)
+                {
+                    mod = request;
+                    await _VacancieService.UpdateVacancie(mod);
+                    var responseJson = JsonConvert.SerializeObject("Ok").ToString();
 
-                var properties = _rabbitMqChannel.CreateBasicProperties();
+                    var properties = _rabbitMqChannel.CreateBasicProperties();
 
-                _rabbitMqChannel.BasicPublish("", "company_vacancies_response_edit_queue", properties, Encoding.UTF8.GetBytes(responseJson));
+                    _rabbitMqChannel.BasicPublish("", "company_vacancies_response_edit_queue", properties, Encoding.UTF8.GetBytes(responseJson));
+                }
                 
                 
             };
