@@ -1,17 +1,22 @@
-﻿using RabbitMQ.Client;
+﻿using Newtonsoft.Json;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using ResponseAPI.RabbitMq;
-using VacancieService.VacancieService;
+using System.Text;
+using VacancieAPI.ViewModel;
+using VacancieDomain.Model;
+using VacancieService.ResponseService;
 
-namespace VacancieAPI.RabbitMq
+namespace ResponseAPI.RabbitMq
 {
     public class ResponseProducer : IResponseProducer
     {
-        private readonly IVacancieService _VacancieService;
+        private readonly IResponseService _ResponseService;
         private readonly IConnection _rabbitMqConnection;
         private IModel _rabbitMqChannel;
-        public ResponseProducer(IVacancieService vacancyService, IConnection rabbitMqConnection, IModel rabbitMqChannel)
+        public ResponseProducer(IResponseService vacancyService, IConnection rabbitMqConnection, IModel rabbitMqChannel)
         {
-            _VacancieService = vacancyService;
+            _ResponseService = vacancyService;
             _rabbitMqConnection = rabbitMqConnection;
             _rabbitMqChannel = rabbitMqChannel;
             var factory = new ConnectionFactory() { HostName = "localhost" };
@@ -29,30 +34,107 @@ namespace VacancieAPI.RabbitMq
             _rabbitMqChannel.QueueDeclare("User_Responses_response_delete_queue", false, false, false, null);
             _rabbitMqChannel.QueueDeclare("User_Responses_response_all_queue", false, false, false, null);
         }
-
-        public Task CreateNewResponse()
+        public async Task SendSingleResponse()
         {
-            throw new NotImplementedException();
+            var consumer = new EventingBasicConsumer(_rabbitMqChannel);
+            consumer.Received += async (model, ea) =>
+            {
+                var message = Encoding.UTF8.GetString(ea.Body.ToArray());
+                var request = JsonConvert.DeserializeObject<ResponseViewModel>(message);
+                var response = await _ResponseService.GetResponse((int)request.Id);
+                if (response != null)
+                {
+                    var responseJson = JsonConvert.SerializeObject(response).ToArray();
+
+                    var properties = _rabbitMqChannel.CreateBasicProperties();
+
+                    _rabbitMqChannel.BasicPublish("", "User_Responses_response_queue", properties, Encoding.UTF8.GetBytes(responseJson));
+                }
+            };
+            _rabbitMqChannel.BasicConsume("vacancy_requests_ask", true, consumer);
+        }
+        public async Task CreateNewResponse()
+        {
+            var consumer = new EventingBasicConsumer(_rabbitMqChannel);
+            consumer.Received += async (model, ea) =>
+            {
+                var message = Encoding.UTF8.GetString(ea.Body.ToArray());
+                var request = JsonConvert.DeserializeObject<ResponseModel>(message);
+                if (request != null)
+                {
+                    await _ResponseService.CreateResponse(request);
+                    var responseJson = JsonConvert.SerializeObject("Ok").ToString();
+
+                    var properties = _rabbitMqChannel.CreateBasicProperties();
+
+                    _rabbitMqChannel.BasicPublish("", "User_Responses_response_create_queue", properties, Encoding.UTF8.GetBytes(responseJson));
+                }
+            };
+            _rabbitMqChannel.BasicConsume("vacancy_requests_create_vacancy", true, consumer);
         }
 
-        public Task DeleteResponse()
+
+        public async Task DeleteResponse()
         {
-            throw new NotImplementedException();
+            var consumer = new EventingBasicConsumer(_rabbitMqChannel);
+            consumer.Received += async (model, ea) =>
+            {
+                var message = Encoding.UTF8.GetString(ea.Body.ToArray());
+                var request = JsonConvert.DeserializeObject<ResponseViewModel>(message);
+                ResponseModel res = new ResponseModel();
+                await _ResponseService.DeleteResponse((int)request.Id);
+                var responseJson = JsonConvert.SerializeObject("Ok").ToArray();
+
+                var properties = _rabbitMqChannel.CreateBasicProperties();
+
+                _rabbitMqChannel.BasicPublish("", "User_Responses_response_delete_queue", properties, Encoding.UTF8.GetBytes(responseJson));
+
+            };
+            _rabbitMqChannel.BasicConsume("vacancy_requests_delete_vacancy", true, consumer);
         }
 
-        public Task SendResponseForUser()
+        public async Task UpdateResponse()
         {
-            throw new NotImplementedException();
+            var consumer = new EventingBasicConsumer(_rabbitMqChannel);
+            consumer.Received += async (model, ea) =>
+            {
+                var message = Encoding.UTF8.GetString(ea.Body.ToArray());
+                var request = JsonConvert.DeserializeObject<ResponseModel>(message);
+                var mod = await _ResponseService.GetResponse(request.Id);
+                if (mod != null)
+                {
+                    mod = request;
+                    await _ResponseService.UpdateResponse(mod);
+                    var responseJson = JsonConvert.SerializeObject("Ok").ToString();
+
+                    var properties = _rabbitMqChannel.CreateBasicProperties();
+
+                    _rabbitMqChannel.BasicPublish("", "User_Responses_response_edit_queue", properties, Encoding.UTF8.GetBytes(responseJson));
+                }
+
+
+            };
+            _rabbitMqChannel.BasicConsume("vacancy_requests_edit_vacancy", true, consumer);
         }
 
-        public Task SendSingleResponse()
+        public async Task SendResponseForUser()
         {
-            throw new NotImplementedException();
-        }
+            var consumer = new EventingBasicConsumer(_rabbitMqChannel);
+            consumer.Received += async (model, ea) =>
+            {
+                var message = Encoding.UTF8.GetString(ea.Body.ToArray());
+                var request = JsonConvert.DeserializeObject<ResponseViewModel>(message);
+                var response = _ResponseService.GetAll(/*(int)request.VacancieId*/);
+                if (response != null)
+                {
+                    var responseJson = JsonConvert.SerializeObject(response).ToArray();
 
-        public Task UpdateResponse()
-        {
-            throw new NotImplementedException();
+                    var properties = _rabbitMqChannel.CreateBasicProperties();
+
+                    _rabbitMqChannel.BasicPublish("", "User_Responses_response_all_queue", properties, Encoding.UTF8.GetBytes(responseJson));
+                }
+            };
+            _rabbitMqChannel.BasicConsume("vacancy_requests_ask_User", true, consumer);
         }
     }
 }

@@ -78,9 +78,6 @@ namespace VacancieAPI.RabbitMq
             _rabbitMqChannel.BasicConsume("vacancy_requests_create_vacancy", true, consumer);
         }
 
-        public void Dispose()
-        {
-        }
 
         public async Task DeleteVacancie()
         {
@@ -143,6 +140,10 @@ namespace VacancieAPI.RabbitMq
                 }
             };
             _rabbitMqChannel.BasicConsume("vacancy_requests_ask_company", true, consumer);
+        }
+
+        public void Dispose()
+        {
         }
     }
 }
