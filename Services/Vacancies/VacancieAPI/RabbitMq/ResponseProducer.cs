@@ -51,7 +51,7 @@ namespace ResponseAPI.RabbitMq
                     _rabbitMqChannel.BasicPublish("", "User_Responses_response_queue", properties, Encoding.UTF8.GetBytes(responseJson));
                 }
             };
-            _rabbitMqChannel.BasicConsume("vacancy_requests_ask", true, consumer);
+            _rabbitMqChannel.BasicConsume("response_requests_get_response", true, consumer);
         }
         public async Task CreateNewResponse()
         {
@@ -70,7 +70,7 @@ namespace ResponseAPI.RabbitMq
                     _rabbitMqChannel.BasicPublish("", "User_Responses_response_create_queue", properties, Encoding.UTF8.GetBytes(responseJson));
                 }
             };
-            _rabbitMqChannel.BasicConsume("vacancy_requests_create_vacancy", true, consumer);
+            _rabbitMqChannel.BasicConsume("response_requests_create_response", true, consumer);
         }
 
 
@@ -90,7 +90,7 @@ namespace ResponseAPI.RabbitMq
                 _rabbitMqChannel.BasicPublish("", "User_Responses_response_delete_queue", properties, Encoding.UTF8.GetBytes(responseJson));
 
             };
-            _rabbitMqChannel.BasicConsume("vacancy_requests_delete_vacancy", true, consumer);
+            _rabbitMqChannel.BasicConsume("response_requests_delete_response", true, consumer);
         }
 
         public async Task UpdateResponse()
@@ -114,7 +114,7 @@ namespace ResponseAPI.RabbitMq
 
 
             };
-            _rabbitMqChannel.BasicConsume("vacancy_requests_edit_vacancy", true, consumer);
+            _rabbitMqChannel.BasicConsume("response_requests_edit_response", true, consumer);
         }
 
         public async Task SendResponseForUser()
@@ -134,7 +134,7 @@ namespace ResponseAPI.RabbitMq
                     _rabbitMqChannel.BasicPublish("", "User_Responses_response_all_queue", properties, Encoding.UTF8.GetBytes(responseJson));
                 }
             };
-            _rabbitMqChannel.BasicConsume("vacancy_requests_ask_User", true, consumer);
+            _rabbitMqChannel.BasicConsume("response_requests_ask_User", true, consumer);
         }
     }
 }

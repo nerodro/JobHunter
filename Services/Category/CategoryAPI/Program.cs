@@ -3,7 +3,6 @@ using CategoryRepository;
 using CategoryRepository.CategoryLogic;
 using CategoryService.CategoryService;
 using Microsoft.EntityFrameworkCore;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

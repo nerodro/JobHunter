@@ -119,6 +119,63 @@ namespace UserAPI.Controllers
             }
             return model;
         }
+        [HttpGet("GetResponse/{id}")]
+        public async Task<ActionResult<ResponseViewModel>> SingleResponse(int id)
+        {
+
+            ResponseViewModel model = new ResponseViewModel();
+            model = await _responseProducer.TakeSingleResponseForUser(id);
+            if (model != null)
+            {
+                return model;
+            }
+            return BadRequest();
+        }
+        [HttpPost("CreateResponse")]
+        public async Task<IActionResult> CreateResponse(ResponseViewModel model)
+        {
+            ResponseViewModel Response = new ResponseViewModel
+            {
+                CvId = model.CvId,
+                VacancieId = model.VacancieId,
+                Message = model.Message.Trim(),
+            };
+            if (model.Message != null)
+            {
+                string answer = await _responseProducer.CreateReposneForUser(Response);
+                return Ok(answer);
+            }
+            return BadRequest("Не все обязательные поля были заполнены");
+        }
+        [HttpPut("EditResponse")]
+        public async Task<IActionResult> EditResponse(ResponseViewModel model)
+        {
+            ResponseViewModel Response = new ResponseViewModel
+            {
+                CvId = model.CvId,
+                VacancieId = model.VacancieId,
+                Message = model.Message,
+                Id = model.Id
+            };
+            if (model.Message != null)
+            {
+                string answer = await _responseProducer.EditResponseForUser(Response);
+                return Ok(answer);
+            }
+            return BadRequest("Не все обязательные поля были заполнены");
+        }
+        [HttpGet("GetResponseForUser/{responseId}")]
+        public IEnumerable<ResponseViewModel> AllForresponseResponse(int responseId)
+        {
+            var model = _responseProducer.TakeAllResponseOfUser(responseId);
+            return model;
+        }
+        [HttpDelete("DeleteResponse/{id}")]
+        public async Task<ActionResult<ResponseViewModel>> DeleteResponse(int id)
+        {
+            await _responseProducer.DeleteResponseForUser(id);
+            return Ok("Вакансия успешно удалена");
+        }
         private int GetCategoryId(int id)
         {
             int category = _rpc.GetCategoryById(id);
