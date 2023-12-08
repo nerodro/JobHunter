@@ -183,7 +183,7 @@ namespace UserAPI.RabbitMq
             var properties = _rabbitMqChannel.CreateBasicProperties();
             properties.ReplyTo = responseQueueName;
             properties.CorrelationId = correlationId;
-            _rabbitMqChannel.BasicPublish("", "response_requests_ask", properties, body);
+            _rabbitMqChannel.BasicPublish("", "response_requests_get_response", properties, body);
             var responseWaiter = new ManualResetEventSlim(false);
 
             ResponseViewModel modelvac = default(ResponseViewModel);
@@ -196,8 +196,8 @@ namespace UserAPI.RabbitMq
                 {
                     modelvac = response;
                 }
-                responseWaiter.Set();
-            };
+                responseWaiter.Set(); 
+            }; 
             _rabbitMqChannel.BasicConsume("User_Responses_response_queue", true, consumer);
             if (!responseWaiter.Wait(TimeSpan.FromSeconds(10)))
             {
