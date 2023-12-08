@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using RabbitMQ.Client;
 using UserAPI.Controllers;
+using UserAPI.RabbitMq;
 using UserAPI.ServiceGrpc;
 using UserAPI.ViewModel;
 using UserDomain.Models;
@@ -20,17 +22,40 @@ namespace UserService.Tests.Cv
         Mock<IUserService> _userService;
         Mock<CategoryRpc> _rpc;
         CvController _controller;
+        Mock<CategoryServiceGrpc.CategoryServiceGrpcClient> mock;
+        private readonly IResponseProducer _responseProducer;
+        private IModel _rabbitMqChannel;
         public CvControllerTests()
         {
+            mock = new Mock<CategoryServiceGrpc.CategoryServiceGrpcClient>();
             _cvService = new Mock<ICvService>();
             _languageService = new Mock<ILanguageService>();
             _rpc = new Mock<CategoryRpc>();
             _userService = new Mock<IUserService>();
-            _controller = new CvController(_cvService.Object, _languageService.Object, _userService.Object, _rpc.Object);
+            _controller = new CvController(_cvService.Object, _languageService.Object, _userService.Object, _rpc.Object,_responseProducer, _rabbitMqChannel);
         }
         [TestMethod]
         public async Task TestAdd_Cv()
         {
+            // var mockRpc = new Mock<CategoryServiceGrpc.CategoryServiceGrpcClient>();
+            var test = new Mock<CategoryRpc>();
+            // Настройка поведения метода GetCategoryById для mock-объекта
+            var categoryId = 123; // Здесь указывается categoryId, для которого вы хотите создать mock-объект
+            var responseGrpc = new CategoryResponseGrpc
+            {
+                Category = new CategoryGrpc
+                {
+                    CategoryId = categoryId,
+                    CategoryName = "Category Name"
+                }
+            };
+            mock.Setup(r => r.GetCategoryByIdAsync(It.IsAny<CategoryRequestGrpc>(), null, null, default))
+                   .Returns(responseGrpc);
+            // Использование mock-объекта в тесте
+            var categoryRpc = new CategoryRpc
+            {
+                test = mock.Object
+            };
             _languageService.Setup(x => x.GetLanguage(1)).ReturnsAsync(new LanguageModel { Id = 1, Language = "Roma" });
             _userService.Setup(x => x.GetUser(1)).ReturnsAsync(new UserModel { Id = 1, Name = "Tom" });
             CategoryViewModel categoryView = new CategoryViewModel()
@@ -38,8 +63,6 @@ namespace UserService.Tests.Cv
                 Id = 1,
                 CategoryName = "Test"
             };
-            //var mockClient = new Mock<CategoryRpc>();
-            // mockClient.Setup(c => c.GetCategoryById(1)).Returns((int)categoryView.Id);
             CvViewModel _viewModel = new CvViewModel
             {
                 Id = 1,

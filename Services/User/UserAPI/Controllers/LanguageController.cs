@@ -44,21 +44,6 @@ namespace UserAPI.Controllers
             }
             return BadRequest(ModelState);
         }
-        //[HttpPut("EditLanguage/{id}")]
-        //public async Task<ActionResult<LanguageViewModel>> EditLanguage(int id, LanguageViewModel model)
-        //{
-        //    LanguageModel language = await _language.GetLanguage(id);
-        //    if (ModelState.IsValid)
-        //    {
-        //        language.Language = model.LanguageName.Trim();
-        //        if (model.LanguageName != null)
-        //        {
-        //            await _language.Update(language);
-        //            return Ok(model);
-        //        }
-        //    }
-        //    return BadRequest(ModelState);
-        //}
         [HttpDelete("DeleteLanguage/{id}")]
         public async Task<ActionResult<LanguageViewModel>> DeleteLanguage(int id)
         {
@@ -81,31 +66,12 @@ namespace UserAPI.Controllers
                 {
                     model.LanguageName = language.Language;
                     model.Id = language.Id;
-                    //return Ok(model);
                     return new ObjectResult(model);
                 }
                 return BadRequest("Язык не найден");
             }
             return BadRequest();
         }
-        //[HttpGet("GetOneLanguage/{id}")]
-        //public async Task<ActionResult<LanguageViewModel>> SingleLanguage(int id)
-        //{
-        //    LanguageViewModel model = new LanguageViewModel();
-        //    if (id != 0)
-        //    {
-        //        LanguageModel language = await _language.GetLanguage(id);
-        //        if (language != null)
-        //        {
-        //            model.LanguageName = language.Language;
-        //            model.Id = language.Id;
-        //            //return Ok(model);
-        //            return new ObjectResult(model);
-        //        }
-        //        return BadRequest("Язык не найден");
-        //    }
-        //    return BadRequest();
-        //}
         [HttpGet("GetAllLanguage")]
         public IEnumerable<LanguageViewModel> Index()
         {

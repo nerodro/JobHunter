@@ -11,14 +11,14 @@ namespace CompanyRepository
     public class CompanyContext : DbContext
     {
         public DbSet<CompanyModel> Companie { get; set; }
-        public CompanyContext(DbContextOptions<CompanyContext> options) : base(options)
-        {
-            //Database.EnsureDeleted();
-            Database.EnsureCreated();
-        }
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //public CompanyContext(DbContextOptions<CompanyContext> options) : base(options)
         //{
-        //    optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Company;Username=postgres;Password=123;");
+        //    //Database.EnsureDeleted();
+        //    Database.EnsureCreated();
         //}
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Company;Username=postgres;Password=123;");
+        }
     }
 }
