@@ -1,8 +1,13 @@
 using MassTransit;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using RabbitMQ.Client;
 using ResponseAPI.RabbitMq;
 using ResponseRepository.ResponseLogic;
+using UserRepository.Login;
+using UserRepository.Registration;
+using UserService.LoginService;
+using UserService.RegistrationService;
 using VacancieAPI.RabbitMq;
 using VacancieAPI.ServiceGrpc;
 using VacancieAPI.VacancieRpc;
@@ -22,11 +27,17 @@ string? connection = builder.Configuration.GetConnectionString("DefaultConnectio
 
 // добавляем контекст ApplicationContext в качестве сервиса в приложение
 builder.Services.AddDbContext<VacancyContext>(options => options.UseNpgsql(connection), ServiceLifetime.Singleton);
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+              .AddCookie(options =>
+              {
+                  options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                  options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+              });
 
 
 builder.Services.AddScoped(typeof(IVacancieLogic<>), typeof(VacancieLogic<>));
-
 builder.Services.AddScoped(typeof(IResponseLogic<>), typeof(ResponseLogic<>));
+
 
 
 
@@ -108,6 +119,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 
 app.UseAuthorization();
 

@@ -34,6 +34,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\User\UserRepository\UserRepository.csproj" />
+    <ProjectReference Include="..\..\User\UserService\UserService.csproj" />
     <ProjectReference Include="..\VacancieDomain\VacancieDomain.csproj" />
     <ProjectReference Include="..\VacancieRepository\VacancieRepository.csproj" />
     <ProjectReference Include="..\VacancieService\VacancieService.csproj" />

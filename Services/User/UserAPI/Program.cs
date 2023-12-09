@@ -4,10 +4,14 @@ using UserAPI.RabbitMq;
 using UserAPI.ServiceGrpc;
 using UserRepository.CvLogic;
 using UserRepository.LanguageLogic;
+using UserRepository.Login;
+using UserRepository.Registration;
 using UserRepository.UserContext;
 using UserRepository.UserLogic;
 using UserService.CvService;
 using UserService.LanguageService;
+using UserService.LoginService;
+using UserService.RegistrationService;
 using UserService.UserService;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +27,9 @@ builder.Services.AddDbContext<UserDbContext>(options => options.UseNpgsql(connec
 builder.Services.AddScoped(typeof(IUserLogic<>), typeof(UserLogic<>));
 builder.Services.AddScoped(typeof(ICvLogic<>), typeof(CvLogic<>));
 builder.Services.AddScoped(typeof(ILanguageLogic<>), typeof(LanguageLogic<>));
+builder.Services.AddScoped(typeof(IRegistration<>), typeof(RegistrationLogic<>));
+builder.Services.AddScoped(typeof(ILogin<>), typeof(LoginLogic<>));
+
 builder.Services.AddSingleton<IConnection>(factory =>
 {
     var rabbitMqFactory = new ConnectionFactory() { HostName = "localhost" };
@@ -39,6 +46,9 @@ builder.Services.AddScoped<IResponseProducer, ResponseProducer>();
 builder.Services.AddScoped<CategoryRpc>();
 builder.Services.AddScoped<LocationRpc>();
 
+
+builder.Services.AddTransient<ILoginService, LoginService>();
+builder.Services.AddTransient<IRegistrationService, RegistrationService>();
 builder.Services.AddTransient<IUserService, UserServices>();
 builder.Services.AddTransient<ICvService, CvService>();
 builder.Services.AddTransient<ILanguageService, LanguageService>();
@@ -60,7 +70,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
