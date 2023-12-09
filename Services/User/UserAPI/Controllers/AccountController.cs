@@ -8,6 +8,8 @@ using WebShop.Models;
 using UserService.RegistrationService;
 using UserService.LoginService;
 using UserDomain.Models;
+using UserAPI.ViewModel;
+using UserAPI.ServiceGrpc;
 
 namespace UserAPI.Controllers
 {
@@ -17,25 +19,34 @@ namespace UserAPI.Controllers
     {
         private readonly IRegistrationService _registeredServices;
         private readonly ILoginService _loginService;
-        public AccountController(IRegistrationService registered, ILoginService login)
+        private readonly LocationRpc _rpc;
+        public AccountController(IRegistrationService registered, ILoginService login, LocationRpc rpc)
         {
             this._registeredServices = registered;
             this._loginService = login;
+            _rpc = rpc;
         }
         [HttpPost("Register")]
-        public async Task<IActionResult> Register(RegistrationViewModel registrationViewModel)
+        public async Task<IActionResult> Register(UserViewModel model)
         {
             UserModel userEntity = new UserModel
             {
-                Email = registrationViewModel.FirstName,
-                Password = registrationViewModel.Password
+                Email = model.Email.Trim(),
+                Name = model.Name.Trim(),
+                Patronomyc = model.Patronomyc.Trim(),
+                Phone = model.Phone,
+                CityId = await GetCityId(model.CityId),
+                CountryId = await GetCountryId(model.CountryId),
+                Surname = model.Surname.Trim(),
+                RoleId = model.RoleId,
+                Password = model.Password,
             };
             await _registeredServices.CreateUser(userEntity);
 
             if (userEntity.Id > 0)
             {
                 await Authenticate(userEntity);
-                return Ok(registrationViewModel);
+                return Ok(model);
             }
             else
             {
@@ -100,6 +111,25 @@ namespace UserAPI.Controllers
             }
             return Convert.ToString(sb);
         }
-
+        private async Task<int> GetCityId(int id)
+        {
+            var city = await _rpc.GetCityById(id);
+            return (int)city.Id;
+        }
+        private async Task<int> GetCountryId(int id)
+        {
+            var country = await _rpc.GetCountryById(id);
+            return (int)country.Id;
+        }
+        private async Task<string> GetCountryName(int id)
+        {
+            var country = await _rpc.GetCountryById(id);
+            return country.CountryName;
+        }
+        private async Task<string> GetCityName(int id)
+        {
+            var city = await _rpc.GetCityById(id);
+            return city.CityName;
+        }
     }
 }

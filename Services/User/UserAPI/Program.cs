@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using RabbitMQ.Client;
 using UserAPI.RabbitMq;
@@ -20,7 +21,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 string? connection = builder.Configuration.GetConnectionString("DefaultConnection");
-
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+              .AddCookie(options =>
+              {
+                  options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                  options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+              });
 // добавляем контекст ApplicationContext в качестве сервиса в приложение
 builder.Services.AddDbContext<UserDbContext>(options => options.UseNpgsql(connection));
 
@@ -70,6 +76,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
