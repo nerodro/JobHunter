@@ -11,17 +11,26 @@ namespace UserRepository.Login
 {
     public class LoginLogic<T> : ILogin<T> where T : UserModel
     {
-        private readonly UserDbContext context;
+        private readonly UserDbContext _dbcontext;
         private DbSet<T> entities;
-        string errorMessage = string.Empty;
         public LoginLogic(UserDbContext context)
         {
-            this.context = context;
+            _dbcontext = context;
             entities = context.Set<T>();
         }
-        public T Get(long id)
+        public async Task<T> Get(long id)
         {
             return entities.SingleOrDefault(s => s.Id == id);
+            //if (id == 0)
+            //{
+            //    throw new ArgumentNullException("entity");
+            //}
+            //var user = await entities.FirstOrDefaultAsync(x => x.Id == id);
+            //if (user == null)
+            //{
+            //    throw new ArgumentException($"Пользователя с Id {id}, не найдено");
+            //}
+            //return user;
         }
     }
 }

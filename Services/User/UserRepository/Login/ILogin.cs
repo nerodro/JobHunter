@@ -9,6 +9,6 @@ namespace UserRepository.Login
 {
     public interface ILogin<T> where T : UserModel
     {
-        T Get(long id);
+        Task<T> Get(long id);
     }
 }

@@ -25,11 +25,12 @@ namespace UserService.RegistrationService
         }
         public async Task CreateUser(UserModel userModel)
         {
+            //UserModel user1 = _context.User.FirstOrDefault(x => x.Email == userModel.Email && x.Password == userModel.Password);
             var user = _userLogic.GetAll().FirstOrDefault(x => x.Email == userModel.Email && x.Password == userModel.Password);
             RoleModel? userRole = _context.Role.FirstOrDefault(r => r.RoleName == "User");
             if (userRole != null)
             {
-                user.Role = userRole;
+                userModel.Role = userRole;
             }
             if (user == null)
             {

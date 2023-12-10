@@ -63,7 +63,7 @@ namespace UserAPI.Controllers
             {
                 model.FirstName = name;
                 model.Password = password;
-                password = HasPassword(password);
+                //password = HasPassword(password);
                 UserModel userEntity = await _loginService.GetUser(name, password);
 
                 if (userEntity != null)
@@ -86,7 +86,7 @@ namespace UserAPI.Controllers
                 var claims = new List<Claim>
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role?.RoleName),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.RoleName),
             };
                 // создаем объект ClaimsIdentity
                 ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType,
