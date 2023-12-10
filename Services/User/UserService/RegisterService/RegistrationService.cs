@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using UserDomain.Models;
 using UserRepository.Registration;
 using UserRepository.UserContext;
@@ -22,18 +23,17 @@ namespace UserService.RegistrationService
             this._userLogic = userLogic;
             this._context = context;
         }
-        public async Task CreateUser(UserModel user)
+        public async Task CreateUser(UserModel userModel)
         {
-
-            UserModel user1 = _context.User.FirstOrDefault(x => x.Email == user.Email && x.Password == user.Password);
-            RoleModel userRole = _context.Role.FirstOrDefault(r => r.RoleName == "User");
+            var user = _userLogic.GetAll().FirstOrDefault(x => x.Email == userModel.Email && x.Password == userModel.Password);
+            RoleModel? userRole = _context.Role.FirstOrDefault(r => r.RoleName == "User");
             if (userRole != null)
             {
                 user.Role = userRole;
             }
-            if (user1 == null)
+            if (user == null)
             {
-                await _registrationService.Create(user);
+                await _registrationService.Create(userModel);
             }
 
         }
