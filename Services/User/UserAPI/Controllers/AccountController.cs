@@ -39,7 +39,7 @@ namespace UserAPI.Controllers
                 CountryId = await GetCountryId(model.CountryId),
                 Surname = model.Surname.Trim(),
                 RoleId = model.RoleId,
-                Password = model.Password,
+                Password = HasPassword(model.Password),
             };
             await _registeredServices.CreateUser(userEntity);
 
@@ -63,7 +63,7 @@ namespace UserAPI.Controllers
             {
                 model.FirstName = name;
                 model.Password = password;
-                //password = HasPassword(password);
+                password = HasPassword(password);
                 UserModel userEntity = await _loginService.GetUser(name, password);
 
                 if (userEntity != null)
@@ -104,9 +104,9 @@ namespace UserAPI.Controllers
         }
         private static string HasPassword(string Password)
         {
-            MD5 md5 = MD5.Create();
+            MD5 md5 =  MD5.Create();
             byte[] b = Encoding.ASCII.GetBytes(Password);
-            byte[] hash = md5.ComputeHash(b);
+            byte[] hash =  md5.ComputeHash(b);
             StringBuilder sb = new StringBuilder();
             foreach (var i in hash)
             {
