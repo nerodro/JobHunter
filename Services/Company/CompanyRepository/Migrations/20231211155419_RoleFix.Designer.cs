@@ -2,6 +2,7 @@
 using CompanyRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CompanyRepository.Migrations
 {
     [DbContext(typeof(CompanyContext))]
-    partial class CompanyContextModelSnapshot : ModelSnapshot
+    [Migration("20231211155419_RoleFix")]
+    partial class RoleFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,9 +59,12 @@ namespace CompanyRepository.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("integer");
 
+                    b.Property<int>("RoleModelId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("RoleId");
+                    b.HasIndex("RoleModelId");
 
                     b.ToTable("Companie");
                 });
@@ -99,13 +105,13 @@ namespace CompanyRepository.Migrations
 
             modelBuilder.Entity("CompanyDomain.Model.CompanyModel", b =>
                 {
-                    b.HasOne("UserDomain.Models.RoleModel", "Role")
+                    b.HasOne("UserDomain.Models.RoleModel", "RoleModel")
                         .WithMany("Company")
-                        .HasForeignKey("RoleId")
+                        .HasForeignKey("RoleModelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Role");
+                    b.Navigation("RoleModel");
                 });
 
             modelBuilder.Entity("UserDomain.Models.RoleModel", b =>

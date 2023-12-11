@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UserDomain.Models;
 
 namespace CompanyDomain.Model
 {
@@ -16,5 +17,7 @@ namespace CompanyDomain.Model
         public int CityId { get; set; }
         public int CountryId { get; set; }
         public int CategoryId { get; set; }
+        public int RoleId { get; set; }
+        public virtual RoleModel Role { get; set; }
     }
 }
