@@ -5,12 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UserDomain.Models;
 
 namespace CompanyRepository
 {
     public class CompanyContext : DbContext
     {
         public DbSet<CompanyModel> Companie { get; set; }
+        public DbSet<RoleModel> Role { get; set; }
         //public CompanyContext(DbContextOptions<CompanyContext> options) : base(options)
         //{
         //    //Database.EnsureDeleted();
