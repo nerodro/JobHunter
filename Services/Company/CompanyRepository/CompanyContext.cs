@@ -15,11 +15,11 @@ namespace CompanyRepository
     {
         public DbSet<CompanyModel> Companie { get; set; }
         public DbSet<RoleModel> Role { get; set; }
-        //public CompanyContext(DbContextOptions<CompanyContext> options) : base(options)
-        //{
-        //    //Database.EnsureDeleted();
-        //    Database.EnsureCreated();
-        //}
+        public CompanyContext(DbContextOptions<CompanyContext> options) : base(options)
+        {
+            //Database.EnsureDeleted();
+            Database.EnsureCreated();
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Company;Username=postgres;Password=123;");
@@ -33,7 +33,7 @@ namespace CompanyRepository
 
             RoleModel adminRoleModel = new RoleModel { Id = 1, RoleName = "Admin" };
             RoleModel moderRoleModel = new RoleModel { Id = 2, RoleName = "Moder" };
-            RoleModel userRoleModel = new RoleModel { Id = 3, RoleName = "CompanyModer" };
+            RoleModel userRoleModel = new RoleModel { Id = 3, RoleName = "Company" };
             modelBuilder.Entity<RoleModel>().HasData(new RoleModel[] { adminRoleModel, moderRoleModel, userRoleModel });
             base.OnModelCreating(modelBuilder);
         }

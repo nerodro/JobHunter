@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
-namespace UserAPI.ViewModel
+namespace CompanyAPI.ViewModel
 {
     public class LoginViewModel
     {

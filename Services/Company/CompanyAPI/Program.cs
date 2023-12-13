@@ -3,7 +3,12 @@ using CompanyAPI.RabbitMq;
 using CompanyAPI.ServiceGrpc;
 using CompanyRepository;
 using CompanyRepository.CompanyLogic;
+using CompanyRepository.Login;
+using CompanyRepository.Registration;
 using CompanyService.CompanyService;
+using CompanyService.LoginService;
+using CompanyService.RegistrationService;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using RabbitMQ.Client;
 
@@ -13,12 +18,20 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 string? connection = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+              .AddCookie(options =>
+              {
+                  options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                  options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+              });
 
 // добавляем контекст ApplicationContext в качестве сервиса в приложение
 builder.Services.AddDbContext<CompanyContext>(options => options.UseNpgsql(connection));
 
 builder.Services.AddScoped(typeof(ICompanyLogic<>), typeof(CompanyLogic<>));
 builder.Services.AddTransient<ICompanyService, CompanyServices>();
+builder.Services.AddScoped(typeof(IRegistration<>), typeof(RegistrationLogic<>));
+builder.Services.AddScoped(typeof(ILogin<>), typeof(LoginLogic<>));
 
 
 builder.Services.AddSingleton<IConnection>(factory =>
@@ -33,6 +46,8 @@ builder.Services.AddSingleton<IModel>(provider =>
     return connection.CreateModel();
 });
 
+builder.Services.AddTransient<ILoginService, LoginService>();
+builder.Services.AddTransient<IRegistrationService, RegistrationService>();
 builder.Services.AddScoped<ICompanyProducer, CompanyProducer>();
 
 
@@ -61,6 +76,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

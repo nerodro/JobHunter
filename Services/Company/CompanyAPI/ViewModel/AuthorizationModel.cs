@@ -1,4 +1,4 @@
-﻿namespace UserAPI.ViewModel
+﻿namespace CompanyAPI.ViewModel
 {
     public class AuthorizationModel
     {
