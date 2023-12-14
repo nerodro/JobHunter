@@ -1,0 +1,31 @@
+version: '3.4'
+
+networks:
+  dev:
+    driver: bridge
+
+services:
+  categoryapi:
+    image: ${DOCKER_REGISTRY-}categoryapi
+    depends_on:
+        - "app_db"
+    build:
+      context: .
+      dockerfile: Services/Category/CategoryAPI/Dockerfile
+    environment:
+        -   ConnectionStrings__DefaultConnection=Server=appCategoryDb;Port=5432;Database=Category;Username=postgres;Password=123;
+    networks:
+        - dev
+
+  app_db:
+    image: postgres
+    container_name: appCategoryDb
+    environment:
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=123
+        - POSTGRES_DB=Category
+    ports:
+        - "5432:5432"
+    restart: always
+    networks:
+        - dev

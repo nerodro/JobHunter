@@ -18,7 +18,8 @@ namespace CategoryRepository
         }
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
-        //    optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Category;Username=postgres;Password=123;");
+        //    optionsBuilder.UseNpgsql("Server=localhost;Port=5432;Database=Category;Username=postgres;Password=123;");
         //}
     }
 }
+
