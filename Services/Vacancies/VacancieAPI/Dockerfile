@@ -7,10 +7,13 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["VacancieAPI/VacancieAPI.csproj", "VacancieAPI/"]
-RUN dotnet restore "VacancieAPI/VacancieAPI.csproj"
+COPY ["Services/Vacancie/Vacancie.API/Vacancie.API.csproj", "Services/Vacancie/Vacancie.API/"]
+COPY ["Services/Vacancie/VacancieDomain/VacancieDomain.csproj", "Services/Vacancie/VacancieDomain/"]
+COPY ["Services/Vacancie/VacancieRepository/VacancieRepository.csproj", "Services/Vacancie/VacancieRepository/"]
+COPY ["Services/Vacancie/VacancieService/VacancieService.csproj", "Services/Vacancie/VacancieService/"]
+RUN dotnet restore "Services/Vacancie/VacancieAPI/VacancieAPI.csproj"
 COPY . .
-WORKDIR "/src/VacancieAPI"
+WORKDIR "/src/Services/Vacancie/VacancieAPI"
 RUN dotnet build "VacancieAPI.csproj" -c Release -o /app/build
 
 FROM build AS publish
