@@ -7,10 +7,13 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["UserAPI/UserAPI.csproj", "UserAPI/"]
-RUN dotnet restore "UserAPI/UserAPI.csproj"
+COPY ["Services/User/User.API/User.API.csproj", "Services/User/User.API/"]
+COPY ["Services/User/UserDomain/UserDomain.csproj", "Services/User/UserDomain/"]
+COPY ["Services/User/UserRepository/UserRepository.csproj", "Services/User/UserRepository/"]
+COPY ["Services/User/UserService/UserService.csproj", "Services/User/UserService/"]
+RUN dotnet restore "Services/User/UserAPI/UserAPI.csproj"
 COPY . .
-WORKDIR "/src/UserAPI"
+WORKDIR "/src/Services/User/UserAPI"
 RUN dotnet build "UserAPI.csproj" -c Release -o /app/build
 
 FROM build AS publish
