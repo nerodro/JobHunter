@@ -5,6 +5,21 @@ networks:
     driver: bridge
 
 services:
+  locationapi:
+    image: ${DOCKER_REGISTRY-}locationapi
+    depends_on:
+        - "app_db"
+    build:
+      context: .
+      dockerfile: Services/Location/LocationAPI/Dockerfile
+    ports:
+        - "5003:80"
+        - "5004:443"
+    environment:
+        -   ConnectionStrings__DefaultConnection=Server=appdb;Port=5432;Database=Location;Username=postgres;Password=123;
+    networks:
+        - dev
+
   categoryapi:
     image: ${DOCKER_REGISTRY-}categoryapi
     depends_on:
@@ -12,14 +27,17 @@ services:
     build:
       context: .
       dockerfile: Services/Category/CategoryAPI/Dockerfile
+    ports:
+        - "5001:80" 
+        - "5002:443"
     environment:
-        -   ConnectionStrings__DefaultConnection=Server=appCategoryDb;Port=5432;Database=Category;Username=postgres;Password=123;
+        -   ConnectionStrings__DefaultConnection=Server=appdb;Port=5432;Database=Category;Username=postgres;Password=123;
     networks:
         - dev
 
   app_db:
     image: postgres
-    container_name: appCategoryDb
+    container_name: appdb
     environment:
         - POSTGRES_USER=postgres
         - POSTGRES_PASSWORD=123

@@ -4,7 +4,9 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "categoryapi": "StartDebugging"
+        "categoryapi": "StartDebugging",
+        "app_db": "StartWithoutDebugging",
+        "locationapi": "StartDebugging"
       }
     }
   }
