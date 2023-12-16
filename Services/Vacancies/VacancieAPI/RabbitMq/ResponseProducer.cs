@@ -6,6 +6,7 @@ using System.Text;
 using VacancieAPI.ViewModel;
 using VacancieDomain.Model;
 using VacancieService.ResponseService;
+using VacancieService.VacancieService;
 
 namespace ResponseAPI.RabbitMq
 {
@@ -17,11 +18,12 @@ namespace ResponseAPI.RabbitMq
         public ResponseProducer(IResponseService vacancyService, IConnection rabbitMqConnection, IModel rabbitMqChannel)
         {
             _ResponseService = vacancyService;
-            _rabbitMqConnection = rabbitMqConnection;
+            //_VacancieService = vacancyService;
+            //  _rabbitMqConnection = rabbitMqConnection;
             _rabbitMqChannel = rabbitMqChannel;
-            var factory = new ConnectionFactory() { HostName = "localhost" };
-            var connection = factory.CreateConnection();
-            _rabbitMqChannel = connection.CreateModel();
+            //var factory = new ConnectionFactory() { HostName = "localhost" };
+            //var connection = factory.CreateConnection();
+            //_rabbitMqChannel = rabbitMqChannel/*connection.CreateModel()*/;
             _rabbitMqChannel.QueueDeclare("response_requests_get_response", false, false, false, null);
             _rabbitMqChannel.QueueDeclare("response_requests_edit_response", false, false, false, null);
             _rabbitMqChannel.QueueDeclare("response_requests_create_response", false, false, false, null);

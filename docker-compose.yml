@@ -1,8 +1,6 @@
-version: '3.4'
+version: '3.8'
 
-networks:
-  dev:
-    driver: bridge
+
 
 services:
   locationapi:
@@ -35,6 +33,63 @@ services:
     networks:
         - dev
 
+  companyapi:
+    image: ${DOCKER_REGISTRY-}companyapi
+    depends_on:
+        - "app_db"
+        - "rabbit_mq"
+    build:
+      context: .
+      dockerfile: Services/Company/CompanyAPI/Dockerfile
+    ports:
+        - "5005:80"
+        - "5006:443"
+    environment:
+        -   ConnectionStrings__DefaultConnection=Server=appdb;Port=5432;Database=Company;Username=postgres;Password=123;.
+        - RabbitMQ__Hostname=rabbitmq
+        - RabbitMQ__Username=guest
+        - RabbitMQ__Password=guest
+    networks:
+        - dev
+
+  userapi:
+    image: ${DOCKER_REGISTRY-}userapi
+    depends_on:
+        - "app_db"
+        - "rabbit_mq"
+    build:
+      context: .
+      dockerfile: Services/User/UserAPI/Dockerfile
+    ports:
+        - "5007:80"
+        - "5008:443"
+    environment:
+        -   ConnectionStrings__DefaultConnection=Server=appdb;Port=5432;Database=JobUser;Username=postgres;Password=123;
+        - RabbitMQ__Hostname=rabbitmq
+        - RabbitMQ__Username=guest
+        - RabbitMQ__Password=guest
+    networks:
+        - dev
+
+  vacancieapi:
+    image: ${DOCKER_REGISTRY-}vacancieapi
+    depends_on:
+        - "app_db"
+        - "rabbit_mq"
+    build:
+      context: .
+      dockerfile: Services/Vacancies/VacancieAPI/Dockerfile
+    ports:
+        - "5009:80"
+        - "50010:443"
+    environment:
+        -   ConnectionStrings__DefaultConnection=Server=appdb;Port=5432;Database=Vacancy;Username=postgres;Password=123;
+        - RabbitMQ__Hostname=rabbitmq
+        - RabbitMQ__Username=guest
+        - RabbitMQ__Password=guest
+    networks:
+        - dev
+
   app_db:
     image: postgres
     container_name: appdb
@@ -47,3 +102,20 @@ services:
     restart: always
     networks:
         - dev
+
+  rabbit_mq:
+    container_name: rabbit_mq
+    image: rabbitmq:3-management
+    ports:
+        - "15672:15672"
+        - "5672:5672"
+    hostname: "rabbitmq"
+    environment:
+        - RABBITMQ_DEFAULT_USER=guest
+        - RABBITMQ_DEFAULT_PASS=guest 
+    networks:
+        - dev
+
+networks:
+  dev:
+    driver: bridge

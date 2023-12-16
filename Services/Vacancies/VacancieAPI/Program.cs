@@ -1,6 +1,8 @@
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using ResponseAPI.RabbitMq;
 using ResponseRepository.ResponseLogic;
@@ -38,15 +40,19 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.AddScoped(typeof(IVacancieLogic<>), typeof(VacancieLogic<>));
 builder.Services.AddScoped(typeof(IResponseLogic<>), typeof(ResponseLogic<>));
 
+builder.Services.Configure<RabbitMQOptions>(builder.Configuration.GetSection("RabbitMQ"));
 
-
-
-builder.Services.AddSingleton<IConnection>(factory =>
+builder.Services.AddSingleton<IConnection>(provider =>
 {
-    var rabbitMqFactory = new ConnectionFactory() { HostName = "localhost" };
+    var options = provider.GetRequiredService<IOptions<RabbitMQOptions>>().Value;
+    var rabbitMqFactory = new ConnectionFactory
+    {
+        HostName = options.Hostname,
+        UserName = options.Username,
+        Password = options.Password
+    };
     return rabbitMqFactory.CreateConnection();
 });
-
 builder.Services.AddSingleton<IModel>(provider =>
 {
     var connection = provider.GetRequiredService<IConnection>();
