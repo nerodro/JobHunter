@@ -40,6 +40,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.AddScoped(typeof(IVacancieLogic<>), typeof(VacancieLogic<>));
 builder.Services.AddScoped(typeof(IResponseLogic<>), typeof(ResponseLogic<>));
 
+
+
 builder.Services.Configure<RabbitMQOptions>(builder.Configuration.GetSection("RabbitMQ"));
 
 builder.Services.AddSingleton<IConnection>(provider =>
@@ -53,6 +55,7 @@ builder.Services.AddSingleton<IConnection>(provider =>
     };
     return rabbitMqFactory.CreateConnection();
 });
+
 builder.Services.AddSingleton<IModel>(provider =>
 {
     var connection = provider.GetRequiredService<IConnection>();

@@ -11,9 +11,7 @@ namespace CompanyAPI.RabbitMq
         private IModel _rabbitMqChannel;
         public CompanyProducer(IModel rabbitMqChannel)
         {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
-            var connection = factory.CreateConnection();
-            _rabbitMqChannel = connection.CreateModel();
+            _rabbitMqChannel = rabbitMqChannel;
             _rabbitMqChannel.QueueDeclare("vacancy_requests_get_vacancy", false, false, false, null);
             _rabbitMqChannel.QueueDeclare("vacancy_requests_edit_vacancy", false, false, false, null);
             _rabbitMqChannel.QueueDeclare("vacancy_requests_create_vacancy", false, false, false, null);

@@ -11,9 +11,7 @@ namespace UserAPI.RabbitMq
         private IModel _rabbitMqChannel;
         public ResponseProducer(IModel rabbitMqChannel)
         {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
-            var connection = factory.CreateConnection();
-            _rabbitMqChannel = connection.CreateModel();
+            _rabbitMqChannel = rabbitMqChannel;
             _rabbitMqChannel.QueueDeclare("response_requests_get_response", false, false, false, null);
             _rabbitMqChannel.QueueDeclare("response_requests_edit_response", false, false, false, null);
             _rabbitMqChannel.QueueDeclare("response_requests_create_response", false, false, false, null);

@@ -6,7 +6,11 @@
       "serviceActions": {
         "categoryapi": "StartDebugging",
         "app_db": "StartWithoutDebugging",
-        "locationapi": "StartDebugging"
+        "locationapi": "StartDebugging",
+        "companyapi": "StartDebugging",
+        "rabbit_mq": "StartWithoutDebugging",
+        "userapi": "StartDebugging",
+        "vacancieapi": "StartDebugging"
       }
     }
   }

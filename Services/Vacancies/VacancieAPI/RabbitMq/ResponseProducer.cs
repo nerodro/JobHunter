@@ -13,17 +13,11 @@ namespace ResponseAPI.RabbitMq
     public class ResponseProducer : IResponseProducer
     {
         private readonly IResponseService _ResponseService;
-        private readonly IConnection _rabbitMqConnection;
         private IModel _rabbitMqChannel;
-        public ResponseProducer(IResponseService vacancyService, IConnection rabbitMqConnection, IModel rabbitMqChannel)
+        public ResponseProducer(IResponseService vacancyService, IModel rabbitMqChannel)
         {
             _ResponseService = vacancyService;
-            //_VacancieService = vacancyService;
-            //  _rabbitMqConnection = rabbitMqConnection;
             _rabbitMqChannel = rabbitMqChannel;
-            //var factory = new ConnectionFactory() { HostName = "localhost" };
-            //var connection = factory.CreateConnection();
-            //_rabbitMqChannel = rabbitMqChannel/*connection.CreateModel()*/;
             _rabbitMqChannel.QueueDeclare("response_requests_get_response", false, false, false, null);
             _rabbitMqChannel.QueueDeclare("response_requests_edit_response", false, false, false, null);
             _rabbitMqChannel.QueueDeclare("response_requests_create_response", false, false, false, null);

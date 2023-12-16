@@ -8,7 +8,7 @@
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
   </PropertyGroup>
   <PropertyGroup>
-    <DockerServiceName>locationapi</DockerServiceName>
+    <DockerServiceName>userapi</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">

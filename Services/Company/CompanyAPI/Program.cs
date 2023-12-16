@@ -10,6 +10,7 @@ using CompanyService.LoginService;
 using CompanyService.RegistrationService;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,10 +34,17 @@ builder.Services.AddTransient<ICompanyService, CompanyServices>();
 builder.Services.AddScoped(typeof(IRegistration<>), typeof(RegistrationLogic<>));
 builder.Services.AddScoped(typeof(ILogin<>), typeof(LoginLogic<>));
 
+builder.Services.Configure<RabbitMQOptions>(builder.Configuration.GetSection("RabbitMQ"));
 
-builder.Services.AddSingleton<IConnection>(factory =>
+builder.Services.AddSingleton<IConnection>(provider =>
 {
-    var rabbitMqFactory = new ConnectionFactory() { HostName = "localhost" };
+    var options = provider.GetRequiredService<IOptions<RabbitMQOptions>>().Value;
+    var rabbitMqFactory = new ConnectionFactory
+    {
+        HostName = options.Hostname,
+        UserName = options.Username,
+        Password = options.Password
+    };
     return rabbitMqFactory.CreateConnection();
 });
 

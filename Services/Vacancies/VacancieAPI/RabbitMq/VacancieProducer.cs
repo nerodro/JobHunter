@@ -17,16 +17,11 @@ namespace VacancieAPI.RabbitMq
     public class VacancieProducer : IVacancieProducercs, IDisposable
     {
         private readonly IVacancieService _VacancieService;
-        //private readonly IConnection _rabbitMqConnection;
         private IModel _rabbitMqChannel;
-        public VacancieProducer(IVacancieService vacancyService, IConnection rabbitMqConnection, IModel rabbitMqChannel)
+        public VacancieProducer(IVacancieService vacancyService, IModel rabbitMqChannel)
         {
             _VacancieService = vacancyService;
-          //  _rabbitMqConnection = rabbitMqConnection;
             _rabbitMqChannel = rabbitMqChannel;
-            //var factory = new ConnectionFactory() { HostName = "localhost" };
-            //var connection = factory.CreateConnection();
-            //_rabbitMqChannel = rabbitMqChannel/*connection.CreateModel()*/;
             _rabbitMqChannel.QueueDeclare("vacancy_requests_get_vacancy", false, false, false, null);
             _rabbitMqChannel.QueueDeclare("vacancy_requests_edit_vacancy", false, false, false, null);
             _rabbitMqChannel.QueueDeclare("vacancy_requests_create_vacancy", false, false, false, null);

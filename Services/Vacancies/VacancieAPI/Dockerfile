@@ -17,7 +17,7 @@ WORKDIR "/src/Services/Vacancie/VacancieAPI"
 RUN dotnet build "VacancieAPI.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "VacancieAPI.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "VacancieAPI.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
