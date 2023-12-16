@@ -3,12 +3,10 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
-    <ProjectGuid>5257f404-6b81-4979-899c-9c7b221f83a4</ProjectGuid>
+    <ProjectGuid>f971bfa9-8e9c-4542-923b-71343c8cf35c</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
-  </PropertyGroup>
-  <PropertyGroup>
-    <DockerServiceName>userapi</DockerServiceName>
+    <DockerServiceName>categoryapi</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">

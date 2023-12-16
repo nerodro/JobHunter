@@ -7,13 +7,13 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["Services/Vacancie/Vacancie.API/Vacancie.API.csproj", "Services/Vacancie/Vacancie.API/"]
-COPY ["Services/Vacancie/VacancieDomain/VacancieDomain.csproj", "Services/Vacancie/VacancieDomain/"]
-COPY ["Services/Vacancie/VacancieRepository/VacancieRepository.csproj", "Services/Vacancie/VacancieRepository/"]
-COPY ["Services/Vacancie/VacancieService/VacancieService.csproj", "Services/Vacancie/VacancieService/"]
-RUN dotnet restore "Services/Vacancie/VacancieAPI/VacancieAPI.csproj"
+COPY ["Services/Vacancies/VacancieAPI/VacancieAPI.csproj", "Services/Vacancies/VacancieAPI/"]
+COPY ["Services/Vacancies/VacancieDomain/VacancieDomain.csproj", "Services/Vacancie/VacancieDomain/"]
+COPY ["Services/Vacancies/VacancieRepository/VacancieRepository.csproj", "Services/Vacancie/VacancieRepository/"]
+COPY ["Services/Vacancies/VacancieService/VacancieService.csproj", "Services/Vacancie/VacancieService/"]
+RUN dotnet restore "Services/Vacancies/VacancieAPI/VacancieAPI.csproj"
 COPY . .
-WORKDIR "/src/Services/Vacancie/VacancieAPI"
+WORKDIR "/src/Services/Vacancies/VacancieAPI"
 RUN dotnet build "VacancieAPI.csproj" -c Release -o /app/build
 
 FROM build AS publish
