@@ -10,7 +10,8 @@
         "companyapi": "StartDebugging",
         "rabbit_mq": "StartWithoutDebugging",
         "userapi": "StartDebugging",
-        "vacancieapi": "StartDebugging"
+        "vacancieapi": "StartDebugging",
+        "apigateway": "StartDebugging"
       }
     }
   }

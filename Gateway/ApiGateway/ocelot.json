@@ -1,0 +1,32 @@
+{
+  "Routes": [
+    //Category
+    {
+      "UpstreamPathTemplate": "/api/Category",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "categoryapi",
+          "Port": 443
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Category"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Category/{id}",
+      "UpstreamHttpMethod": [ "Get", "Put", "Delete" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "categoryapi",
+          "Port": 443
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Category/{id}"
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:500"
+  }
+}
