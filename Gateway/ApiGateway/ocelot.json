@@ -2,16 +2,16 @@
   "Routes": [
     //Category
     {
-      "UpstreamPathTemplate": "/api/Category",
-      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "UpstreamPathTemplate": "/api/Category/GetAllCategory",
+      "UpstreamHttpMethod": [ "Get" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "categoryapi",
-          "Port": 443
+          "Host": "host.docker.internal",
+          "Port": 5001
         }
       ],
-      "DownstreamPathTemplate": "/api/Category"
+      "DownstreamPathTemplate": "/Category/GetAllCategory"
     },
     {
       "UpstreamPathTemplate": "/api/Category/{id}",
@@ -19,14 +19,64 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "categoryapi",
-          "Port": 443
+          "Host": "localhost",
+          "Port": 5001
         }
       ],
-      "DownstreamPathTemplate": "/api/Category/{id}"
-    }
+      "DownstreamPathTemplate": "/Category/{id}"
+    },
+    //Location City
+    //{
+    //  "UpstreamPathTemplate": "/api/City",
+    //  "UpstreamHttpMethod": [ "Get", "Post" ],
+    //  "DownstreamScheme": "https",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "locationapi",
+    //      "Port": 443
+    //    }
+    //  ],
+    //  "DownstreamPathTemplate": "/api/City"
+    //},
+    //{
+    //  "UpstreamPathTemplate": "/api/City/{id}",
+    //  "UpstreamHttpMethod": [ "Get", "Put", "Delete" ],
+    //  "DownstreamScheme": "https",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "locationapi",
+    //      "Port": 443
+    //    }
+    //  ],
+    //  "DownstreamPathTemplate": "/api/Location/{id}"
+    //}
+    //Location Country
+    //{
+    //  "UpstreamPathTemplate": "/api/Country",
+    //  "UpstreamHttpMethod": [ "Get", "Post" ],
+    //  "DownstreamScheme": "http",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "locationapi",
+    //      "Port": 71443
+    //    }
+    //  ],
+    //  "DownstreamPathTemplate": "/api/Country"
+    //},
+    //{
+    //  "UpstreamPathTemplate": "/api/Category/{id}",
+    //  "UpstreamHttpMethod": [ "Get", "Put", "Delete" ],
+    //  "DownstreamScheme": "http",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "locationapi",
+    //      "Port": 71443
+    //    }
+    //  ],
+    //  "DownstreamPathTemplate": "/api/Location/{id}"
+    //}
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:500"
+    "BaseUrl": "http://localhost:800"
   }
 }
