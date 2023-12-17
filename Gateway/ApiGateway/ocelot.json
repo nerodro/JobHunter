@@ -14,67 +14,53 @@
       "DownstreamPathTemplate": "/Category/GetAllCategory"
     },
     {
-      "UpstreamPathTemplate": "/api/Category/{id}",
-      "UpstreamHttpMethod": [ "Get", "Put", "Delete" ],
+      "UpstreamPathTemplate": "/api/Category/CreateCategory",
+      "UpstreamHttpMethod": [ "Post" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
+          "Host": "host.docker.internal",
           "Port": 5001
         }
       ],
-      "DownstreamPathTemplate": "/Category/{id}"
+      "DownstreamPathTemplate": "/Category/CreateCategory"
     },
-    //Location City
-    //{
-    //  "UpstreamPathTemplate": "/api/City",
-    //  "UpstreamHttpMethod": [ "Get", "Post" ],
-    //  "DownstreamScheme": "https",
-    //  "DownstreamHostAndPorts": [
-    //    {
-    //      "Host": "locationapi",
-    //      "Port": 443
-    //    }
-    //  ],
-    //  "DownstreamPathTemplate": "/api/City"
-    //},
-    //{
-    //  "UpstreamPathTemplate": "/api/City/{id}",
-    //  "UpstreamHttpMethod": [ "Get", "Put", "Delete" ],
-    //  "DownstreamScheme": "https",
-    //  "DownstreamHostAndPorts": [
-    //    {
-    //      "Host": "locationapi",
-    //      "Port": 443
-    //    }
-    //  ],
-    //  "DownstreamPathTemplate": "/api/Location/{id}"
-    //}
-    //Location Country
-    //{
-    //  "UpstreamPathTemplate": "/api/Country",
-    //  "UpstreamHttpMethod": [ "Get", "Post" ],
-    //  "DownstreamScheme": "http",
-    //  "DownstreamHostAndPorts": [
-    //    {
-    //      "Host": "locationapi",
-    //      "Port": 71443
-    //    }
-    //  ],
-    //  "DownstreamPathTemplate": "/api/Country"
-    //},
-    //{
-    //  "UpstreamPathTemplate": "/api/Category/{id}",
-    //  "UpstreamHttpMethod": [ "Get", "Put", "Delete" ],
-    //  "DownstreamScheme": "http",
-    //  "DownstreamHostAndPorts": [
-    //    {
-    //      "Host": "locationapi",
-    //      "Port": 71443
-    //    }
-    //  ],
-    //  "DownstreamPathTemplate": "/api/Location/{id}"
-    //}
+    {
+      "UpstreamPathTemplate": "/api/Category/EditCategory/{id}",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5001
+        }
+      ],
+      "DownstreamPathTemplate": "/Category/EditCategory/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Category/DeleteCategory/{id}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5001
+        }
+      ],
+      "DownstreamPathTemplate": "/Category/DeleteCategory/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Category/GetOneCategory/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5001
+        }
+      ],
+      "DownstreamPathTemplate": "/Category/GetOneCategory/{id}"
+    }
   ],
   "GlobalConfiguration": {
     "BaseUrl": "http://localhost:800"
