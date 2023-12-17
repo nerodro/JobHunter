@@ -8,9 +8,9 @@ services:
     build:
       context: .
       dockerfile: Services/Location/LocationAPI/Dockerfile
-    #ports:
-    #    - "5003:80"
-    #    - "5004:443"
+    ports:
+        - "5003:80"
+        - "5004:443"
     environment:
         -   ConnectionStrings__DefaultConnection=Server=appdb;Port=5432;Database=Location;Username=postgres;Password=123;
     networks:

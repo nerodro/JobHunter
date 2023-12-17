@@ -60,6 +60,128 @@
         }
       ],
       "DownstreamPathTemplate": "/Category/GetOneCategory/{id}"
+    },
+    //Location City
+    {
+      "UpstreamPathTemplate": "/api/City/GetAllCity",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5003
+        }
+      ],
+      "DownstreamPathTemplate": "/City/GetAllCity"
+    },
+    {
+      "UpstreamPathTemplate": "/api/City/CreateCity",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5003
+        }
+      ],
+      "DownstreamPathTemplate": "/City/CreateCity"
+    },
+    {
+      "UpstreamPathTemplate": "/api/City/EditCity/{id}",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5003
+        }
+      ],
+      "DownstreamPathTemplate": "/City/EditCity/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/City/DeleteCity/{id}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5003
+        }
+      ],
+      "DownstreamPathTemplate": "/City/DeleteCity/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/City/GetOneCity/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5003
+        }
+      ],
+      "DownstreamPathTemplate": "/City/GetOneCity/{id}"
+    },
+    //Location Country
+    {
+      "UpstreamPathTemplate": "/api/Country/GetAllCountry",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5003
+        }
+      ],
+      "DownstreamPathTemplate": "/Country/GetAllCountry"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Country/CreateCountry",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5003
+        }
+      ],
+      "DownstreamPathTemplate": "/Country/CreateCountry"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Country/EditCountry/{id}",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5003
+        }
+      ],
+      "DownstreamPathTemplate": "/Country/EditCountry/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Country/DeleteCountry/{id}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5003
+        }
+      ],
+      "DownstreamPathTemplate": "/Country/DeleteCountry/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Country/GetOneCountry/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5003
+        }
+      ],
+      "DownstreamPathTemplate": "/Country/GetOneCountry/{id}"
     }
   ],
   "GlobalConfiguration": {
