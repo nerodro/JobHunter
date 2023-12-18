@@ -58,7 +58,20 @@ builder.Services.AddTransient<ILoginService, LoginService>();
 builder.Services.AddTransient<IRegistrationService, RegistrationService>();
 builder.Services.AddScoped<ICompanyProducer, CompanyProducer>();
 
+builder.Services
+    .AddGrpcClient<LocationServiceGrpc.LocationServiceGrpcClient>(o =>
+    {
+        o.Address = new Uri("https://locationapi:443");
+        o.Address = new Uri("https://categoryapi:443");
+    })
+    .ConfigurePrimaryHttpMessageHandler(() =>
+    {
+        var handler = new HttpClientHandler();
+        handler.ServerCertificateCustomValidationCallback =
+            HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
 
+        return handler;
+    });
 builder.Services.AddScoped<CategoryRpc>();
 builder.Services.AddScoped<LocationRpc>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -27,15 +27,15 @@ namespace CompanyAPI.Controllers
             _rpc = categoryGrpc;
             _Locrpc = Locrpc;
             _companyProducer = company;
-            _rabbitMqChannel = rabbitMqChannel;
-            var factory = new ConnectionFactory() { HostName = "localhost" };
-            var connection = factory.CreateConnection();
-            _rabbitMqChannel = connection.CreateModel();
+           // _rabbitMqChannel = rabbitMqChannel;
+            //var factory = new ConnectionFactory() { HostName = "localhost" };
+            //var connection = factory.CreateConnection();
+            //_rabbitMqChannel = connection.CreateModel();
         }
         [HttpPost("CreateCompany")]
         public async Task<IActionResult> CreateCompany(CompanyViewModel model)
         {
-            CompanyModel language = new CompanyModel
+            CompanyModel company = new CompanyModel
             {
                 CompanyName = model.CompanyName.Trim(),
                 Email = model.Email.Trim(),
@@ -44,11 +44,12 @@ namespace CompanyAPI.Controllers
                 Password = model.Password.Trim(),
                 Phone = model.Phone,
                 CategoryId = await GetCategoryId(model.CategoryId),
+                RoleId = model.RoleId,
             };
             if (model.CompanyName != null)
             {
-                await _CompanyService.CreateCompany(language);
-                return CreatedAtAction("SingleCompany", new { id = language.Id }, model);
+                await _CompanyService.CreateCompany(company);
+                return CreatedAtAction("SingleCompany", new { id = company.Id }, model);
             }
             return BadRequest("Не все обязательные поля были заполнены");
         }

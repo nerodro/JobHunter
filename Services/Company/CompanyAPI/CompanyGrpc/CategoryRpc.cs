@@ -10,7 +10,14 @@ namespace CompanyAPI.ServiceGrpc
         private readonly CategoryServiceGrpc.CategoryServiceGrpcClient _rpc;
         public CategoryRpc()
         {
-            var channel = GrpcChannel.ForAddress("https://localhost:7236");
+            var handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback =
+                HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+
+            var channel = GrpcChannel.ForAddress("https://categoryapi:443",
+                new GrpcChannelOptions { HttpHandler = handler });
+            //var channel = GrpcChannel.ForAddress("https://localhost:7236");
+            //var channel = GrpcChannel.ForAddress("https://categoryapi:443");
             _rpc = new CategoryServiceGrpc.CategoryServiceGrpcClient(channel);
         }
         public async Task<CategoryViewModel> GetCategory(int categoryId)

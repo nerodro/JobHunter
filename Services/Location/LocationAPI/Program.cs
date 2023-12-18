@@ -28,6 +28,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddGrpc();
 
 
+
 var app = builder.Build();
 
 app.MapGrpcService<LocationRpc>();

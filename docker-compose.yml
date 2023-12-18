@@ -1,4 +1,5 @@
-version: '3.8'
+version: '3.4'
+
 
 services:
   locationapi:
@@ -43,7 +44,7 @@ services:
         - "5005:80"
         - "5006:443"
     environment:
-        -   ConnectionStrings__DefaultConnection=Server=appdb;Port=5432;Database=Company;Username=postgres;Password=123;.
+        - ConnectionStrings__DefaultConnection=Server=appdb;Port=5432;Database=Company;Username=postgres;Password=123;
         - RabbitMQ__Hostname=rabbitmq
         - RabbitMQ__Username=guest
         - RabbitMQ__Password=guest
@@ -62,7 +63,7 @@ services:
         - "5007:80"
         - "5008:443"
     environment:
-        -   ConnectionStrings__DefaultConnection=Server=appdb;Port=5432;Database=JobUser;Username=postgres;Password=123;
+        - ConnectionStrings__DefaultConnection=Server=appdb;Port=5432;Database=JobUser;Username=postgres;Password=123;
         - RabbitMQ__Hostname=rabbitmq
         - RabbitMQ__Username=guest
         - RabbitMQ__Password=guest
@@ -81,7 +82,7 @@ services:
         - "5009:80"
         - "50010:443"
     environment:
-        -   ConnectionStrings__DefaultConnection=Server=appdb;Port=5432;Database=Vacancy;Username=postgres;Password=123;
+        - ConnectionStrings__DefaultConnection=Server=appdb;Port=5432;Database=Vacancy;Username=postgres;Password=123;
         - RabbitMQ__Hostname=rabbitmq
         - RabbitMQ__Username=guest
         - RabbitMQ__Password=guest

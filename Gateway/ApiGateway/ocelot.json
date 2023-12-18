@@ -69,7 +69,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
-          "Port": 5003
+          "Port": 5005
         }
       ],
       "DownstreamPathTemplate": "/City/GetAllCity"
@@ -81,7 +81,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
-          "Port": 5003
+          "Port": 5005
         }
       ],
       "DownstreamPathTemplate": "/City/CreateCity"
@@ -93,7 +93,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
-          "Port": 5003
+          "Port": 5005
         }
       ],
       "DownstreamPathTemplate": "/City/EditCity/{id}"
@@ -105,7 +105,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
-          "Port": 5003
+          "Port": 5005
         }
       ],
       "DownstreamPathTemplate": "/City/DeleteCity/{id}"
@@ -117,7 +117,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
-          "Port": 5003
+          "Port": 5005
         }
       ],
       "DownstreamPathTemplate": "/City/GetOneCity/{id}"
@@ -130,7 +130,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
-          "Port": 5003
+          "Port": 5005
         }
       ],
       "DownstreamPathTemplate": "/Country/GetAllCountry"
@@ -142,7 +142,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
-          "Port": 5003
+          "Port": 5005
         }
       ],
       "DownstreamPathTemplate": "/Country/CreateCountry"
@@ -154,7 +154,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
-          "Port": 5003
+          "Port": 5005
         }
       ],
       "DownstreamPathTemplate": "/Country/EditCountry/{id}"
@@ -166,7 +166,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
-          "Port": 5003
+          "Port": 5005
         }
       ],
       "DownstreamPathTemplate": "/Country/DeleteCountry/{id}"
@@ -178,10 +178,72 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
-          "Port": 5003
+          "Port": 5005
         }
       ],
       "DownstreamPathTemplate": "/Country/GetOneCountry/{id}"
+    },
+
+    //Company
+    {
+      "UpstreamPathTemplate": "/api/Company/GetAllCompany",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/Company/GetAllCompany"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Company/CreateCompany",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/Company/CreateCompany"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Company/EditCompany/{id}",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/Company/EditCompany/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Company/DeleteCompany/{id}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/Company/DeleteCompany/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Company/GetOneCompany/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/Company/GetOneCompany/{id}"
     }
   ],
   "GlobalConfiguration": {
