@@ -46,7 +46,7 @@ namespace CompanyRepository.CompanyLogic
             var user = await _dbSet.SingleOrDefaultAsync(x => x.Id == id);
             if (user == null)
             {
-                throw new ArgumentException($"Пользователя с Id {id}, не найдено");
+                throw new ArgumentException($"Компания с Id {id}, не найдено");
             }
             return user;
         }

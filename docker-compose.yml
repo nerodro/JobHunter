@@ -99,8 +99,13 @@ services:
     ports:
         - "5432:5432"
     restart: always
+    volumes: 
+      - app_data:/var/lib/postgresql/data
+    #volumes:
+    #  - postgres_data:/var/lib/postgresql/data/
     networks:
         - dev
+
 
   rabbit_mq:
     container_name: rabbit_mq
@@ -125,6 +130,10 @@ services:
         - "8001:80" 
     networks:
         - dev
+
+volumes:
+  app_data:
+
 
 networks:
   dev:

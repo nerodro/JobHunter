@@ -14,7 +14,7 @@ namespace CategoryRepository
         public CategoryContext(DbContextOptions<CategoryContext> options) : base(options)
         {
             //Database.EnsureDeleted();
-            //Database.EnsureCreated();
+            Database.EnsureCreated();
         }
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
