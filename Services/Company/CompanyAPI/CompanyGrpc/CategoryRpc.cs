@@ -2,6 +2,7 @@
 using Grpc.Net.Client;
 using System.Threading.Channels;
 using CompanyAPI.ViewModel;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace CompanyAPI.ServiceGrpc
 {
@@ -10,14 +11,18 @@ namespace CompanyAPI.ServiceGrpc
         private readonly CategoryServiceGrpc.CategoryServiceGrpcClient _rpc;
         public CategoryRpc()
         {
+            var configuration = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json")
+                    .AddEnvironmentVariables()
+                    .Build();
+
+            var grpcConnection = configuration.GetSection("Grpc:CategoryHttp").Value;
             var handler = new HttpClientHandler();
             handler.ServerCertificateCustomValidationCallback =
                 HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-
-            var channel = GrpcChannel.ForAddress("https://categoryapi:443",
+            var channel = GrpcChannel.ForAddress(grpcConnection,
                 new GrpcChannelOptions { HttpHandler = handler });
-            //var channel = GrpcChannel.ForAddress("https://localhost:7236");
-            //var channel = GrpcChannel.ForAddress("https://categoryapi:443");
             _rpc = new CategoryServiceGrpc.CategoryServiceGrpcClient(channel);
         }
         public async Task<CategoryViewModel> GetCategory(int categoryId)

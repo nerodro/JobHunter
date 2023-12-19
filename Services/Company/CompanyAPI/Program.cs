@@ -61,8 +61,10 @@ builder.Services.AddScoped<ICompanyProducer, CompanyProducer>();
 builder.Services
     .AddGrpcClient<LocationServiceGrpc.LocationServiceGrpcClient>(o =>
     {
-        o.Address = new Uri("https://locationapi:443");
-        o.Address = new Uri("https://categoryapi:443");
+        o.Address = new Uri(builder.Configuration["Grpc:LocationHttp"]);
+        o.Address = new Uri(builder.Configuration["Grpc:CategoryHttp"]);
+        //o.Address = new Uri("https://locationapi:443");
+        //o.Address = new Uri("https://categoryapi:443");
     })
     .ConfigurePrimaryHttpMessageHandler(() =>
     {

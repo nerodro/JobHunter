@@ -8,15 +8,19 @@ namespace CompanyAPI.ServiceGrpc
         private readonly LocationServiceGrpc.LocationServiceGrpcClient _locationService;
         public LocationRpc()
         {
+            var configuration = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json")
+                    .AddEnvironmentVariables()
+                    .Build();
+
+            var grpcConnection = configuration.GetSection("Grpc:LocationHttp").Value;
             var handler = new HttpClientHandler();
             handler.ServerCertificateCustomValidationCallback =
                 HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
 
-            var channel = GrpcChannel.ForAddress("https://locationapi:443",
+            var channel = GrpcChannel.ForAddress(grpcConnection,
                 new GrpcChannelOptions { HttpHandler = handler });
-            //var client = new LocationServiceGrpc.LocationServiceGrpcClient(channel);
-            //var channel = GrpcChannel.ForAddress("https://localhost:7052");
-            //var channel = GrpcChannel.ForAddress("https://locationapi:443");
             _locationService = new LocationServiceGrpc.LocationServiceGrpcClient(channel);
         }
         public async Task<CityViewModel> GetCityById(int CityId)

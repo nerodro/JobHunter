@@ -48,6 +48,8 @@ services:
         - RabbitMQ__Hostname=rabbitmq
         - RabbitMQ__Username=guest
         - RabbitMQ__Password=guest
+        - Grpc__LocationHttp=https://locationapi:443
+        - Grpc__CategoryHttp=https://categoryapi:443
     networks:
         - dev
 
@@ -101,8 +103,6 @@ services:
     restart: always
     volumes: 
       - app_data:/var/lib/postgresql/data
-    #volumes:
-    #  - postgres_data:/var/lib/postgresql/data/
     networks:
         - dev
 
