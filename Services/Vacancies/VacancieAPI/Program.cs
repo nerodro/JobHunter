@@ -106,7 +106,21 @@ builder.Services.AddSingleton<IHostedService>(provider =>
 builder.Services.AddScoped<LocationRpc>();
 builder.Services.AddScoped<CompanyRpc>();
 builder.Services.AddScoped<CvRpc>();
+builder.Services
+    .AddGrpcClient<LocationServiceGrpc.LocationServiceGrpcClient>(o =>
+    {
+        o.Address = new Uri(builder.Configuration["Grpc:LocationHttp"]);
+        o.Address = new Uri(builder.Configuration["Grpc:CompanyHttp"]);
+        o.Address = new Uri(builder.Configuration["Grpc:CvHttp"]);
+    })
+    .ConfigurePrimaryHttpMessageHandler(() =>
+    {
+        var handler = new HttpClientHandler();
+        handler.ServerCertificateCustomValidationCallback =
+            HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
 
+        return handler;
+    });
 
 builder.Services.AddScoped<IVacancieService, VacancyServices>();
 builder.Services.AddTransient<IResponseService, ResponseService>();

@@ -90,6 +90,9 @@ services:
         - RabbitMQ__Hostname=rabbitmq
         - RabbitMQ__Username=guest
         - RabbitMQ__Password=guest
+        - Grpc__LocationHttp=https://locationapi:443
+        - Grpc__CompanyHttp=https://companyapi:443
+        - Grpc__CvHttp=https://userapi:443
     networks:
         - dev
 

@@ -8,7 +8,18 @@ namespace VacancieAPI.VacancieRpc
         private readonly CvServiceGrpc.CvServiceGrpcClient _rpc;
         public CvRpc()
         {
-            var channel = GrpcChannel.ForAddress("https://localhost:7028");
+            var configuration = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json")
+                    .AddEnvironmentVariables()
+                    .Build();
+
+            var grpcConnection = configuration.GetSection("Grpc:CvHttp").Value;
+            var handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback =
+                HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+            var channel = GrpcChannel.ForAddress(grpcConnection,
+                new GrpcChannelOptions { HttpHandler = handler });
             _rpc = new CvServiceGrpc.CvServiceGrpcClient(channel);
         }
         public async Task<CvViewModel> GetCv(int CvId)
