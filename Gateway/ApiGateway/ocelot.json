@@ -184,9 +184,9 @@
       "DownstreamPathTemplate": "/Country/GetOneCountry/{id}"
     },
 
-    //Company
+    //Language
     {
-      "UpstreamPathTemplate": "/api/Company/GetAllCompany",
+      "UpstreamPathTemplate": "/api/Language/GetAllLanguage",
       "UpstreamHttpMethod": [ "Get" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -195,10 +195,10 @@
           "Port": 5005
         }
       ],
-      "DownstreamPathTemplate": "/Company/GetAllCompany"
+      "DownstreamPathTemplate": "/Language/GetAllLanguage"
     },
     {
-      "UpstreamPathTemplate": "/api/Company/CreateCompany",
+      "UpstreamPathTemplate": "/api/Language/CreateLanguage",
       "UpstreamHttpMethod": [ "Post" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -207,10 +207,10 @@
           "Port": 5005
         }
       ],
-      "DownstreamPathTemplate": "/Company/CreateCompany"
+      "DownstreamPathTemplate": "/Language/CreateLanguage"
     },
     {
-      "UpstreamPathTemplate": "/api/Company/EditCompany/{id}",
+      "UpstreamPathTemplate": "/api/Language/EditLanguage/{id}",
       "UpstreamHttpMethod": [ "Put" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -219,10 +219,10 @@
           "Port": 5005
         }
       ],
-      "DownstreamPathTemplate": "/Company/EditCompany/{id}"
+      "DownstreamPathTemplate": "/Language/EditLanguage/{id}"
     },
     {
-      "UpstreamPathTemplate": "/api/Company/DeleteCompany/{id}",
+      "UpstreamPathTemplate": "/api/Language/DeleteLanguage/{id}",
       "UpstreamHttpMethod": [ "Delete" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -231,10 +231,10 @@
           "Port": 5005
         }
       ],
-      "DownstreamPathTemplate": "/Company/DeleteCompany/{id}"
+      "DownstreamPathTemplate": "/Language/DeleteLanguage/{id}"
     },
     {
-      "UpstreamPathTemplate": "/api/Company/GetOneCompany/{id}",
+      "UpstreamPathTemplate": "/api/Language/GetOneLanguage/{id}",
       "UpstreamHttpMethod": [ "Get" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -243,10 +243,10 @@
           "Port": 5005
         }
       ],
-      "DownstreamPathTemplate": "/Company/GetOneCompany/{id}"
+      "DownstreamPathTemplate": "/Language/GetOneLanguage/{id}"
     },
     {
-      "UpstreamPathTemplate": "/api/Company/CreateVacancy",
+      "UpstreamPathTemplate": "/api/Language/CreateVacancy",
       "UpstreamHttpMethod": [ "Post" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -255,10 +255,10 @@
           "Port": 5005
         }
       ],
-      "DownstreamPathTemplate": "/Company/CreateVacancy"
+      "DownstreamPathTemplate": "/Language/CreateVacancy"
     },
     {
-      "UpstreamPathTemplate": "/api/Company/GetVacancy/{id}",
+      "UpstreamPathTemplate": "/api/Language/GetVacancy/{id}",
       "UpstreamHttpMethod": [ "Get" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -267,10 +267,10 @@
           "Port": 5005
         }
       ],
-      "DownstreamPathTemplate": "/Company/GetVacancy/{id}"
+      "DownstreamPathTemplate": "/Language/GetVacancy/{id}"
     },
     {
-      "UpstreamPathTemplate": "/api/Company/EditVacancy",
+      "UpstreamPathTemplate": "/api/Language/EditVacancy",
       "UpstreamHttpMethod": [ "Put" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -279,10 +279,10 @@
           "Port": 5005
         }
       ],
-      "DownstreamPathTemplate": "/Company/EditVacancy"
+      "DownstreamPathTemplate": "/Language/EditVacancy"
     },
     {
-      "UpstreamPathTemplate": "/api/Company/DeleteVacancy/{id}",
+      "UpstreamPathTemplate": "/api/Language/DeleteVacancy/{id}",
       "UpstreamHttpMethod": [ "Delete" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -291,10 +291,10 @@
           "Port": 5005
         }
       ],
-      "DownstreamPathTemplate": "/Company/DeleteVacancy/{id}"
+      "DownstreamPathTemplate": "/Language/DeleteVacancy/{id}"
     },
     {
-      "UpstreamPathTemplate": "/api/Company/GetVacancyForCompany/{companyId}",
+      "UpstreamPathTemplate": "/api/Language/GetVacancyForLanguage/{LanguageId}",
       "UpstreamHttpMethod": [ "Get" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -303,7 +303,68 @@
           "Port": 5005
         }
       ],
-      "DownstreamPathTemplate": "/Company/GetVacancyForCompany/{companyId}"
+      "DownstreamPathTemplate": "/Language/GetVacancyForLanguage/{LanguageId}"
+    },
+    //Language
+    {
+      "UpstreamPathTemplate": "/api/Language/GetAllLanguage",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/Language/GetAllLanguage"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Language/CreateLanguage",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/Language/CreateLanguage"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Language/EditLanguage/{id}",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/Language/EditLanguage/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Language/DeleteLanguage/{id}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/Language/DeleteLanguage/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Language/GetOneLanguage/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/Language/GetOneLanguage/{id}"
     }
   ],
   "GlobalConfiguration": {
