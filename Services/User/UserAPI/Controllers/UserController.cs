@@ -85,6 +85,7 @@ namespace UserAPI.Controllers
                 model.CountryName = await GetCountryName(model.CountryId);
                 model.RoleId = userEntity.RoleId;
                 model.Email = userEntity.Email;
+                model.Patronomyc = userEntity.Patronomyc;
                 return new ObjectResult(model);
             }
             return BadRequest();

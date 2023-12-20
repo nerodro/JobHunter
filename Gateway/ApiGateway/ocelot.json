@@ -368,7 +368,7 @@
     },
     //User
     {
-      "UpstreamPathTemplate": "/api/User/GetAllUser",
+      "UpstreamPathTemplate": "/api/User/GetAllUsers",
       "UpstreamHttpMethod": [ "Get" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -377,7 +377,7 @@
           "Port": 5007
         }
       ],
-      "DownstreamPathTemplate": "/User/GetAllUser"
+      "DownstreamPathTemplate": "/User/GetAllUsers"
     },
     {
       "UpstreamPathTemplate": "/api/User/CreateUser",
