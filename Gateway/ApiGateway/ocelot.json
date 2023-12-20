@@ -244,6 +244,66 @@
         }
       ],
       "DownstreamPathTemplate": "/Company/GetOneCompany/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Company/CreateVacancy",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/Company/CreateVacancy"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Company/GetVacancy/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/Company/GetVacancy/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Company/EditVacancy",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/Company/EditVacancy"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Company/DeleteVacancy/{id}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/Company/DeleteVacancy/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Company/GetVacancyForCompany/{companyId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/Company/GetVacancyForCompany/{companyId}"
     }
   ],
   "GlobalConfiguration": {
