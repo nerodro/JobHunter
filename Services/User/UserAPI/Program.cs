@@ -61,7 +61,20 @@ builder.Services.AddSingleton<IModel>(provider =>
 builder.Services.AddScoped<IResponseProducer, ResponseProducer>();
 builder.Services.AddScoped<CategoryRpc>();
 builder.Services.AddScoped<LocationRpc>();
+builder.Services
+    .AddGrpcClient<LocationServiceGrpc.LocationServiceGrpcClient>(o =>
+    {
+        o.Address = new Uri(builder.Configuration["Grpc:LocationHttp"]);
+        o.Address = new Uri(builder.Configuration["Grpc:CategoryHttp"]);
+    })
+    .ConfigurePrimaryHttpMessageHandler(() =>
+    {
+        var handler = new HttpClientHandler();
+        handler.ServerCertificateCustomValidationCallback =
+            HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
 
+        return handler;
+    });
 
 builder.Services.AddTransient<ILoginService, LoginService>();
 builder.Services.AddTransient<IRegistrationService, RegistrationService>();

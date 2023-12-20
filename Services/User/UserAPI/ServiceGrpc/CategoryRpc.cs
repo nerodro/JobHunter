@@ -10,7 +10,18 @@ namespace UserAPI.ServiceGrpc
         private readonly CategoryServiceGrpc.CategoryServiceGrpcClient _rpc;
         public CategoryRpc()
         {
-            var channel = GrpcChannel.ForAddress("https://localhost:7236");
+            var configuration = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json")
+                    .AddEnvironmentVariables()
+                    .Build();
+
+            var grpcConnection = configuration.GetSection("Grpc:CategoryHttp").Value;
+            var handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback =
+                HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+            var channel = GrpcChannel.ForAddress(grpcConnection,
+                new GrpcChannelOptions { HttpHandler = handler });
             _rpc = new CategoryServiceGrpc.CategoryServiceGrpcClient(channel);
         }
         public int GetCategoryById(int categoryId)
