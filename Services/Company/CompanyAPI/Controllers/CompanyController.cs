@@ -27,10 +27,6 @@ namespace CompanyAPI.Controllers
             _rpc = categoryGrpc;
             _Locrpc = Locrpc;
             _companyProducer = company;
-           // _rabbitMqChannel = rabbitMqChannel;
-            //var factory = new ConnectionFactory() { HostName = "localhost" };
-            //var connection = factory.CreateConnection();
-            //_rabbitMqChannel = connection.CreateModel();
         }
         [HttpPost("CreateCompany")]
         public async Task<IActionResult> CreateCompany(CompanyViewModel model)

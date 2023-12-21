@@ -27,10 +27,6 @@ namespace UserAPI.Controllers
             _userService = userService;
             _rpc = rpc;
             _responseProducer = producer;
-            _rabbitMqChannel = model;
-            var factory = new ConnectionFactory() { HostName = "localhost" };
-            var connection = factory.CreateConnection();
-            _rabbitMqChannel = connection.CreateModel();
         }
         [HttpPost("CreateCv")]
         public async Task<IActionResult> CreateCv(CvViewModel model)
