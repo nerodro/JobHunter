@@ -115,11 +115,11 @@ namespace UserAPI.Controllers
             return model;
         }
         [HttpGet("GetResponse/{Responseid}")]
-        public async Task<ActionResult<ResponseViewModel>> SingleResponse(int id)
+        public async Task<ActionResult<ResponseViewModel>> SingleResponse(int Responseid)
         {
 
             ResponseViewModel model = new ResponseViewModel();
-            model = await _responseProducer.TakeSingleResponseForUser(id);
+            model = await _responseProducer.TakeSingleResponseForUser(Responseid);
             if (model != null)
             {
                 return model;
