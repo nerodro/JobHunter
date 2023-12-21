@@ -487,6 +487,66 @@
         }
       ],
       "DownstreamPathTemplate": "/Cv/GetOneCv/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Cv/GetResponse/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/Cv/GetResponse/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Cv/CreateResponse",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/Cv/CreateResponse"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Cv/EditResponse",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/Cv/EditResponse"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Cv/GetResponseForUser/{responseId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/Cv/GetResponseForUser/{responseId}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Cv/DeleteResponse/{id}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/Cv/DeleteResponse/{id}"
     }
   ],
   "GlobalConfiguration": {

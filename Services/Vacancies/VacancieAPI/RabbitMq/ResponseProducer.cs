@@ -120,7 +120,7 @@ namespace ResponseAPI.RabbitMq
             {
                 var message = Encoding.UTF8.GetString(ea.Body.ToArray());
                 var request = JsonConvert.DeserializeObject<ResponseViewModel>(message);
-                var response = _ResponseService.GetAll(/*(int)request.VacancieId*/);
+                var response = _ResponseService.GetForCv(request.CvId);
                 if (response != null)
                 {
                     var responseJson = JsonConvert.SerializeObject(response).ToArray();

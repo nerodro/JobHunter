@@ -14,5 +14,6 @@ namespace VacancieService.ResponseService
         Task CreateResponse(ResponseModel Response);
         Task UpdateResponse(ResponseModel Response);
         Task DeleteResponse(int id);
+        IEnumerable<ResponseModel> GetForCv(int CvId);
     }
 }

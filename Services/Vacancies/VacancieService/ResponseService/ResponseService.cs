@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VacancieDomain.Model;
 using VacancieRepository.ResponseLogic;
+using VacancieService.VacancieService;
 
 namespace VacancieService.ResponseService
 {
@@ -36,6 +38,11 @@ namespace VacancieService.ResponseService
             ResponseModel Response = await _ResponseService.Get(id);
             await _ResponseService.Delete(Response);
             await _ResponseService.SaveChanges();
+        }
+
+        public IEnumerable<ResponseModel> GetForCv(int CvId)
+        {
+            return _ResponseService.GetAll().Where(x => x.CvId == CvId);
         }
     }
 }
