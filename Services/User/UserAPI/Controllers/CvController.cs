@@ -114,7 +114,7 @@ namespace UserAPI.Controllers
             }
             return model;
         }
-        [HttpGet("GetResponse/{id}")]
+        [HttpGet("GetResponse/{Responseid}")]
         public async Task<ActionResult<ResponseViewModel>> SingleResponse(int id)
         {
 
@@ -159,10 +159,10 @@ namespace UserAPI.Controllers
             }
             return BadRequest("Не все обязательные поля были заполнены");
         }
-        [HttpGet("GetResponseForUser/{responseId}")]
-        public IEnumerable<ResponseViewModel> AllForresponseResponse(int responseId)
+        [HttpGet("GetResponseForUser/{CvId}")]
+        public IEnumerable<ResponseViewModel> AllForresponseResponse(int CvId)
         {
-            var model = _responseProducer.TakeAllResponseOfUser(responseId);
+            var model = _responseProducer.TakeAllResponseOfUser(CvId);
             return model;
         }
         [HttpDelete("DeleteResponse/{id}")]

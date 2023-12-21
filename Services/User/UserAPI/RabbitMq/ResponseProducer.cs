@@ -132,11 +132,11 @@ namespace UserAPI.RabbitMq
             }
             return Task.FromResult(responsetext);
         }
-        public IEnumerable<ResponseViewModel> TakeAllResponseOfUser(int VacancieId)
+        public IEnumerable<ResponseViewModel> TakeAllResponseOfUser(int CvId)
         {
             var request = new ResponseViewModel
             {
-                VacancieId = VacancieId,
+                CvId = CvId,
             };
             var requestJson = JsonConvert.SerializeObject(request);
             var correlationId = Guid.NewGuid().ToString();

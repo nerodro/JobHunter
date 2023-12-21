@@ -525,7 +525,7 @@
       "DownstreamPathTemplate": "/Cv/EditResponse"
     },
     {
-      "UpstreamPathTemplate": "/api/Cv/GetResponseForUser/{responseId}",
+      "UpstreamPathTemplate": "/api/Cv/GetResponseForUser/{CvId}",
       "UpstreamHttpMethod": [ "Get" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -534,7 +534,7 @@
           "Port": 5007
         }
       ],
-      "DownstreamPathTemplate": "/Cv/GetResponseForUser/{responseId}"
+      "DownstreamPathTemplate": "/Cv/GetResponseForUser/{CvId}"
     },
     {
       "UpstreamPathTemplate": "/api/Cv/DeleteResponse/{id}",
