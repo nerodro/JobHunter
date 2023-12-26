@@ -1,0 +1,677 @@
+{
+  "Routes": [
+    //Category
+    {
+      "UpstreamPathTemplate": "/api/Category/GetAllCategory",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7236
+        }
+      ],
+      "DownstreamPathTemplate": "/Category/GetAllCategory"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Category/CreateCategory",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7236
+        }
+      ],
+      "DownstreamPathTemplate": "/Category/CreateCategory"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Category/EditCategory/{id}",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7236
+        }
+      ],
+      "DownstreamPathTemplate": "/Category/EditCategory/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Category/DeleteCategory/{id}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7236
+        }
+      ],
+      "DownstreamPathTemplate": "/Category/DeleteCategory/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Category/GetOneCategory/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7236
+        }
+      ],
+      "DownstreamPathTemplate": "/Category/GetOneCategory/{id}"
+    },
+    //Location City
+    {
+      "UpstreamPathTemplate": "/api/City/GetAllCity",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/City/GetAllCity"
+    },
+    {
+      "UpstreamPathTemplate": "/api/City/CreateCity",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/City/CreateCity"
+    },
+    {
+      "UpstreamPathTemplate": "/api/City/EditCity/{id}",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/City/EditCity/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/City/DeleteCity/{id}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/City/DeleteCity/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/City/GetOneCity/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/City/GetOneCity/{id}"
+    },
+    //Location Country
+    {
+      "UpstreamPathTemplate": "/api/Country/GetAllCountry",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/Country/GetAllCountry"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Country/CreateCountry",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/Country/CreateCountry"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Country/EditCountry/{id}",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/Country/EditCountry/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Country/DeleteCountry/{id}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/Country/DeleteCountry/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Country/GetOneCountry/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/Country/GetOneCountry/{id}"
+    },
+
+    //Company
+    {
+      "UpstreamPathTemplate": "/api/Company/GetAllCompany",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/Company/GetAllCompany"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Company/CreateCompany",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/Company/CreateCompany"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Company/EditCompany/{id}",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/Company/EditCompany/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Company/DeleteCompany/{id}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/Company/DeleteCompany/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Company/GetOneCompany/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/Company/GetOneCompany/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Company/CreateVacancy",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/Company/CreateVacancy"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Company/GetVacancy/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/Company/GetVacancy/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Company/EditVacancy",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/Company/EditVacancy"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Company/DeleteVacancy/{id}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/Company/DeleteVacancy/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Company/GetVacancyForCompany/{CompanyId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/Company/GetVacancyForCompany/{CompanyId}"
+    },
+    //Language
+    {
+      "UpstreamPathTemplate": "/api/Language/GetAllLanguage",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/Language/GetAllLanguage"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Language/CreateLanguage",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/Language/CreateLanguage"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Language/EditLanguage/{id}",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/Language/EditLanguage/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Language/DeleteLanguage/{id}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/Language/DeleteLanguage/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Language/GetOneLanguage/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/Language/GetOneLanguage/{id}"
+    },
+    //User
+    {
+      "UpstreamPathTemplate": "/api/User/GetAllUsers",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7028
+        }
+      ],
+      "DownstreamPathTemplate": "/User/GetAllUsers"
+    },
+    {
+      "UpstreamPathTemplate": "/api/User/CreateUser",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/User/CreateUser"
+    },
+    {
+      "UpstreamPathTemplate": "/api/User/EditUser/{id}",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/User/EditUser/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/User/DeleteUser/{id}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/User/DeleteUser/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/User/GetOneUser/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/User/GetOneUser/{id}"
+    },
+    //Cv
+    {
+      "UpstreamPathTemplate": "/api/Cv/GetAllCv",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/Cv/GetAllCv"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Cv/CreateCv",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/Cv/CreateCv"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Cv/EditCv/{id}",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/Cv/EditCv/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Cv/DeleteCv/{id}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/Cv/DeleteCv/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Cv/GetOneCv/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/Cv/GetOneCv/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Cv/GetResponse/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/Cv/GetResponse/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Cv/CreateResponse",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/Cv/CreateResponse"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Cv/EditResponse",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/Cv/EditResponse"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Cv/GetResponseForUser/{CvId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/Cv/GetResponseForUser/{CvId}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Cv/DeleteResponse/{id}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/Cv/DeleteResponse/{id}"
+    },
+    //Response
+    {
+      "UpstreamPathTemplate": "/api/Response/GetAllResponse",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5009
+        }
+      ],
+      "DownstreamPathTemplate": "/Response/GetAllResponse"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Response/CreateResponse",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5009
+        }
+      ],
+      "DownstreamPathTemplate": "/Response/CreateResponse"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Response/EditResponse/{id}",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5009
+        }
+      ],
+      "DownstreamPathTemplate": "/Response/EditResponse/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Response/DeleteResponse/{id}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5009
+        }
+      ],
+      "DownstreamPathTemplate": "/Response/DeleteResponse/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Response/GetOneResponse/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5009
+        }
+      ],
+      "DownstreamPathTemplate": "/Response/GetOneResponse/{id}"
+    },
+    //Vacancie
+    {
+      "UpstreamPathTemplate": "/api/Vacancie/GetAllVacancie",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5009
+        }
+      ],
+      "DownstreamPathTemplate": "/Vacancie/GetAllVacancie"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Vacancie/CreateVacancie",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5009
+        }
+      ],
+      "DownstreamPathTemplate": "/Vacancie/CreateVacancie"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Vacancie/EditVacancie/{id}",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5009
+        }
+      ],
+      "DownstreamPathTemplate": "/Vacancie/EditVacancie/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Vacancie/DeleteVacancie/{id}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5009
+        }
+      ],
+      "DownstreamPathTemplate": "/Vacancie/DeleteVacancie/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Vacancie/GetOneVacancie/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5009
+        }
+      ],
+      "DownstreamPathTemplate": "/Vacancie/GetOneVacancie/{id}"
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:8001"
+  }
+}

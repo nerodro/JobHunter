@@ -133,6 +133,8 @@ services:
       dockerfile: Gateway/ApiGateway/Dockerfile
     ports:
         - "8001:80" 
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development    
     networks:
         - dev
 
