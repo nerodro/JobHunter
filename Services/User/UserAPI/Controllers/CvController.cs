@@ -19,7 +19,7 @@ namespace UserAPI.Controllers
         private readonly IUserService _userService;
         private readonly CategoryRpc _rpc;
         private readonly IResponseProducer _responseProducer;
-        public CvController(ICvService cvService, ILanguageService languageService, IUserService userService, CategoryRpc rpc, IResponseProducer producer)
+        public CvController(ICvService cvService, ILanguageService languageService, IUserService userService, CategoryRpc rpc, IResponseProducer producer, IModel? _rabbitMqChannel)
         {
             _cvService = cvService;
             _languageService = languageService;

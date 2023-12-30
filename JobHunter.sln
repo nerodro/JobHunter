@@ -61,7 +61,7 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{8490A967-E6D6-4670-879F-3033EE7205AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiGateway", "Gateway\ApiGateway\ApiGateway.csproj", "{7674BEC5-20E2-44B1-9510-85D5BAE113F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiGateway", "Gateway\ApiGateway\ApiGateway.csproj", "{7674BEC5-20E2-44B1-9510-85D5BAE113F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

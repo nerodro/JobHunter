@@ -37,10 +37,10 @@ namespace UserService.Tests.Cv
         [TestMethod]
         public async Task TestAdd_Cv()
         {
-            // var mockRpc = new Mock<CategoryServiceGrpc.CategoryServiceGrpcClient>();
-            var test = new Mock<CategoryRpc>();
+            var test = new Mock<CategoryServiceGrpc.CategoryServiceGrpcClient>();
+
             // Настройка поведения метода GetCategoryById для mock-объекта
-            var categoryId = 123; // Здесь указывается categoryId, для которого вы хотите создать mock-объект
+            var categoryId = 123;
             var responseGrpc = new CategoryResponseGrpc
             {
                 Category = new CategoryGrpc
@@ -49,13 +49,15 @@ namespace UserService.Tests.Cv
                     CategoryName = "Category Name"
                 }
             };
-            mock.Setup(r => r.GetCategoryByIdAsync(It.IsAny<CategoryRequestGrpc>(), null, null, default))
-                   .Returns(responseGrpc);
-            // Использование mock-объекта в тесте
-            var categoryRpc = new CategoryRpc
-            {
-                test = mock.Object
-            };
+
+            test.Setup(r => r.GetCategoryByIdAsync(It.IsAny<CategoryRequestGrpc>(), null, null, default))
+                .Returns(responseGrpc);
+
+            // Используйте mock-объект вместо реального объекта CategoryRpc
+            var categoryRpc = test.Object;
+
+            // Ваш код контроллера
+            var result = await categoryRpc.GetCategoryByIdAsync(new CategoryRequestGrpc());
             _languageService.Setup(x => x.GetLanguage(1)).ReturnsAsync(new LanguageModel { Id = 1, Language = "Roma" });
             _userService.Setup(x => x.GetUser(1)).ReturnsAsync(new UserModel { Id = 1, Name = "Tom" });
             CategoryViewModel categoryView = new CategoryViewModel()
