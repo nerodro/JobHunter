@@ -10,13 +10,37 @@ spec:
         app: location
     spec:
       containers:
-      - name: productsbackend
+      - name: location-api
         image: nerodro/loaction
         ports:
-        - containerPort: 80
+        - containerPort: 9001
         env:
         - name: ASPNETCORE_URLS
           value: http://*:80
   selector:
     matchLabels:
       app: location
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: user
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: user
+    spec:
+      containers:
+      - name: user-api
+        image: nerodro/user
+        ports:
+        - containerPort: 9002
+        env:
+        - name: ASPNETCORE_URLS
+          value: http://*:80
+  selector:
+    matchLabels:
+      app: user
