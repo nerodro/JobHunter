@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: location
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: location
+    spec:
+      containers:
+      - name: productsbackend
+        image: nerodro/loaction
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_URLS
+          value: http://*:80
+  selector:
+    matchLabels:
+      app: location
