@@ -11,16 +11,32 @@ spec:
     spec:
       containers:
       - name: location-api
-        image: nerodro/loaction
+        image: nerodro/location
         ports:
-        - containerPort: 9001
+        - containerPort: 80
         env:
         - name: ASPNETCORE_URLS
           value: http://*:80
+        - name: ImagePrefix
+          value: http://localhost
   selector:
     matchLabels:
       app: location
-
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: location
+spec:
+  type: NodePort
+  ports:
+  - name: "http"
+    protocol: TCP
+    port: 80
+    targetPort: 80
+    nodePort: 30000
+  selector:
+    app: location
 ---
 apiVersion: apps/v1
 kind: Deployment
