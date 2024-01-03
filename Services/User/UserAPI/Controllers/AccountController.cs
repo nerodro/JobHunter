@@ -4,12 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using WebShop.Models;
 using UserService.RegistrationService;
 using UserService.LoginService;
 using UserDomain.Models;
 using UserAPI.ViewModel;
 using UserAPI.ServiceGrpc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using Newtonsoft.Json.Linq;
 
 namespace UserAPI.Controllers
 {
@@ -20,11 +22,13 @@ namespace UserAPI.Controllers
         private readonly IRegistrationService _registeredServices;
         private readonly ILoginService _loginService;
         private readonly LocationRpc _rpc;
-        public AccountController(IRegistrationService registered, ILoginService login, LocationRpc rpc)
+        private readonly IConfiguration _configuration;
+        public AccountController(IRegistrationService registered, ILoginService login, LocationRpc rpc, IConfiguration configuration)
         {
             this._registeredServices = registered;
             this._loginService = login;
             _rpc = rpc;
+            _configuration = configuration;
         }
         [HttpPost("Register")]
         public async Task<IActionResult> Register(UserViewModel model)
@@ -45,7 +49,7 @@ namespace UserAPI.Controllers
 
             if (userEntity.Id > 0)
             {
-                await Authenticate(userEntity);
+                //await Authenticate(userEntity);
                 return Ok(model);
             }
             else
@@ -68,8 +72,9 @@ namespace UserAPI.Controllers
 
                 if (userEntity != null)
                 {
-                    await Authenticate(userEntity);
-                    return Ok(model);
+                    string token = JwtToken(userEntity);
+                    //await Authenticate(userEntity);
+                    return Ok(token);
                 }
                 else if (userEntity == null)
                 {
@@ -95,6 +100,24 @@ namespace UserAPI.Controllers
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
             }
 
+        }
+        private string JwtToken(UserModel user) 
+        {
+            List <Claim> claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, user.Name),
+            };
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
+                _configuration.GetSection("Jwt:Token").Value!));
+            var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
+
+            var jwt = new JwtSecurityToken(
+                claims: claims,
+                expires: DateTime.Now.AddYears(1),
+                signingCredentials: cred
+                );
+            var token = new JwtSecurityTokenHandler().WriteToken(jwt); 
+            return token;
         }
         [HttpGet("Logout")]
         public async Task<IActionResult> Logout()

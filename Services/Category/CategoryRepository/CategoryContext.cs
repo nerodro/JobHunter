@@ -13,7 +13,7 @@ namespace CategoryRepository
         public DbSet<CategoryModel> Category { get; set; }
         public CategoryContext(DbContextOptions<CategoryContext> options) : base(options)
         {
-            Database.Migrate();
+            //Database.Migrate();
             //Database.EnsureDeleted();
             //Database.EnsureCreated();
         }

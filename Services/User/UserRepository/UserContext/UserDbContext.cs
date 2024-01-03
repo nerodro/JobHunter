@@ -19,7 +19,7 @@ namespace UserRepository.UserContext
         public DbSet<LanguageModel> Language { get; set; }
         public UserDbContext(DbContextOptions<UserDbContext> options) : base(options)
         {
-            Database.Migrate();
+            //Database.Migrate();
             //Database.EnsureDeleted();
             //Database.EnsureCreated();
         }

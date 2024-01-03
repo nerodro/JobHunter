@@ -22,7 +22,7 @@ namespace UserService.LoginService
 
         public async Task<UserModel> GetUser(string name, string password)
         {
-            UserModel? user = _context.User.Include(u => u.Role).FirstOrDefault(x => x.Email == name && x.Password == password);
+            UserModel? user = _context.User.Include(u => u.Role).FirstOrDefault(x => x.Name == name && x.Password == password);
             if (user != null)
             {
                 return await userControlLogic.Get((int)user.Id);
