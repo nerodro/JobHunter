@@ -9,6 +9,9 @@ using CompanyService.LoginService;
 using CompanyAPI.ServiceGrpc;
 using CompanyAPI.ViewModel;
 using CompanyDomain.Model;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace UserAPI.Controllers
 {
@@ -19,11 +22,13 @@ namespace UserAPI.Controllers
         private readonly IRegistrationService _registeredServices;
         private readonly ILoginService _loginService;
         private readonly LocationRpc _rpc;
-        public AccountController(IRegistrationService registered, ILoginService login, LocationRpc rpc)
+        private readonly IConfiguration _configuration;
+        public AccountController(IRegistrationService registered, ILoginService login, LocationRpc rpc, IConfiguration configuration)
         {
             this._registeredServices = registered;
             this._loginService = login;
             _rpc = rpc;
+            _configuration = configuration;
         }
         [HttpPost("Register")]
         public async Task<IActionResult> Register(CompanyViewModel model)
@@ -38,11 +43,10 @@ namespace UserAPI.Controllers
                 RoleId = model.RoleId,
                 Password = HasPassword(model.Password),
             };
-        await _registeredServices.CreateUserForCompany(companyEntity);
+            await _registeredServices.CreateUserForCompany(companyEntity);
 
             if (companyEntity.Id > 0)
             {
-                await Authenticate(companyEntity);
                 return Ok(model);
             }
             else
@@ -65,8 +69,8 @@ namespace UserAPI.Controllers
 
                 if (companyEntity != null)
                 {
-                    await Authenticate(companyEntity);
-                    return Ok(model);
+                    string token = JwtToken(companyEntity);
+                    return Ok(token);
                 }
                 else if (companyEntity == null)
                 {
@@ -75,29 +79,24 @@ namespace UserAPI.Controllers
             }
             return BadRequest();
         }
-        private async Task Authenticate(CompanyModel user)
+        private string JwtToken(CompanyModel company)
         {
-            // создаем один claim
-            if (user != null)
+            List<Claim> claims = new List<Claim>
             {
-                var claims = new List<Claim>
-            {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.RoleName),
+                new Claim(ClaimTypes.Name, company.Email),
+                new Claim(ClaimTypes.Role, company.Role.RoleName)
             };
-                // создаем объект ClaimsIdentity
-                ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType,
-                    ClaimsIdentity.DefaultRoleClaimType);
-                // установка аутентификационных куки
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
-            }
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
+                _configuration.GetSection("Jwt:Token").Value!));
+            var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
 
-        }
-        [HttpGet("Logout")]
-        public async Task<IActionResult> Logout()
-        {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return Ok();
+            var jwt = new JwtSecurityToken(
+                claims: claims,
+                expires: DateTime.Now.AddYears(1),
+                signingCredentials: cred
+                );
+            var token = new JwtSecurityTokenHandler().WriteToken(jwt);
+            return token;
         }
         private static string HasPassword(string Password)
         {
