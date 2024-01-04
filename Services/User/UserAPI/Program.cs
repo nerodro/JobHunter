@@ -28,12 +28,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 string? connection = builder.Configuration.GetConnectionString("DefaultConnection");
-//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-//              .AddCookie(options =>
-//              {
-//                  options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
-//                  options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
-//              });
 builder.Services.AddDbContext<UserDbContext>(options => options.UseNpgsql(connection));
 
 builder.Services.AddScoped(typeof(IUserLogic<>), typeof(UserLogic<>));
