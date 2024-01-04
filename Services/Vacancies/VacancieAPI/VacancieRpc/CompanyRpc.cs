@@ -14,7 +14,7 @@ namespace VacancieAPI.VacancieRpc
                     .AddEnvironmentVariables()
                     .Build();
 
-            var grpcConnection = configuration.GetSection("Grpc:CompanyHttp").Value;
+            var grpcConnection = configuration.GetSection("Grpc:CompanyHttp").Value!;
             var handler = new HttpClientHandler();
             handler.ServerCertificateCustomValidationCallback =
                 HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;

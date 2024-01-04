@@ -36,7 +36,7 @@ namespace ResponseAPI.RabbitMq
             consumer.Received += async (model, ea) =>
             {
                 var message = Encoding.UTF8.GetString(ea.Body.ToArray());
-                var request = JsonConvert.DeserializeObject<ResponseViewModel>(message);
+                var request = JsonConvert.DeserializeObject<ResponseViewModel>(message)!;
                 var response = await _ResponseService.GetResponse((int)request.Id);
                 if (response != null)
                 {
@@ -76,7 +76,7 @@ namespace ResponseAPI.RabbitMq
             consumer.Received += async (model, ea) =>
             {
                 var message = Encoding.UTF8.GetString(ea.Body.ToArray());
-                var request = JsonConvert.DeserializeObject<ResponseViewModel>(message);
+                var request = JsonConvert.DeserializeObject<ResponseViewModel>(message)!;
                 ResponseModel res = new ResponseModel();
                 await _ResponseService.DeleteResponse((int)request.Id);
                 var responseJson = JsonConvert.SerializeObject("Ok").ToArray();
@@ -95,7 +95,7 @@ namespace ResponseAPI.RabbitMq
             consumer.Received += async (model, ea) =>
             {
                 var message = Encoding.UTF8.GetString(ea.Body.ToArray());
-                var request = JsonConvert.DeserializeObject<ResponseModel>(message);
+                var request = JsonConvert.DeserializeObject<ResponseModel>(message)!;
                 var mod = await _ResponseService.GetResponse(request.Id);
                 if (mod != null)
                 {
@@ -119,7 +119,7 @@ namespace ResponseAPI.RabbitMq
             consumer.Received += async (model, ea) =>
             {
                 var message = Encoding.UTF8.GetString(ea.Body.ToArray());
-                var request = JsonConvert.DeserializeObject<ResponseViewModel>(message);
+                var request = JsonConvert.DeserializeObject<ResponseViewModel>(message)!;
                 var response = _ResponseService.GetForCv(request.CvId);
                 if (response != null)
                 {

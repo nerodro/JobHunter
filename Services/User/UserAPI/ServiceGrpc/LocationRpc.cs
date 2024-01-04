@@ -14,7 +14,7 @@ namespace UserAPI.ServiceGrpc
                     .AddEnvironmentVariables()
                     .Build();
 
-            var grpcConnection = configuration.GetSection("Grpc:LocationHttp").Value;
+            var grpcConnection = configuration.GetSection("Grpc:LocationHttp").Value!;
             var handler = new HttpClientHandler();
             handler.ServerCertificateCustomValidationCallback =
                 HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;

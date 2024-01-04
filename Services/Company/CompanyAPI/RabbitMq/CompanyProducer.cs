@@ -39,12 +39,12 @@ namespace CompanyAPI.RabbitMq
             _rabbitMqChannel.BasicPublish("", "vacancy_requests_create_vacancy", properties, body);
             var responseWaiter = new ManualResetEventSlim(false);
 
-            string responsetext = default; 
+            string responsetext = default!; 
             var consumer = new EventingBasicConsumer(_rabbitMqChannel);
             consumer.Received += (model, ea) =>
             {
                 var responseMessage = Encoding.UTF8.GetString(ea.Body.ToArray());
-                var response = JsonConvert.DeserializeObject(responseMessage).ToString();
+                var response = JsonConvert.DeserializeObject(responseMessage)!.ToString();
                 if (response != null)
                 {
                     responsetext = response;
@@ -77,12 +77,12 @@ namespace CompanyAPI.RabbitMq
             _rabbitMqChannel.BasicPublish("", "vacancy_requests_delete_vacancy", properties, body);
             var responseWaiter = new ManualResetEventSlim(false);
 
-            string responsetext = default;
+            string responsetext = default!;
             var consumer = new EventingBasicConsumer(_rabbitMqChannel);
             consumer.Received += (model, ea) =>
             {
                 var responseMessage = Encoding.UTF8.GetString(ea.Body.ToArray());
-                var response = JsonConvert.DeserializeObject(responseMessage).ToString();
+                var response = JsonConvert.DeserializeObject(responseMessage)!.ToString();
                 if (response != null)
                 {
                     responsetext = response;
@@ -112,12 +112,12 @@ namespace CompanyAPI.RabbitMq
             _rabbitMqChannel.BasicPublish("", "vacancy_requests_edit_vacancy", properties, body);
             var responseWaiter = new ManualResetEventSlim(false);
 
-            string responsetext = default;
+            string responsetext = default!;
             var consumer = new EventingBasicConsumer(_rabbitMqChannel);
             consumer.Received += (model, ea) =>
             {
                 var responseMessage = Encoding.UTF8.GetString(ea.Body.ToArray());
-                var response = JsonConvert.DeserializeObject(responseMessage).ToString();
+                var response = JsonConvert.DeserializeObject(responseMessage)!.ToString();
                 if (response != null)
                 {
                     responsetext = response;
@@ -130,7 +130,7 @@ namespace CompanyAPI.RabbitMq
                 throw new Exception("Timeout waiting for vacancies response");
 
             }
-            return Task.FromResult(responsetext);
+            return Task.FromResult(responsetext)!;
         }
 
         public IEnumerable<VacancieViewModel> TakeAllVacanciesOfCompany(int companyId)
@@ -156,7 +156,7 @@ namespace CompanyAPI.RabbitMq
             {
                 var responseMessage = Encoding.UTF8.GetString(ea.Body.ToArray());
                 var response = JsonConvert.DeserializeObject<List<VacancieViewModel>>(responseMessage);
-                modelvac = response;
+                modelvac = response!;
                 responseWaiter.Set();
             };
             _rabbitMqChannel.BasicConsume("company_vacancies_response_all_queue", true, consumer);
@@ -185,7 +185,7 @@ namespace CompanyAPI.RabbitMq
             _rabbitMqChannel.BasicPublish("", "vacancy_requests_ask", properties, body);
             var responseWaiter = new ManualResetEventSlim(false);
 
-            VacancieViewModel modelvac = default(VacancieViewModel);
+            VacancieViewModel modelvac = default(VacancieViewModel)!;
             var consumer = new EventingBasicConsumer(_rabbitMqChannel);
             consumer.Received += (model, ea) =>
             {

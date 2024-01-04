@@ -109,7 +109,7 @@ namespace UserAPI.Controllers
             {
                 sb.Append(i.ToString("X2"));
             }
-            return Convert.ToString(sb);
+            return Convert.ToString(sb)!;
         }
         private async Task<int> GetCityId(int id)
         {

@@ -39,12 +39,12 @@ namespace UserAPI.RabbitMq
             _rabbitMqChannel.BasicPublish("", "response_requests_create_response", properties, body);
             var responseWaiter = new ManualResetEventSlim(false);
 
-            string responsetext = default;
+            string responsetext = default!;
             var consumer = new EventingBasicConsumer(_rabbitMqChannel);
             consumer.Received += (model, ea) =>
             {
                 var responseMessage = Encoding.UTF8.GetString(ea.Body.ToArray());
-                var response = JsonConvert.DeserializeObject(responseMessage).ToString();
+                var response = JsonConvert.DeserializeObject(responseMessage)!.ToString();
                 if (response != null)
                 {
                     responsetext = response;
@@ -77,12 +77,12 @@ namespace UserAPI.RabbitMq
             _rabbitMqChannel.BasicPublish("", "response_requests_delete_response", properties, body);
             var responseWaiter = new ManualResetEventSlim(false);
 
-            string responsetext = default;
+            string responsetext = default!;
             var consumer = new EventingBasicConsumer(_rabbitMqChannel);
             consumer.Received += (model, ea) =>
             {
                 var responseMessage = Encoding.UTF8.GetString(ea.Body.ToArray());
-                var response = JsonConvert.DeserializeObject(responseMessage).ToString();
+                var response = JsonConvert.DeserializeObject(responseMessage)!.ToString();
                 if (response != null)
                 {
                     responsetext = response;
@@ -112,12 +112,12 @@ namespace UserAPI.RabbitMq
             _rabbitMqChannel.BasicPublish("", "response_requests_edit_response", properties, body);
             var responseWaiter = new ManualResetEventSlim(false);
 
-            string responsetext = default;
+            string responsetext = default!;
             var consumer = new EventingBasicConsumer(_rabbitMqChannel);
             consumer.Received += (model, ea) =>
             {
                 var responseMessage = Encoding.UTF8.GetString(ea.Body.ToArray());
-                var response = JsonConvert.DeserializeObject(responseMessage).ToString();
+                var response = JsonConvert.DeserializeObject(responseMessage)!.ToString();
                 if (response != null)
                 {
                     responsetext = response;
@@ -154,7 +154,7 @@ namespace UserAPI.RabbitMq
             consumer.Received += (model, ea) =>
             {
                 var responseMessage = Encoding.UTF8.GetString(ea.Body.ToArray());
-                var response = JsonConvert.DeserializeObject<List<ResponseViewModel>>(responseMessage);
+                var response = JsonConvert.DeserializeObject<List<ResponseViewModel>>(responseMessage)!;
                 modelvac = response;
                 responseWaiter.Set();
             };
@@ -184,7 +184,7 @@ namespace UserAPI.RabbitMq
             _rabbitMqChannel.BasicPublish("", "response_requests_get_response", properties, body);
             var responseWaiter = new ManualResetEventSlim(false);
 
-            ResponseViewModel modelvac = default(ResponseViewModel);
+            ResponseViewModel modelvac = default(ResponseViewModel)!;
             var consumer = new EventingBasicConsumer(_rabbitMqChannel);
             consumer.Received += (model, ea) =>
             {

@@ -21,7 +21,7 @@ namespace CompanyRepository.Login
         }
         public async Task<T> Get(long id)
         {
-            return entities.SingleOrDefault(s => s.Id == id);
+            return entities.SingleOrDefault(s => s.Id == id)!;
             //if (id == 0)
             //{
             //    throw new ArgumentNullException("entity");

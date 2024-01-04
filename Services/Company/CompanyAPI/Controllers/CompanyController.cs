@@ -20,8 +20,7 @@ namespace CompanyAPI.Controllers
         private readonly CategoryRpc _rpc;
         private readonly LocationRpc _Locrpc;
         private readonly ICompanyProducer _companyProducer;
-        private IModel _rabbitMqChannel;
-        public CompanyController(ICompanyService CompanyService, CategoryRpc categoryGrpc, LocationRpc Locrpc, ICompanyProducer company, IModel rabbitMqChannel)
+        public CompanyController(ICompanyService CompanyService, CategoryRpc categoryGrpc, LocationRpc Locrpc, ICompanyProducer company)
         {
             _CompanyService = CompanyService;
             _rpc = categoryGrpc;
