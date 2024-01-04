@@ -100,12 +100,6 @@ namespace UserAPI.Controllers
             var token = new JwtSecurityTokenHandler().WriteToken(jwt); 
             return token;
         }
-        [HttpGet("Logout")]
-        public async Task<IActionResult> Logout()
-        {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return Ok();
-        }
         private static string HasPassword(string Password)
         {
             MD5 md5 =  MD5.Create();
