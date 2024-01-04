@@ -2,8 +2,14 @@ using CategoryAPI.ServiceGrpc;
 using CategoryRepository;
 using CategoryRepository.CategoryLogic;
 using CategoryService.CategoryService;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
- var builder = WebApplication.CreateBuilder(args);
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
+using System.Text;
+
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
@@ -17,9 +23,32 @@ builder.Services.AddScoped(typeof(ICategoryLogic<>), typeof(CategoryLogic<>));
 builder.Services.AddTransient<ICategoryService, CategoryServices>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey
+    });
+    c.OperationFilter<SecurityRequirementsOperationFilter>();
+});
 builder.Services.AddGrpc();
-
+builder.Services.AddAuthentication(p =>
+{
+    p.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    p.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        ValidateAudience = false,
+        ValidateIssuer = false,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
+                 builder.Configuration.GetSection("Jwt:Token").Value!))
+    };
+}).AddCookie();
 var app = builder.Build();
 
 app.MapGrpcService<GrpcCategory>();
@@ -33,7 +62,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
+
 
 app.MapControllers();
 

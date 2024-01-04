@@ -1,6 +1,7 @@
 ﻿using CategoryAPI.ViewModel;
 using CategoryDomain.Model;
 using CategoryService.CategoryService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CategoryAPI.Controllers
@@ -15,6 +16,7 @@ namespace CategoryAPI.Controllers
             _categoryService = categoryService;
         }
         [HttpPost("CreateCategory")]
+        [Authorize(Roles = "Admin,Moder")]
         public async Task<IActionResult> CreateCategory(CategoryViewModel model)
         {
             CategoryModel language = new CategoryModel
@@ -29,6 +31,7 @@ namespace CategoryAPI.Controllers
             return BadRequest("Не все обязательные поля были заполнены");
         }
         [HttpPut("EditCategory/{id}")]
+        [Authorize(Roles = "Admin,Moder")]
         public async Task<ActionResult<CategoryViewModel>> EditCategory(int id, CategoryViewModel model)
         {
             CategoryModel category = await _categoryService.GetCategory(id);
@@ -44,12 +47,14 @@ namespace CategoryAPI.Controllers
             return BadRequest(ModelState);
         }
         [HttpDelete("DeleteCategory/{id}")]
+        [Authorize(Roles = "Admin,Moder")]
         public async Task<ActionResult<CategoryViewModel>> DeleteCategory(int id)
         {
             await _categoryService.Delete(id);
             return Ok("Категория успешно удалена");
         }
         [HttpGet("GetOneCategory/{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<CategoryViewModel>> SingleCategory(int id)
         {
             CategoryViewModel model = new CategoryViewModel();
@@ -67,6 +72,7 @@ namespace CategoryAPI.Controllers
             return BadRequest();
         }
         [HttpGet("GetAllCategory")]
+        [AllowAnonymous]
         public IEnumerable<CategoryViewModel> Index()
         {
             List<CategoryViewModel> model = new List<CategoryViewModel>();

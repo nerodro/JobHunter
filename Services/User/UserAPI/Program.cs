@@ -96,7 +96,11 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "User API", Version = "v1" });
 });
 
-builder.Services.AddAuthentication().AddJwtBearer(options =>
+builder.Services.AddAuthentication(p =>
+{
+    p.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    p.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
     {
@@ -106,7 +110,7 @@ builder.Services.AddAuthentication().AddJwtBearer(options =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
                  builder.Configuration.GetSection("Jwt:Token").Value!))
     };
-});
+}).AddCookie();
 
 var app = builder.Build();
 app.UseSwaggerUI(c =>
