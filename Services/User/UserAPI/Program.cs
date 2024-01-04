@@ -34,7 +34,6 @@ string? connection = builder.Configuration.GetConnectionString("DefaultConnectio
 //                  options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
 //                  options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
 //              });
-// добавляем контекст ApplicationContext в качестве сервиса в приложение
 builder.Services.AddDbContext<UserDbContext>(options => options.UseNpgsql(connection));
 
 builder.Services.AddScoped(typeof(IUserLogic<>), typeof(UserLogic<>));
@@ -69,8 +68,8 @@ builder.Services.AddScoped<LocationRpc>();
 builder.Services
     .AddGrpcClient<LocationServiceGrpc.LocationServiceGrpcClient>(o =>
     {
-        o.Address = new Uri(builder.Configuration["Grpc:LocationHttp"]);
-        o.Address = new Uri(builder.Configuration["Grpc:CategoryHttp"]);
+        o.Address = new Uri(builder.Configuration["Grpc:LocationHttp"]!);
+        o.Address = new Uri(builder.Configuration["Grpc:CategoryHttp"]!);
     })
     .ConfigurePrimaryHttpMessageHandler(() =>
     {
@@ -132,7 +131,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-//app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

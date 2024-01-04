@@ -86,6 +86,7 @@ namespace UserAPI.Controllers
             List <Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Name),
+                new Claim(ClaimTypes.Role, user.Role.RoleName)
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
                 _configuration.GetSection("Jwt:Token").Value!));
