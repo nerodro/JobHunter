@@ -1,6 +1,7 @@
 ﻿using LocationAPI.ViewModel;
 using LocationDomain.Model;
 using LocationService.CountryService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LocationAPI.Controllers
@@ -15,6 +16,7 @@ namespace LocationAPI.Controllers
             _Country = Country;
         }
         [HttpPost("CreateCountry")]
+        [Authorize(Roles = "Admin,Moder")]
         public async Task<IActionResult> CreateCountry(CountryViewModel model)
         {
             CountryModel Country = new CountryModel
@@ -29,6 +31,7 @@ namespace LocationAPI.Controllers
             return BadRequest("Не все обязательные поля были заполнены");
         }
         [HttpPut("EditCountry/{id}")]
+        [Authorize(Roles = "Admin,Moder")]
         public async Task<ActionResult<CountryViewModel>> EditCountry(int id, CountryViewModel model)
         {
             CountryModel Country = await _Country.GetCountry(id);
@@ -44,12 +47,14 @@ namespace LocationAPI.Controllers
             return BadRequest(ModelState);
         }
         [HttpDelete("DeleteCountry/{id}")]
+        [Authorize(Roles = "Admin,Moder")]
         public async Task<ActionResult<CountryViewModel>> DeleteCountry(int id)
         {
             await _Country.DeleteCountry(id);
             return Ok("Город успешно удален");
         }
         [HttpGet("GetOneCountry/{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<CountryViewModel>> SingleCountry(int id)
         {
             CountryViewModel model = new CountryViewModel();
@@ -67,6 +72,7 @@ namespace LocationAPI.Controllers
             return BadRequest();
         }
         [HttpGet("GetAllCountry")]
+        [AllowAnonymous]
         public IEnumerable<CountryViewModel> Index()
         {
             List<CountryViewModel> model = new List<CountryViewModel>();

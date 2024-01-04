@@ -2,6 +2,7 @@
 using LocationDomain.Model;
 using LocationService.CityService;
 using LocationService.CountryService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LocationAPI.Controllers
@@ -18,6 +19,7 @@ namespace LocationAPI.Controllers
             _Country = country;
         }
         [HttpPost("CreateCity")]
+        [Authorize(Roles = "Admin,Moder")]
         public async Task<IActionResult> CreateCity(CityViewModel model)
         {
             CityModel City = new CityModel
@@ -33,6 +35,7 @@ namespace LocationAPI.Controllers
             return BadRequest("Не все обязательные поля были заполнены");
         }
         [HttpPut("EditCity/{id}")]
+        [Authorize(Roles = "Admin,Moder")]
         public async Task<ActionResult<CityViewModel>> EditCity(int id, CityViewModel model)
         {
             CityModel City = await _City.GetCity(id);
@@ -49,12 +52,14 @@ namespace LocationAPI.Controllers
             return BadRequest(ModelState);
         }
         [HttpDelete("DeleteCity/{id}")]
+        [Authorize(Roles = "Admin,Moder")]
         public async Task<ActionResult<CityViewModel>> DeleteCity(int id)
         {
             await _City.DeleteCity(id);
             return Ok("Страна успешно удалена");
         }
         [HttpGet("GetOneCity/{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<CityViewModel>> SingleCity(int id)
         {
             CityViewModel model = new CityViewModel();
@@ -74,6 +79,7 @@ namespace LocationAPI.Controllers
             return BadRequest();
         }
         [HttpGet("GetAllCity")]
+        [AllowAnonymous]
         public IEnumerable<CityViewModel> Index()
         {
             List<CityViewModel> model = new List<CityViewModel>();
