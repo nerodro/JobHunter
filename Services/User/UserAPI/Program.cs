@@ -1,8 +1,13 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using RabbitMQ.Client;
+using Swashbuckle.AspNetCore.Filters;
+using System.Text;
 using UserAPI.RabbitMq;
 using UserAPI.ServiceGrpc;
 using UserRepository.CvLogic;
@@ -23,12 +28,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 string? connection = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-              .AddCookie(options =>
-              {
-                  options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
-                  options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
-              });
+//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+//              .AddCookie(options =>
+//              {
+//                  options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+//                  options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+//              });
 // добавляем контекст ApplicationContext в качестве сервиса в приложение
 builder.Services.AddDbContext<UserDbContext>(options => options.UseNpgsql(connection));
 
@@ -88,7 +93,26 @@ builder.Services.AddGrpc();
 
 builder.Services.AddSwaggerGen(c =>
 {
+    c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey
+    });
+    c.OperationFilter<SecurityRequirementsOperationFilter>();
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "User API", Version = "v1" });
+});
+
+builder.Services.AddAuthentication().AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        ValidateAudience = false,
+        ValidateIssuer = false,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
+                 builder.Configuration.GetSection("Jwt:Token").Value!))
+    };
 });
 
 var app = builder.Build();
@@ -108,7 +132,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication();
+//app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

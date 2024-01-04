@@ -49,7 +49,6 @@ namespace UserAPI.Controllers
 
             if (userEntity.Id > 0)
             {
-                //await Authenticate(userEntity);
                 return Ok(model);
             }
             else
@@ -73,7 +72,6 @@ namespace UserAPI.Controllers
                 if (userEntity != null)
                 {
                     string token = JwtToken(userEntity);
-                    //await Authenticate(userEntity);
                     return Ok(token);
                 }
                 else if (userEntity == null)
@@ -82,24 +80,6 @@ namespace UserAPI.Controllers
                 }
             }
             return BadRequest();
-        }
-        private async Task Authenticate(UserModel user)
-        {
-            // создаем один claim
-            if (user != null)
-            {
-                var claims = new List<Claim>
-            {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.RoleName),
-            };
-                // создаем объект ClaimsIdentity
-                ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType,
-                    ClaimsIdentity.DefaultRoleClaimType);
-                // установка аутентификационных куки
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
-            }
-
         }
         private string JwtToken(UserModel user) 
         {

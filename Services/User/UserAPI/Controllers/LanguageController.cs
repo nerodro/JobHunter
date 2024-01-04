@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using UserAPI.ViewModel;
 using UserDomain.Models;
@@ -73,6 +74,7 @@ namespace UserAPI.Controllers
             return BadRequest();
         }
         [HttpGet("GetAllLanguage")]
+        [Authorize]
         public IEnumerable<LanguageViewModel> Index()
         {
             List<LanguageViewModel> model = new List<LanguageViewModel>();
