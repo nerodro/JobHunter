@@ -74,7 +74,6 @@ namespace UserAPI.Controllers
             return BadRequest();
         }
         [HttpGet("GetAllLanguage")]
-        [Authorize(Roles = "Admin")]
         public IEnumerable<LanguageViewModel> Index()
         {
             List<LanguageViewModel> model = new List<LanguageViewModel>();

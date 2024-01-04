@@ -119,7 +119,7 @@ app.UseSwaggerUI(c =>
 });
 app.MapGrpcService<CategoryRpc>();
 app.MapGrpcService<LocationRpc>();
-
+app.MapGrpcService<CvRpc>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

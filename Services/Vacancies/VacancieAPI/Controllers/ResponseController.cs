@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using VacancieAPI.VacancieRpc;
 using VacancieAPI.ViewModel;
 using VacancieDomain.Model;
@@ -21,6 +22,7 @@ namespace VacancieAPI.Controllers
             _VacancieService = vacancie;
         }
         [HttpPost("CreateResponse")]
+        [Authorize(Roles = "Admin,Moder,User")]
         public async Task<IActionResult> CreateResponse(ResponseViewModel model)
         {
             ResponseModel language = new ResponseModel
@@ -37,6 +39,7 @@ namespace VacancieAPI.Controllers
             return BadRequest("Не все обязательные поля были заполнены");
         }
         [HttpPut("EditResponse/{id}")]
+        [Authorize(Roles = "Admin,Moder,User")]
         public async Task<ActionResult<ResponseViewModel>> EditResponse(int id, ResponseViewModel model)
         {
             ResponseModel Response = await _ResponseService.GetResponse(id);
@@ -53,12 +56,14 @@ namespace VacancieAPI.Controllers
             return BadRequest(ModelState);
         }
         [HttpDelete("DeleteResponse/{id}")]
+        [Authorize(Roles = "Admin,Moder,User")]
         public async Task<ActionResult<ResponseViewModel>> DeleteResponse(int id)
         {
             await _ResponseService.DeleteResponse(id);
             return Ok("Отклик успешно удален");
         }
         [HttpGet("GetOneResponse/{id}")]
+        [Authorize(Roles = "Admin,Moder,User")]
         public async Task<ActionResult<ResponseViewModel>> SingleResponse(int id)
         {
             ResponseViewModel model = new ResponseViewModel();
@@ -80,6 +85,7 @@ namespace VacancieAPI.Controllers
             return BadRequest();
         }
         [HttpGet("GetAllResponse")]
+        [Authorize(Roles = "Admin,Moder")]
         public IEnumerable<ResponseViewModel> Index()
         {
             List<ResponseViewModel> model = new List<ResponseViewModel>();

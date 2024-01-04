@@ -1,11 +1,16 @@
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using RabbitMQ.Client;
 using ResponseAPI.RabbitMq;
 using ResponseRepository.ResponseLogic;
+using Swashbuckle.AspNetCore.Filters;
+using System.Text;
 using UserRepository.Login;
 using UserRepository.Registration;
 using UserService.LoginService;
@@ -103,9 +108,9 @@ builder.Services.AddScoped<CvRpc>();
 builder.Services
     .AddGrpcClient<LocationServiceGrpc.LocationServiceGrpcClient>(o =>
     {
-        o.Address = new Uri(builder.Configuration["Grpc:LocationHttp"]);
-        o.Address = new Uri(builder.Configuration["Grpc:CompanyHttp"]);
-        o.Address = new Uri(builder.Configuration["Grpc:CvHttp"]);
+        o.Address = new Uri(builder.Configuration["Grpc:LocationHttp"]!);
+        o.Address = new Uri(builder.Configuration["Grpc:CompanyHttp"]!);
+        o.Address = new Uri(builder.Configuration["Grpc:CvHttp"]!);
     })
     .ConfigurePrimaryHttpMessageHandler(() =>
     {
@@ -120,7 +125,32 @@ builder.Services.AddScoped<IVacancieService, VacancyServices>();
 builder.Services.AddTransient<IResponseService, ResponseService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey
+    });
+    c.OperationFilter<SecurityRequirementsOperationFilter>();
+});
+builder.Services.AddGrpc();
+builder.Services.AddAuthentication(p =>
+{
+    p.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    p.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        ValidateAudience = false,
+        ValidateIssuer = false,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
+                 builder.Configuration.GetSection("Jwt:Token").Value!))
+    };
+}).AddCookie();
 builder.Services.AddGrpc();
 
 var app = builder.Build();
@@ -137,7 +167,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

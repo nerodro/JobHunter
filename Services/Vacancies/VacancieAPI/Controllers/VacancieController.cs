@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RabbitMQ.Client;
 using VacancieAPI.RabbitMq;
 using VacancieAPI.ServiceGrpc;
@@ -25,6 +26,7 @@ namespace VacancieAPI.Controllers
             _companyRpc = companyRpc;
         }
         [HttpPost("CreateVacancie")]
+        [Authorize(Roles = "Admin,Moder,Company")]
         public async Task<IActionResult> CreateVacancie(VacancieViewModel model)
         {
             VacancieModel language = new VacancieModel
@@ -43,6 +45,7 @@ namespace VacancieAPI.Controllers
             return BadRequest("Не все обязательные поля были заполнены");
         }
         [HttpPut("EditVacancie/{id}")]
+        [Authorize(Roles = "Admin,Moder,Company")]
         public async Task<ActionResult<VacancieViewModel>> EditVacancie(int id, VacancieViewModel model)
         {
             VacancieModel Vacancie = await _VacancieService.GetVacancie(id);
@@ -62,12 +65,14 @@ namespace VacancieAPI.Controllers
             return BadRequest(ModelState);
         }
         [HttpDelete("DeleteVacancie/{id}")]
+        [Authorize(Roles = "Admin,Moder,Company")]
         public async Task<ActionResult<VacancieViewModel>> DeleteVacancie(int id)
         {
             await _VacancieService.DeleteVacancie(id);
             return Ok("Вакансия успешно удалена");
         }
         [HttpGet("GetOneVacancie/{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<VacancieViewModel>> SingleVacancie(int id)
         {
             VacancieViewModel model = new VacancieViewModel();
@@ -93,6 +98,7 @@ namespace VacancieAPI.Controllers
             return BadRequest();
         }
         [HttpGet("GetAllVacancie")]
+        [AllowAnonymous]
         public IEnumerable<VacancieViewModel> Index()
         {
             List<VacancieViewModel> model = new List<VacancieViewModel>();
