@@ -40,8 +40,9 @@ namespace UserAPI.Controllers
                 Phone = model.Phone,
                 CityId = await GetCityId(model.CityId),
                 CountryId = await GetCountryId(model.CountryId),
-                RoleId = model.RoleId,
+                RoleId = 3,
                 Password = HasPassword(model.Password),
+                CategoryId = model.CategoryId
             };
             await _registeredServices.CreateUserForCompany(companyEntity);
 
@@ -83,7 +84,7 @@ namespace UserAPI.Controllers
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, company.Email),
+                new Claim(ClaimTypes.Name, company.CompanyName),
                 new Claim(ClaimTypes.Role, company.Role.RoleName)
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(

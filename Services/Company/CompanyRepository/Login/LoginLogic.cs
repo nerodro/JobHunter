@@ -21,17 +21,17 @@ namespace CompanyRepository.Login
         }
         public async Task<T> Get(long id)
         {
-            return entities.SingleOrDefault(s => s.Id == id)!;
-            //if (id == 0)
-            //{
-            //    throw new ArgumentNullException("entity");
-            //}
-            //var user = await entities.FirstOrDefaultAsync(x => x.Id == id);
-            //if (user == null)
-            //{
-            //    throw new ArgumentException($"Пользователя с Id {id}, не найдено");
-            //}
-            //return user;
+            //return entities.SingleOrDefault(s => s.Id == id)!;
+            if (id == 0)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            var user = await entities.FirstOrDefaultAsync(x => x.Id == id);
+            if (user == null)
+            {
+                throw new ArgumentException($"Пользователя с Id {id}, не найдено");
+            }
+            return user;
         }
     }
 }

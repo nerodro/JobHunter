@@ -27,7 +27,7 @@ namespace CompanyService.RegistrationService
         public async Task CreateUserForCompany(CompanyModel CompanyModel)
         {
             //CompanyModel Company1 = _context.Company.FirstOrDefault(x => x.Email == CompanyModel.Email && x.Password == CompanyModel.Password);
-            var Company = _CompanyLogic.GetAllCompanies().FirstOrDefault(x => x.Email == CompanyModel.Email && x.Password == CompanyModel.Password);
+            var Company = _CompanyLogic.GetAllCompanies().FirstOrDefault(x => x.CompanyName == CompanyModel.CompanyName && x.Password == CompanyModel.Password);
             RoleModel? CompanyRole = _context.Role.FirstOrDefault(r => r.RoleName == "Company");
             if (CompanyRole != null)
             {
