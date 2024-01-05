@@ -85,7 +85,7 @@ builder.Services.AddSwaggerGen(c =>
         Type = SecuritySchemeType.ApiKey
     });
     c.OperationFilter<SecurityRequirementsOperationFilter>();
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "User API", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Company API", Version = "v1" });
 });
 
 builder.Services.AddAuthentication(p =>

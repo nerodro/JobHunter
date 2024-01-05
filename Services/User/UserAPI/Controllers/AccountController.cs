@@ -58,7 +58,7 @@ namespace UserAPI.Controllers
             return BadRequest();
         }
 
-        [HttpGet("LoginUser/{name},{password}")]
+        [HttpPost("LoginUser/{name},{password}")]
         public async Task<ActionResult> LoginAsync(string name, string password)
         {
             LoginViewModel model = new LoginViewModel();

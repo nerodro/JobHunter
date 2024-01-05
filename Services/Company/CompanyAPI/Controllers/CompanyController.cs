@@ -3,6 +3,7 @@ using CompanyAPI.ServiceGrpc;
 using CompanyAPI.ViewModel;
 using CompanyDomain.Model;
 using CompanyService.CompanyService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
@@ -28,6 +29,7 @@ namespace CompanyAPI.Controllers
             _companyProducer = company;
         }
         [HttpPost("CreateCompany")]
+        [Authorize(Roles = "Admin,Moder,Company")]
         public async Task<IActionResult> CreateCompany(CompanyViewModel model)
         {
             CompanyModel company = new CompanyModel
@@ -49,6 +51,7 @@ namespace CompanyAPI.Controllers
             return BadRequest("Не все обязательные поля были заполнены");
         }
         [HttpPut("EditCompany/{id}")]
+        [Authorize(Roles = "Admin,Moder,Company")]
         public async Task<ActionResult<CompanyViewModel>> EditCompany(int id, CompanyViewModel model)
         {
             CompanyModel Company = await _CompanyService.GetCompany(id);
@@ -70,12 +73,14 @@ namespace CompanyAPI.Controllers
             return BadRequest(ModelState);
         }
         [HttpDelete("DeleteCompany/{id}")]
+        [Authorize(Roles = "Admin,Moder,Company")]
         public async Task<ActionResult<CompanyViewModel>> DeleteCompany(int id)
         {
             await _CompanyService.DeleteCompany(id);
             return Ok("Компания успешно удалена");
         }
         [HttpGet("GetOneCompany/{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<CompanyViewModel>> SingleCompany(int id)
         {
             CompanyViewModel model = new CompanyViewModel();
@@ -102,6 +107,7 @@ namespace CompanyAPI.Controllers
         }
         
         [HttpGet("GetAllCompany")]
+        [AllowAnonymous]
         public IEnumerable<CompanyViewModel> Index()
         {
             List<CompanyViewModel> model = new List<CompanyViewModel>();
@@ -125,6 +131,7 @@ namespace CompanyAPI.Controllers
             return model;
         }
         [HttpGet("GetVacancy/{id}")]
+        [Authorize(Roles = "Admin,Moder,Company")]
         public async Task<ActionResult<VacancieViewModel>> SingleVacancy(int id)
         {
 
@@ -137,6 +144,7 @@ namespace CompanyAPI.Controllers
             return BadRequest();
         }
         [HttpPost("CreateVacancy")]
+        [Authorize(Roles = "Admin,Moder,Company")]
         public async Task<IActionResult> CreateVacancy(VacancieViewModel model)
         {
             VacancieViewModel vacancy = new VacancieViewModel
@@ -155,6 +163,7 @@ namespace CompanyAPI.Controllers
             return BadRequest("Не все обязательные поля были заполнены");
         }
         [HttpPut("EditVacancy")]
+        [Authorize(Roles = "Admin,Moder,Company")]
         public async Task<IActionResult> EditVacancy(VacancieViewModel model)
         {
             VacancieViewModel vacancy = new VacancieViewModel
@@ -174,12 +183,14 @@ namespace CompanyAPI.Controllers
             return BadRequest("Не все обязательные поля были заполнены");
         }
         [HttpGet("GetVacancyForCompany/{companyId}")]
+        [Authorize(Roles = "Admin,Moder,Company")]
         public IEnumerable<VacancieViewModel> AllForCompanyVacancy(int companyId)
         {
             var model = _companyProducer.TakeAllVacanciesOfCompany(companyId);
             return model;
         }
         [HttpDelete("DeleteVacancy/{id}")]
+        [Authorize(Roles = "Admin,Moder,Company")]
         public async Task<ActionResult<CompanyViewModel>> DeleteVacancy(int id)
         {
             await _companyProducer.DeleteVacancieForCompany(id);
