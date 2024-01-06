@@ -74,7 +74,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
-          "Port": 5005
+          "Port": 5003
         }
       ],
       "DownstreamPathTemplate": "/City/GetAllCity"
@@ -86,7 +86,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
-          "Port": 5005
+          "Port": 5003
         }
       ],
       "DownstreamPathTemplate": "/City/CreateCity"
@@ -98,7 +98,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
-          "Port": 5005
+          "Port": 5003
         }
       ],
       "DownstreamPathTemplate": "/City/EditCity/{id}"
@@ -110,7 +110,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
-          "Port": 5005
+          "Port": 5003
         }
       ],
       "DownstreamPathTemplate": "/City/DeleteCity/{id}"
@@ -122,7 +122,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
-          "Port": 5005
+          "Port": 5003
         }
       ],
       "DownstreamPathTemplate": "/City/GetOneCity/{id}"
@@ -135,7 +135,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
-          "Port": 5005
+          "Port": 5003
         }
       ],
       "DownstreamPathTemplate": "/Country/GetAllCountry"
@@ -147,7 +147,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
-          "Port": 5005
+          "Port": 5003
         }
       ],
       "DownstreamPathTemplate": "/Country/CreateCountry"
@@ -159,7 +159,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
-          "Port": 5005
+          "Port": 5003
         }
       ],
       "DownstreamPathTemplate": "/Country/EditCountry/{id}"
@@ -171,7 +171,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
-          "Port": 5005
+          "Port": 5003
         }
       ],
       "DownstreamPathTemplate": "/Country/DeleteCountry/{id}"
@@ -183,7 +183,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
-          "Port": 5005
+          "Port": 5003
         }
       ],
       "DownstreamPathTemplate": "/Country/GetOneCountry/{id}"
