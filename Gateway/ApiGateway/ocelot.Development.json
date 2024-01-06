@@ -15,6 +15,10 @@
     },
     {
       "UpstreamPathTemplate": "/api/Category/CreateCategory",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
       "UpstreamHttpMethod": [ "Post" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -24,6 +28,7 @@
         }
       ],
       "DownstreamPathTemplate": "/Category/CreateCategory"
+
     },
     {
       "UpstreamPathTemplate": "/api/Category/EditCategory/{id}",

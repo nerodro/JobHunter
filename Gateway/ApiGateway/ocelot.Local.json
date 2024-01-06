@@ -23,7 +23,11 @@
           "Port": 7236
         }
       ],
-      "DownstreamPathTemplate": "/Category/CreateCategory"
+      "DownstreamPathTemplate": "/Category/CreateCategory",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Category/EditCategory/{id}",
@@ -35,7 +39,11 @@
           "Port": 7236
         }
       ],
-      "DownstreamPathTemplate": "/Category/EditCategory/{id}"
+      "DownstreamPathTemplate": "/Category/EditCategory/{id}",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Category/DeleteCategory/{id}",
@@ -47,7 +55,11 @@
           "Port": 7236
         }
       ],
-      "DownstreamPathTemplate": "/Category/DeleteCategory/{id}"
+      "DownstreamPathTemplate": "/Category/DeleteCategory/{id}",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Category/GetOneCategory/{id}",
@@ -84,7 +96,11 @@
           "Port": 7052
         }
       ],
-      "DownstreamPathTemplate": "/City/CreateCity"
+      "DownstreamPathTemplate": "/City/CreateCity",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/City/EditCity/{id}",
@@ -96,7 +112,11 @@
           "Port": 7052
         }
       ],
-      "DownstreamPathTemplate": "/City/EditCity/{id}"
+      "DownstreamPathTemplate": "/City/EditCity/{id}",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/City/DeleteCity/{id}",
@@ -108,7 +128,11 @@
           "Port": 7052
         }
       ],
-      "DownstreamPathTemplate": "/City/DeleteCity/{id}"
+      "DownstreamPathTemplate": "/City/DeleteCity/{id}",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/City/GetOneCity/{id}",
@@ -145,7 +169,11 @@
           "Port": 7052
         }
       ],
-      "DownstreamPathTemplate": "/Country/CreateCountry"
+      "DownstreamPathTemplate": "/Country/CreateCountry",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Country/EditCountry/{id}",
@@ -157,7 +185,11 @@
           "Port": 7052
         }
       ],
-      "DownstreamPathTemplate": "/Country/EditCountry/{id}"
+      "DownstreamPathTemplate": "/Country/EditCountry/{id}",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Country/DeleteCountry/{id}",
@@ -169,7 +201,11 @@
           "Port": 7052
         }
       ],
-      "DownstreamPathTemplate": "/Country/DeleteCountry/{id}"
+      "DownstreamPathTemplate": "/Country/DeleteCountry/{id}",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Country/GetOneCountry/{id}",
@@ -207,7 +243,11 @@
           "Port": 7039
         }
       ],
-      "DownstreamPathTemplate": "/Company/CreateCompany"
+      "DownstreamPathTemplate": "/Company/CreateCompany",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Company/EditCompany/{id}",
@@ -219,7 +259,11 @@
           "Port": 7039
         }
       ],
-      "DownstreamPathTemplate": "/Company/EditCompany/{id}"
+      "DownstreamPathTemplate": "/Company/EditCompany/{id}",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Company/DeleteCompany/{id}",
@@ -231,7 +275,11 @@
           "Port": 7039
         }
       ],
-      "DownstreamPathTemplate": "/Company/DeleteCompany/{id}"
+      "DownstreamPathTemplate": "/Company/DeleteCompany/{id}",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Company/GetOneCompany/{id}",
@@ -255,7 +303,11 @@
           "Port": 7039
         }
       ],
-      "DownstreamPathTemplate": "/Company/CreateVacancy"
+      "DownstreamPathTemplate": "/Company/CreateVacancy",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Company/GetVacancy/{id}",
@@ -279,7 +331,11 @@
           "Port": 7039
         }
       ],
-      "DownstreamPathTemplate": "/Company/EditVacancy"
+      "DownstreamPathTemplate": "/Company/EditVacancy",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Company/DeleteVacancy/{id}",
@@ -291,7 +347,11 @@
           "Port": 7039
         }
       ],
-      "DownstreamPathTemplate": "/Company/DeleteVacancy/{id}"
+      "DownstreamPathTemplate": "/Company/DeleteVacancy/{id}",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Company/GetVacancyForCompany/{CompanyId}",
@@ -303,7 +363,11 @@
           "Port": 7039
         }
       ],
-      "DownstreamPathTemplate": "/Company/GetVacancyForCompany/{CompanyId}"
+      "DownstreamPathTemplate": "/Company/GetVacancyForCompany/{CompanyId}",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     //Language
     {
@@ -328,7 +392,11 @@
           "Port": 7028
         }
       ],
-      "DownstreamPathTemplate": "/Language/CreateLanguage"
+      "DownstreamPathTemplate": "/Language/CreateLanguage",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Language/EditLanguage/{id}",
@@ -340,7 +408,11 @@
           "Port": 7028
         }
       ],
-      "DownstreamPathTemplate": "/Language/EditLanguage/{id}"
+      "DownstreamPathTemplate": "/Language/EditLanguage/{id}",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Language/DeleteLanguage/{id}",
@@ -352,7 +424,11 @@
           "Port": 7028
         }
       ],
-      "DownstreamPathTemplate": "/Language/DeleteLanguage/{id}"
+      "DownstreamPathTemplate": "/Language/DeleteLanguage/{id}",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Language/GetOneLanguage/{id}",
@@ -389,7 +465,11 @@
           "Port": 7028
         }
       ],
-      "DownstreamPathTemplate": "/User/CreateUser"
+      "DownstreamPathTemplate": "/User/CreateUser",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/User/EditUser/{id}",
@@ -401,7 +481,11 @@
           "Port": 7028
         }
       ],
-      "DownstreamPathTemplate": "/User/EditUser/{id}"
+      "DownstreamPathTemplate": "/User/EditUser/{id}",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/User/DeleteUser/{id}",
@@ -413,7 +497,11 @@
           "Port": 7028
         }
       ],
-      "DownstreamPathTemplate": "/User/DeleteUser/{id}"
+      "DownstreamPathTemplate": "/User/DeleteUser/{id}",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/User/GetOneUser/{id}",
@@ -450,7 +538,11 @@
           "Port": 7028
         }
       ],
-      "DownstreamPathTemplate": "/Cv/CreateCv"
+      "DownstreamPathTemplate": "/Cv/CreateCv",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Cv/EditCv/{id}",
@@ -462,7 +554,11 @@
           "Port": 7028
         }
       ],
-      "DownstreamPathTemplate": "/Cv/EditCv/{id}"
+      "DownstreamPathTemplate": "/Cv/EditCv/{id}",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Cv/DeleteCv/{id}",
@@ -474,7 +570,11 @@
           "Port": 7028
         }
       ],
-      "DownstreamPathTemplate": "/Cv/DeleteCv/{id}"
+      "DownstreamPathTemplate": "/Cv/DeleteCv/{id}",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Cv/GetOneCv/{id}",
@@ -498,7 +598,11 @@
           "Port": 7028
         }
       ],
-      "DownstreamPathTemplate": "/Cv/GetResponse/{id}"
+      "DownstreamPathTemplate": "/Cv/GetResponse/{id}",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Cv/CreateResponse",
@@ -510,7 +614,11 @@
           "Port": 7028
         }
       ],
-      "DownstreamPathTemplate": "/Cv/CreateResponse"
+      "DownstreamPathTemplate": "/Cv/CreateResponse",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Cv/EditResponse",
@@ -522,7 +630,11 @@
           "Port": 7028
         }
       ],
-      "DownstreamPathTemplate": "/Cv/EditResponse"
+      "DownstreamPathTemplate": "/Cv/EditResponse",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Cv/GetResponseForUser/{CvId}",
@@ -534,7 +646,11 @@
           "Port": 7028
         }
       ],
-      "DownstreamPathTemplate": "/Cv/GetResponseForUser/{CvId}"
+      "DownstreamPathTemplate": "/Cv/GetResponseForUser/{CvId}",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Cv/DeleteResponse/{id}",
@@ -546,7 +662,11 @@
           "Port": 7028
         }
       ],
-      "DownstreamPathTemplate": "/Cv/DeleteResponse/{id}"
+      "DownstreamPathTemplate": "/Cv/DeleteResponse/{id}",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     //Response
     {
@@ -559,7 +679,11 @@
           "Port": 7104
         }
       ],
-      "DownstreamPathTemplate": "/Response/GetAllResponse"
+      "DownstreamPathTemplate": "/Response/GetAllResponse",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Response/CreateResponse",
@@ -571,7 +695,11 @@
           "Port": 7104
         }
       ],
-      "DownstreamPathTemplate": "/Response/CreateResponse"
+      "DownstreamPathTemplate": "/Response/CreateResponse",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Response/EditResponse/{id}",
@@ -583,7 +711,11 @@
           "Port": 7104
         }
       ],
-      "DownstreamPathTemplate": "/Response/EditResponse/{id}"
+      "DownstreamPathTemplate": "/Response/EditResponse/{id}",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Response/DeleteResponse/{id}",
@@ -595,7 +727,11 @@
           "Port": 7104
         }
       ],
-      "DownstreamPathTemplate": "/Response/DeleteResponse/{id}"
+      "DownstreamPathTemplate": "/Response/DeleteResponse/{id}",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Response/GetOneResponse/{id}",
@@ -607,7 +743,11 @@
           "Port": 7104
         }
       ],
-      "DownstreamPathTemplate": "/Response/GetOneResponse/{id}"
+      "DownstreamPathTemplate": "/Response/GetOneResponse/{id}",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     //Vacancie
     {
@@ -632,7 +772,11 @@
           "Port": 7104
         }
       ],
-      "DownstreamPathTemplate": "/Vacancie/CreateVacancie"
+      "DownstreamPathTemplate": "/Vacancie/CreateVacancie",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Vacancie/EditVacancie/{id}",
@@ -644,7 +788,11 @@
           "Port": 7104
         }
       ],
-      "DownstreamPathTemplate": "/Vacancie/EditVacancie/{id}"
+      "DownstreamPathTemplate": "/Vacancie/EditVacancie/{id}",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Vacancie/DeleteVacancie/{id}",
@@ -656,7 +804,11 @@
           "Port": 7104
         }
       ],
-      "DownstreamPathTemplate": "/Vacancie/DeleteVacancie/{id}"
+      "DownstreamPathTemplate": "/Vacancie/DeleteVacancie/{id}",
+      "AuthenticationOptions": {
+        "AuthneticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "UpstreamPathTemplate": "/api/Vacancie/GetOneVacancie/{id}",
@@ -672,6 +824,6 @@
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:8001"
+    "BaseUrl": "https://localhost:7180"
   }
 }
