@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RabbitMQ.Client;
 using VacancieAPI.VacancieRpc;
 using VacancieAPI.ViewModel;
 using VacancieDomain.Model;
@@ -15,7 +16,7 @@ namespace VacancieAPI.Controllers
         private readonly IResponseService _ResponseService;
         private readonly CvRpc _rpc;
         private readonly IVacancieService _VacancieService;
-        public ResponseController(IResponseService ResponseService, CvRpc cv, IVacancieService vacancie)
+        public ResponseController(IResponseService ResponseService, CvRpc cv, IVacancieService vacancie, IModel? _rabbitMqChannel)
         {
             _ResponseService = ResponseService;
             _rpc = cv;

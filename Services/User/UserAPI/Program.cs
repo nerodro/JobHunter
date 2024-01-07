@@ -57,6 +57,8 @@ builder.Services.AddSingleton<IModel>(provider =>
 });
 
 builder.Services.AddScoped<IResponseProducer, ResponseProducer>();
+
+
 builder.Services.AddScoped<CategoryRpc>();
 builder.Services.AddScoped<LocationRpc>();
 builder.Services

@@ -19,7 +19,7 @@ namespace VacancieAPI.Controllers
         private readonly IVacancieService _VacancieService;
         private readonly LocationRpc _rpc;
         private readonly CompanyRpc _companyRpc;
-        public VacancieController(IVacancieService VacancieService, LocationRpc rpc, CompanyRpc companyRpc)
+        public VacancieController(IVacancieService VacancieService, LocationRpc rpc, CompanyRpc companyRpc, IModel? _rabbitMqChannel)
         {
             _VacancieService = VacancieService;
             _rpc = rpc;
