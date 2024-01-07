@@ -29,4 +29,10 @@ var app = builder.Build();
 await app.UseOcelot();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseCors(opntions =>
+{
+    opntions.AllowAnyHeader();
+    opntions.AllowAnyMethod();
+    opntions.AllowAnyOrigin();
+});
 app.Run();
