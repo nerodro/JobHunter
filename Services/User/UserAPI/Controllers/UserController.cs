@@ -109,8 +109,8 @@ namespace UserAPI.Controllers
                         RoleId = u.RoleId,
                         Email = u.Email,
                         Patronomyc = u.Patronomyc,
-                        //CountryName = await GetCountryName(u.CountryId),
-                        //CityName = await GetCityName(u.CityId),
+                        CountryName = await GetCountryName(u.CountryId),
+                        CityName = await GetCityName(u.CityId),
                     };
                     model.Add(user);
                 });

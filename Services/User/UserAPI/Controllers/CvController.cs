@@ -101,7 +101,7 @@ namespace UserAPI.Controllers
             List<CvViewModel> model = new List<CvViewModel>();
             if (_cvService != null)
             {
-                _cvService.GetAll().ToList().ForEach(u =>
+                _cvService.GetAll().ToList().ForEach(async u =>
                 {
                     CvViewModel cv = new CvViewModel
                     {
@@ -112,6 +112,8 @@ namespace UserAPI.Controllers
                         UserId = u.UserId,
                         CategoryId = u.CategoryId,
                         Salary = u.Salary,
+                        LanguageName = await GetLanguageName(u.LanguageId),
+                        CategoryName = await GetCategoryName(u.CategoryId),
                     };
                     model.Add(cv);
                 });

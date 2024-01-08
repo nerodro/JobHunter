@@ -113,7 +113,7 @@ namespace CompanyAPI.Controllers
             List<CompanyViewModel> model = new List<CompanyViewModel>();
             if (_CompanyService != null)
             {
-                _CompanyService.GetAllCompany().ToList().ForEach(u =>
+                _CompanyService.GetAllCompany().ToList().ForEach(async u =>
                 {
                     CompanyViewModel Company = new CompanyViewModel
                     {
@@ -124,6 +124,9 @@ namespace CompanyAPI.Controllers
                         Phone = u.Phone,
                         Email = u.Email,
                         CategoryId = u.CategoryId,
+                        CategoryName = await GetCategoryName(u.CategoryId),
+                        CityName = await GetCityName(u.CityId),
+                        CountryName = await GetCountryName(u.CountryId),
                     };
                     model.Add(Company);
                 });
