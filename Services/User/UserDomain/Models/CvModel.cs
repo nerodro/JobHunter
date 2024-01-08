@@ -5,6 +5,7 @@
         public int Id { get; set; }
         public string JobNmae { get; set; } = null!;
         public string AboutMe { get; set; } = null!;
+        public int Salary { get; set; } 
         public int UserId { get; set; }
         public virtual UserModel User { get; set; }
         public int LanguageId { get; set; }

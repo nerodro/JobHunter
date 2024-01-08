@@ -12,6 +12,7 @@ namespace UserDomain.Map
             entityTypeBuilder.Property(x => x.AboutMe).IsRequired();
             entityTypeBuilder.Property(x => x.LanguageId).IsRequired();
             entityTypeBuilder.Property(x => x.CategoryId).IsRequired();
+            entityTypeBuilder.Property(x => x.Salary).IsRequired();
         }
     }
 }

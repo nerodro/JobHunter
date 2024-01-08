@@ -37,6 +37,7 @@ namespace UserAPI.Controllers
                 AboutMe = model.AboutMe.Trim(),
                 JobNmae = model.JobNmae.Trim(),
                 CategoryId = GetCategoryId(model.CategoryId),
+                Salary = model.Salary,
             };
             if (model.JobNmae != null)
             {
@@ -53,6 +54,7 @@ namespace UserAPI.Controllers
             {
                 cv.AboutMe = model.AboutMe.Trim();
                 cv.JobNmae = model.JobNmae.Trim();
+                cv.Salary = model.Salary;
                 cv.LanguageId = await GetLanguageId(model.LanguageId);
                 if (model.JobNmae != null)
                 {
@@ -63,7 +65,7 @@ namespace UserAPI.Controllers
             return BadRequest(ModelState);
         }
         [HttpDelete("DeleteCv/{id}")]
-        public async Task<ActionResult<CvViewModel>> DeleteUser(int id)
+        public async Task<ActionResult<CvViewModel>> DeleteCv(int id)
         {
             await _cvService.DeleteCv(id);
             return Ok("Резюме успешно удалено");
@@ -86,6 +88,7 @@ namespace UserAPI.Controllers
                     model.Id = CvEntity.Id;
                     model.CategoryId = CvEntity.CategoryId;
                     model.CategoryName = await GetCategoryName(model.CategoryId);
+                    model.Salary = CvEntity.Salary;
                     return new ObjectResult(model);
                 }
                 return BadRequest("Резюме не найдено");
@@ -108,6 +111,7 @@ namespace UserAPI.Controllers
                         AboutMe = u.AboutMe,
                         UserId = u.UserId,
                         CategoryId = u.CategoryId,
+                        Salary = u.Salary,
                     };
                     model.Add(cv);
                 });

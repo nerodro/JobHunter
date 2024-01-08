@@ -8,6 +8,7 @@ namespace UserAPI.ViewModel
         [HiddenInput]
         public Int64 Id { get; set; }
         public string JobNmae { get; set; } = null!;
+        public int Salary { get; set; }
         public string AboutMe { get; set; } = null!;
         public int UserId { get; set; }
         public string UserName { get; set; } = null!;
