@@ -114,6 +114,9 @@ namespace VacancieAPI.Controllers
                         CountryId = u.CountryId,
                         AboutWork = u.AboutWork,
                         WorkName = u.WorkName,
+                        //CityName = "test",
+                        //CompanyName = "test",
+                        //CountryName = "test"
                     };
                     model.Add(Vacancie);
                 });

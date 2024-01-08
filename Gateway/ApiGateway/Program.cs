@@ -25,14 +25,17 @@ builder.Services.AddAuthentication(p =>
     };
 }).AddCookie();
 
+builder.Services.AddCors();
+
 var app = builder.Build();
+
 await app.UseOcelot();
+app.UseCors(policy =>
+{
+    policy.AllowAnyOrigin();
+    policy.AllowAnyHeader();
+    policy.AllowAnyMethod();
+});
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseCors(opntions =>
-{
-    opntions.AllowAnyHeader();
-    opntions.AllowAnyMethod();
-    opntions.AllowAnyOrigin();
-});
 app.Run();
