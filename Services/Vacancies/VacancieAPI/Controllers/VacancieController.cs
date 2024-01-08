@@ -104,7 +104,7 @@ namespace VacancieAPI.Controllers
             List<VacancieViewModel> model = new List<VacancieViewModel>();
             if (_VacancieService != null)
             {
-                _VacancieService.GetAll().ToList().ForEach(u =>
+                _VacancieService.GetAll().ToList().ForEach(async u =>
                 {
                     VacancieViewModel Vacancie = new VacancieViewModel
                     {
@@ -114,6 +114,9 @@ namespace VacancieAPI.Controllers
                         CountryId = u.CountryId,
                         AboutWork = u.AboutWork,
                         WorkName = u.WorkName,
+                        CountryName = await GetCountryName(u.CountryId),
+                        CityName = await GetCityName(u.CityId),
+                        CompanyName = await GetCompanyName(u.CompanyId),
                     };
                     model.Add(Vacancie);
                 });

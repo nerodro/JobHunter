@@ -17,16 +17,16 @@ namespace UserRepository.UserContext
         public DbSet<RoleModel> Role { get; set; }
         public DbSet<UserModel> User { get; set; }
         public DbSet<LanguageModel> Language { get; set; }
-        //public UserDbContext(DbContextOptions<UserDbContext> options) : base(options)
-        //{
-        //    Database.Migrate();
-        //    Database.EnsureDeleted();
-        //    Database.EnsureCreated();
-        //}
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public UserDbContext(DbContextOptions<UserDbContext> options) : base(options)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=JobUser;Username=postgres;Password=123;");
+            //Database.Migrate();
+            //Database.EnsureDeleted();
+            //Database.EnsureCreated();
         }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=JobUser;Username=postgres;Password=123;");
+        //}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

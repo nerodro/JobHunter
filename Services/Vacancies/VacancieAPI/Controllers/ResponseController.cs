@@ -77,7 +77,7 @@ namespace VacancieAPI.Controllers
                     model.CvId = Response.CvId;
                     model.CvName = await GetCvName(Response.CvId);
                     model.VacancieId = Response.VacancieId;
-                   // model.VacancieName = await GetVacancieName(Response.VacancieId);
+                    model.VacancieName = await GetVacancieName(Response.VacancieId);
                     model.Id = Response.Id;
                     return new ObjectResult(model);
                 }
@@ -92,14 +92,16 @@ namespace VacancieAPI.Controllers
             List<ResponseViewModel> model = new List<ResponseViewModel>();
             if (_ResponseService != null)
             {
-                _ResponseService.GetAll().ToList().ForEach(u =>
+                _ResponseService.GetAll().ToList().ForEach(async u =>
                 {
                     ResponseViewModel Response = new ResponseViewModel
                     {
                         Id = u.Id,
                         Message = u.Message,
                         CvId = u.CvId,
-                        VacancieId=u.VacancieId,
+                        VacancieId = u.VacancieId,
+                        CvName = await GetCvName(u.CvId),
+                        VacancieName = await GetVacancieName(u.VacancieId),
                     };
                     model.Add(Response);
                 });
@@ -116,10 +118,10 @@ namespace VacancieAPI.Controllers
             var cv = await _rpc.GetCv(id);
             return cv.CvName;
         }
-        //public async Task<string> GetVacancieName(int id)
-        //{
-        //    var vacancie = await _VacancieService.GetVacancie(id);
-        //    return vacancie.WorkName;
-        //}
+        public async Task<string> GetVacancieName(int id)
+        {
+            var vacancie = await _VacancieService.GetVacancie(id);
+            return vacancie.WorkName;
+        }
     }
 }
