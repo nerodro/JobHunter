@@ -674,6 +674,55 @@
         }
       ],
       "DownstreamPathTemplate": "/Vacancie/GetOneVacancie/{id}"
+    },
+    //Account
+    {
+      "UpstreamPathTemplate": "/api/Account/Register",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/Account/Register"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Account/LoginUser/{name},{password}",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5007
+        }
+      ],
+      "DownstreamPathTemplate": "/Account/LoginUser/{name},{password}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Account/RegisterCompany",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/Account/RegisterCompany"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Account/LoginCompany/{name},{password}",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "DownstreamPathTemplate": "/Account/LoginCompany/{name},{password}"
     }
   ],
   "GlobalConfiguration": {

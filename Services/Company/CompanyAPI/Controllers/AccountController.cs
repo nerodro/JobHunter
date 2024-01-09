@@ -30,7 +30,7 @@ namespace UserAPI.Controllers
             _rpc = rpc;
             _configuration = configuration;
         }
-        [HttpPost("Register")]
+        [HttpPost("RegisterCompany")]
         public async Task<IActionResult> Register(CompanyViewModel model)
         {
             CompanyModel companyEntity = new CompanyModel
@@ -57,7 +57,7 @@ namespace UserAPI.Controllers
             return BadRequest();
         }
 
-        [HttpPost("LoginUser/{name},{password}")]
+        [HttpPost("LoginCompany/{name},{password}")]
         public async Task<ActionResult> LoginAsync(string name, string password)
         {
             LoginViewModel model = new LoginViewModel();
