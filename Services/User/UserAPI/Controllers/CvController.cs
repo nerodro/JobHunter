@@ -112,7 +112,7 @@ namespace UserAPI.Controllers
                         UserId = u.UserId,
                         CategoryId = u.CategoryId,
                         Salary = u.Salary,
-                        LanguageName = await GetLanguageName(u.LanguageId),
+                    //    LanguageName = await GetLanguageName(u.LanguageId),
                         CategoryName = await GetCategoryName(u.CategoryId),
                     };
                     model.Add(cv);
