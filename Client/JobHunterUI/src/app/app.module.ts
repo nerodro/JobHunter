@@ -5,11 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { VacanciesListComponent } from './Components/Vacancies/vacancies-list/vacancies-list.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { RegistrationComponent } from './Components/AuthenticationUser/registration/registration.component';
+import { LoginComponent } from './Components/AuthenticationUser/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    VacanciesListComponent
+    VacanciesListComponent,
+    RegistrationComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

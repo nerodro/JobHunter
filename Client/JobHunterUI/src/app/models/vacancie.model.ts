@@ -8,4 +8,5 @@ export class Vacancie {
     cityName: string='';
     countryId: number=0;
     countryName: string='';
+    salary: number=0;
 }

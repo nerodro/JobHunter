@@ -8,19 +8,7 @@ import { Vacancie } from 'src/app/models/vacancie.model';
   styleUrls: ['./vacancies-list.component.css']
 })
 export class VacanciesListComponent implements OnInit {
-  vacancies: Vacancie[] = [
-    /*{
-      Id:1488,
-      WorkName:"Test",
-      AboutWork:"REHBERHBNER",
-      CityId:1,
-      CityName:"ergher",
-      CompanyId:1,
-      CompanyName: "HGWEGHQW",
-      CountryId:1,
-      CountryName:"hrnehen"
-    }*/
-  ];
+  vacancies: Vacancie[] = [];
   constructor(private vacancieService: VacanciesService){}
   ngOnInit(): void {
     this.vacancieService.getAllVacancies()

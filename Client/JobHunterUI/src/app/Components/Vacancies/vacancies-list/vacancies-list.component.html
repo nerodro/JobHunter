@@ -1,11 +1,14 @@
 <div class="container my-5">
     <h1 class="mb-3">Список доступных вакансий</h1>
+
     <div *ngIf="vacancies && vacancies.length > 0">
-    <div class="card" *ngFor="let vacancie of vacancies">
+    <div class="card mb-4" *ngFor="let vacancie of vacancies">
         <div class="card-body">
           <h5 class="card-title">{{vacancie.workName}}</h5>
-          <p class="card-text">{{vacancie.aboutWork}}</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <p class="card-text"><b><h4>{{vacancie.salary}} ₽</h4></b></p>
+          <p class="card-text">{{vacancie.companyName}}</p>
+          <p class="card-text">{{vacancie.cityName}}</p>
+          <a href="#" class="btn btn-success">Подробнее</a>
         </div>
       </div>
     </div>
