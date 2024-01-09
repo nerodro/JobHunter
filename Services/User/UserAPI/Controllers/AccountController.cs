@@ -58,16 +58,13 @@ namespace UserAPI.Controllers
             return BadRequest();
         }
 
-        [HttpPost("LoginUser/{name},{password}")]
-        public async Task<ActionResult> LoginAsync(string name, string password)
+        [HttpPost("LoginUser")]
+        public async Task<ActionResult> LoginAsync(LoginViewModel login)
         {
-            LoginViewModel model = new LoginViewModel();
             if (ModelState.IsValid)
             {
-                model.FirstName = name;
-                model.Password = password;
-                password = HasPassword(password);
-                UserModel userEntity = await _loginService.GetUser(name, password);
+                login.Password = HasPassword(login.Password);
+                UserModel userEntity = await _loginService.GetUser(login.FirstName, login.Password);
 
                 if (userEntity != null)
                 {
