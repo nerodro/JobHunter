@@ -12,13 +12,13 @@ namespace VacancieRepository
     {
         public DbSet<ResponseModel> Responses { get; set; }
         public DbSet<VacancieModel> Vacanies { get; set;}
-        //public VacancyContext(DbContextOptions<VacancyContext> options) : base(options)
-        //{
-        //    //Database.Migrate();
-        //}
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public VacancyContext(DbContextOptions<VacancyContext> options) : base(options)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Vacancy;Username=postgres;Password=123;");
+            //Database.Migrate();
         }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Vacancy;Username=postgres;Password=123;");
+        //}
     }
 }
