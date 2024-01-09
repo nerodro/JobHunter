@@ -31,11 +31,12 @@ namespace VacancieAPI.Controllers
         {
             VacancieModel language = new VacancieModel
             {
-                CityId = await GetCityId(model.CityId),
+               CityId = await GetCityId(model.CityId),
                 CountryId = await GetCountryId(model.CountryId),
                 AboutWork = model.AboutWork.Trim(),
                 WorkName = model.WorkName.Trim(),
                 CompanyId = await GetCompanyId(model.CompanyId),
+                Salary = model.Salary
             };
             if (model.CompanyId != 0 && model.WorkName != null)
             {
@@ -55,7 +56,8 @@ namespace VacancieAPI.Controllers
                 Vacancie.CountryId = await GetCountryId(model.CountryId);
                 Vacancie.AboutWork = model.AboutWork.Trim();
                 Vacancie.WorkName = model.WorkName.Trim();
-                Vacancie.CompanyId = await GetCompanyId(model.CompanyId);
+               Vacancie.CompanyId = await GetCompanyId(model.CompanyId);
+                Vacancie.Salary = model.Salary;
                 if (model.CompanyId != 0 && model.WorkName != null)
                 {
                     await _VacancieService.UpdateVacancie(Vacancie);
@@ -82,7 +84,7 @@ namespace VacancieAPI.Controllers
                 if (Vacancie != null)
                 {
 
-                    model.CityId =  Vacancie.CityId;
+                    model.CityId = Vacancie.CityId;
                     model.CityName = await GetCityName(Vacancie.CityId);
                     model.CompanyId = Vacancie.CompanyId;
                     model.CompanyName = await GetCompanyName(Vacancie.CompanyId);
@@ -90,6 +92,7 @@ namespace VacancieAPI.Controllers
                     model.CountryName = await GetCountryName(Vacancie.CountryId);
                     model.AboutWork = Vacancie.AboutWork.Trim();
                     model.WorkName = Vacancie.WorkName.Trim();
+                    model.Salary = Vacancie.Salary;
                     model.Id = Vacancie.Id;
                     return new ObjectResult(model);
                 }
@@ -114,9 +117,10 @@ namespace VacancieAPI.Controllers
                         CountryId = u.CountryId,
                         AboutWork = u.AboutWork,
                         WorkName = u.WorkName,
-                        CountryName = await GetCountryName(u.CountryId),
-                        CityName = await GetCityName(u.CityId),
-                        CompanyName = await GetCompanyName(u.CompanyId),
+                        Salary = u.Salary,
+                         CountryName = await GetCountryName(u.CountryId),
+                         CityName = await GetCityName(u.CityId),
+                          CompanyName = await GetCompanyName(u.CompanyId),
                     };
                     model.Add(Vacancie);
                 });

@@ -118,7 +118,7 @@ namespace VacancieAPI.Controllers
             var cv = await _rpc.GetCv(id);
             return cv.CvName;
         }
-        public async Task<string> GetVacancieName(int id)
+        private async Task<string> GetVacancieName(int id)
         {
             var vacancie = await _VacancieService.GetVacancie(id);
             return vacancie.WorkName;
