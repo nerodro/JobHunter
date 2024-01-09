@@ -689,7 +689,7 @@
       "DownstreamPathTemplate": "/Account/Register"
     },
     {
-      "UpstreamPathTemplate": "/api/Account/LoginUser/{name},{password}",
+      "UpstreamPathTemplate": "/api/Account/LoginUser",
       "UpstreamHttpMethod": [ "Post" ],
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
@@ -698,7 +698,7 @@
           "Port": 5007
         }
       ],
-      "DownstreamPathTemplate": "/Account/LoginUser/{name},{password}"
+      "DownstreamPathTemplate": "/Account/LoginUser"
     },
     {
       "UpstreamPathTemplate": "/api/Account/RegisterCompany",
@@ -713,7 +713,7 @@
       "DownstreamPathTemplate": "/Account/RegisterCompany"
     },
     {
-      "UpstreamPathTemplate": "/api/Account/LoginCompany/{name},{password}",
+      "UpstreamPathTemplate": "/api/Account/LoginCompany",
       "UpstreamHttpMethod": [ "Post" ],
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
@@ -722,7 +722,7 @@
           "Port": 5005
         }
       ],
-      "DownstreamPathTemplate": "/Account/LoginCompany/{name},{password}"
+      "DownstreamPathTemplate": "/Account/LoginCompany"
     }
   ],
   "GlobalConfiguration": {
