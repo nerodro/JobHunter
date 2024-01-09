@@ -8,6 +8,7 @@
         public int CompanyId { get; set; }
         public int CityId { get; set; }
         public int CountryId { get; set; }
+        public int Salary { get; set; }
         public virtual List<ResponseModel> ResponseModel { get; set; }
         public VacancieModel() 
         { 
