@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
@@ -113,8 +114,29 @@ builder.Services.AddAuthentication(p =>
                  builder.Configuration.GetSection("Jwt:Token").Value!))
     };
 }).AddCookie();
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("POLICY", builders =>
+    {
+        builders
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowAnyOrigin(); // –азрешить доступ из любого источника
+    });
+    //options.AddPolicy("POLICY", builders =>
+    //{
+    //    builders
+    //        .AllowAnyHeader()
+    //        .AllowAnyMethod();
+    //    var orig = builder.Configuration.GetSection("AllowSpecificOrigin").Get<List<string>>();
+    //    if (orig != null)
+    //    {
+    //        builders.WithOrigins(orig.ToArray());
+    //    }
+    //});
+});
 var app = builder.Build();
+app.UseCors("POLICY");
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "User API v1");
@@ -130,12 +152,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors(policy =>
-{
-    policy.AllowAnyOrigin();
-    policy.AllowAnyHeader();
-    policy.AllowAnyMethod();
-});
+
 app.UseAuthorization();
 
 app.MapControllers();

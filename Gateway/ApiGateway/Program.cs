@@ -2,13 +2,16 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using Ocelot.Values;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.SetBasePath(builder.Environment.ContentRootPath)
     .AddJsonFile($"ocelot.{builder.Environment.EnvironmentName}.json", optional: false, reloadOnChange: true)
     .AddEnvironmentVariables();
+
 builder.Services.AddOcelot(builder.Configuration);
+
 builder.Services.AddAuthentication(p =>
 {
     p.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -25,17 +28,32 @@ builder.Services.AddAuthentication(p =>
     };
 }).AddCookie();
 
-builder.Services.AddCors();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("POLICY", builders =>
+    {
+        builders
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowAnyOrigin(); // –азрешить доступ из любого источника
+    });
+    //options.AddPolicy("POLICY", builders =>
+    //{
+    //    builders
+    //        .AllowAnyHeader()
+    //        .AllowAnyMethod();
+    //    var orig = builder.Configuration.GetSection("AllowSpecificOrigin").Get<List<string>>();
+    //    if (orig != null)
+    //    {
+    //        builders.WithOrigins(orig.ToArray());
+    //    }
+    //});
+});
 
 var app = builder.Build();
 
+app.UseCors("POLICY");
 await app.UseOcelot();
-app.UseCors(policy =>
-{
-    policy.AllowAnyOrigin();
-    policy.AllowAnyHeader();
-    policy.AllowAnyMethod();
-});
 app.UseAuthentication();
 app.UseAuthorization();
 app.Run();

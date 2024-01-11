@@ -6,9 +6,9 @@ export class User {
     email: string='';
     password: string='';
     phone: number=0;
-    cityName: string='';
+    cityName: string='test';
     cityId: number=0;
-    countryName: string='';
+    countryName: string='test';
     countryId: number=0;
     RoleId: number=0;
 }

@@ -4,9 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { VacanciesListComponent } from './Components/Vacancies/vacancies-list/vacancies-list.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { RegistrationComponent } from './Components/AuthenticationUser/registration/registration.component';
 import { LoginComponent } from './Components/AuthenticationUser/login/login.component';
+import { FormsModule } from '@angular/forms';
+import { AuthInterceptor } from './Services/AuthenticationUser/auth.interceptor';
+import { CorsRequestInterceptor } from './Services/Cors/cors.interceptor';
 
 @NgModule({
   declarations: [
@@ -18,9 +21,19 @@ import { LoginComponent } from './Components/AuthenticationUser/login/login.comp
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  },
+  /*{
+    provide: HTTP_INTERCEPTORS,
+    useClass: CorsRequestInterceptor,
+    multi: true
+  }*/],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,1 +1,18 @@
-<p>login works!</p>
+<div class="container my-5">
+    <h1 class="mb-3">Авторизация</h1>
+    
+    <a href="registerUser" class="btn btn-primary">Зарегистрироватся</a>
+    <div class="mb-3">
+        <label>Имя пользователя</label>
+        <input class="form-control form-control-lg"
+        placeholder="Name of User" name="username"
+        #productName="ngModel"[(ngModel)]="loginData.firstName" required>
+    </div>
+    <div class="mb-3">
+        <label>Пароль</label>
+        <input class="form-control form-control-lg"
+        placeholder="Pass of User" name="password"
+        #productName="ngModel"[(ngModel)]="loginData.password" type="password" required>
+    </div>
+    <button button class="btn btn-lg btn-success" type="submit" (click)="login(loginData)">Войти</button>
+</div>

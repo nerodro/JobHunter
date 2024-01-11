@@ -12,11 +12,13 @@ using UserAPI.ServiceGrpc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using Newtonsoft.Json.Linq;
+using Microsoft.AspNetCore.Cors;
 
 namespace UserAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [EnableCors("*")]
     public class AccountController : ControllerBase
     {
         private readonly IRegistrationService _registeredServices;

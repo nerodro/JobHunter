@@ -10,10 +10,12 @@ import { environment } from 'src/environments/environment';
 export class VacanciesService {
 
   baseUrl: string = environment.baseUrl;
-  list: Vacancie[] = []
   constructor(private http: HttpClient) { }
 
   getAllVacancies(): Observable<Vacancie[]>{
     return this.http.get<Vacancie[]>(this.baseUrl + '/Vacancie/GetAllVacancie');
+  }
+  createVacancies(vacancie: Vacancie): Observable<any>{
+    return this.http.post<any>(this.baseUrl + '/Vacancie/GetAllVacancie', vacancie);
   }
 }
