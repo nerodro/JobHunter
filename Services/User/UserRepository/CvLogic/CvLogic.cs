@@ -78,7 +78,7 @@ namespace UserRepository.CvLogic
         }
         public IEnumerable<T> GetAll()
         {
-            return _dbSet.AsEnumerable();
+            return _dbSet.AsEnumerable().OrderByDescending(x => x.Id);
         }
     }
 }

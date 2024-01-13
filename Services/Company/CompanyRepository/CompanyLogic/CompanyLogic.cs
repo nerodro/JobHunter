@@ -75,7 +75,7 @@ namespace CompanyRepository.CompanyLogic
         }
         public IEnumerable<T> GetAllCompanies()
         {
-            return _dbSet.AsEnumerable();
+            return _dbSet.AsEnumerable().OrderByDescending(x => x.Id);
         }
     }
 }
