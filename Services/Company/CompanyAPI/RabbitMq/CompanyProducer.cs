@@ -39,25 +39,25 @@ namespace CompanyAPI.RabbitMq
             _rabbitMqChannel.BasicPublish("", "vacancy_requests_create_vacancy", properties, body);
             var responseWaiter = new ManualResetEventSlim(false);
 
-            string responsetext = default!; 
-            var consumer = new EventingBasicConsumer(_rabbitMqChannel);
-            consumer.Received += (model, ea) =>
-            {
-                var responseMessage = Encoding.UTF8.GetString(ea.Body.ToArray());
-                var response = JsonConvert.DeserializeObject(responseMessage)!.ToString();
-                if (response != null)
-                {
-                    responsetext = response;
-                }
-                responseWaiter.Set();
-            };
-            _rabbitMqChannel.BasicConsume("company_vacancies_response_create_queue", true, consumer);
-            if (!responseWaiter.Wait(TimeSpan.FromSeconds(10)))
-            {
-                throw new Exception("Timeout waiting for vacancies response");
+            //string responsetext = default!; 
+            //var consumer = new EventingBasicConsumer(_rabbitMqChannel);
+            //consumer.Received += (model, ea) =>
+            //{
+            //    var responseMessage = Encoding.UTF8.GetString(ea.Body.ToArray());
+            //    var response = JsonConvert.DeserializeObject(responseMessage)!.ToString();
+            //    if (response != null)
+            //    {
+            //        responsetext = response;
+            //    }
+            //    responseWaiter.Set();
+            //};
+            //_rabbitMqChannel.BasicConsume("company_vacancies_response_create_queue", true, consumer);
+            //if (!responseWaiter.Wait(TimeSpan.FromSeconds(10)))
+            //{
+            //    throw new Exception("Timeout waiting for vacancies response");
 
-            }
-            return Task.FromResult(responsetext);
+            //}
+            return Task.FromResult("Запрос на создание вакансий был отправлен");
         }
 
         public Task<string> DeleteVacancieForCompany(int id)

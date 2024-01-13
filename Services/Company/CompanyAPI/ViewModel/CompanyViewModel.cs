@@ -17,6 +17,7 @@ namespace CompanyAPI.ViewModel
         public string CategoryName { get; set; } = null!;
         public string CityName { get; set; } = null!;   
         public string CountryName { get; set; } = null!;
+        
 
     }
 }

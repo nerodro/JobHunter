@@ -157,6 +157,7 @@ namespace CompanyAPI.Controllers
                 AboutWork = model.AboutWork.Trim(),
                 WorkName = model.WorkName.Trim(),
                 CompanyId = model.CompanyId,
+                Salary = model.Salary,
             };
             if (model.CompanyName != null)
             {
