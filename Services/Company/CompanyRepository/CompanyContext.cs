@@ -17,7 +17,7 @@ namespace CompanyRepository
         public DbSet<RoleModel> Role { get; set; }
         public CompanyContext(DbContextOptions<CompanyContext> options) : base(options)
         {
-            Database.Migrate();
+            //Database.Migrate();
             //Database.EnsureDeleted();
             //Database.EnsureCreated();
         }

@@ -1,0 +1,41 @@
+<div class="container my-5">
+    <h1 class="mb-3">Просмотр вакансий</h1>
+    <form>
+    <div class="mb-3">
+        <label>Название работы</label>
+        <input class="form-control form-control-lg"
+        placeholder="Name of vacancie" name="vacanciename"
+        #productName="ngModel"[(ngModel)]="vacancie.workName" readonly>
+    </div>
+    <div class="mb-3">
+        <label>Описание работы</label>
+        <input class="form-control form-control-lg"
+        placeholder="Pass of vacancie" name="password"
+        #productName="ngModel"[(ngModel)]="vacancie.aboutWork" readonly>
+    </div>
+    <div class="mb-3">
+        <label>Зарплата</label>
+        <input class="form-control form-control-lg"
+        placeholder="Surname of vacancie" name="surname"
+        #productName="ngModel"[(ngModel)]="vacancie.salary"  readonly>
+    </div>
+    <div class="mb-3">
+        <label>Город</label>
+        <input class="form-control form-control-lg"
+        placeholder="City of vacancie" name="City"
+        #productName="ngModel"[(ngModel)]="vacancie.cityId"  readonly>
+    </div>
+    <div class="mb-3">
+        <label>Страна</label>
+        <input class="form-control form-control-lg"
+        placeholder="Country of vacancie" name="Country"
+        #productName="ngModel"[(ngModel)]="vacancie.countryId"  readonly>
+    </div>
+    <div class="mb-3">
+        <label>Компания</label>
+        <input class="form-control form-control-lg"
+        placeholder="Phone of vacancie" name="Phone"
+        #productName="ngModel"[(ngModel)]="vacancie.companyId"  readonly>
+    </div>
+</form>
+</div>

@@ -32,12 +32,12 @@
         placeholder="Email of User" name="email"
         #productName="ngModel"[(ngModel)]="user.email"  required>
     </div>
-    <div class="mb-3">
+    <!--<div class="mb-3">
         <label>Город</label>
         <input class="form-control form-control-lg"
         placeholder="City of User" name="City"
         #productName="ngModel"[(ngModel)]="user.cityId"  required>
-    </div>
+    </div>-->
     <div class="mb-3">
         <label>Страна</label>
         <input class="form-control form-control-lg"
@@ -50,5 +50,14 @@
         placeholder="Phone of User" name="Phone"
         #productName="ngModel"[(ngModel)]="user.phone"  required>
     </div>
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          Выберите город
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" *ngFor="let city of city">
+          <li><a class="dropdown-item" [(ngModel)]="city.id">{{city.countryName}}</a></li>
+        </ul>
+      </div>
+      <br/>
     <button button class="btn btn-lg btn-success" type="submit" (click)="register(user)">Зарегистрироватся</button>
 </div>

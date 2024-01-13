@@ -8,7 +8,8 @@
           <p class="card-text"><b><h4>{{vacancie.salary}} ₽</h4></b></p>
           <p class="card-text">{{vacancie.companyName}}</p>
           <p class="card-text">{{vacancie.cityName}}</p>
-          <a href="#" class="btn btn-success">Подробнее</a>
+          <a [routerLink]="['/vacancies','vacancieView', vacancie.id]" class="btn btn-success">Подробнее</a>
+          <a [routerLink]="['/vacancies' ,'vacancieEdit', vacancie.id]" class="btn btn-primary">Редактировать</a>
         </div>
       </div>
     </div>

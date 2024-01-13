@@ -10,13 +10,19 @@ import { LoginComponent } from './Components/AuthenticationUser/login/login.comp
 import { FormsModule } from '@angular/forms';
 import { AuthInterceptor } from './Services/AuthenticationUser/auth.interceptor';
 import { CorsRequestInterceptor } from './Services/Cors/cors.interceptor';
+import { VacanciesAddComponent } from './Components/Vacancies/vacancies-add/vacancies-add.component';
+import { VacanciesEditComponent } from './Components/Vacancies/vacancies-edit/vacancies-edit.component';
+import { VacanciesViewComponent } from './Components/Vacancies/vacancies-view/vacancies-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     VacanciesListComponent,
     RegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    VacanciesAddComponent,
+    VacanciesEditComponent,
+    VacanciesViewComponent
   ],
   imports: [
     BrowserModule,

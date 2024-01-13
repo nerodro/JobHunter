@@ -22,4 +22,5 @@ export class VacanciesListComponent implements OnInit {
       }
     })
   }
+  
 }

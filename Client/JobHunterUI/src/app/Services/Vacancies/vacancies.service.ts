@@ -15,7 +15,16 @@ export class VacanciesService {
   getAllVacancies(): Observable<Vacancie[]>{
     return this.http.get<Vacancie[]>(this.baseUrl + '/Vacancie/GetAllVacancie');
   }
-  createVacancies(vacancie: Vacancie): Observable<any>{
-    return this.http.post<any>(this.baseUrl + '/Vacancie/GetAllVacancie', vacancie);
+  createVacancies(vacancie: Vacancie): Observable<Vacancie>{
+    return this.http.post<Vacancie>(this.baseUrl + '/Company/CreateVacancy', vacancie);
+  }
+  editVacancies(id: number, vacancie: Vacancie): Observable<Vacancie>{
+    return this.http.put<Vacancie>(this.baseUrl + '/Vacancie/EditVacancie/'+ id, vacancie);
+  }
+  getVacancies(id: string): Observable<Vacancie>{
+    return this.http.get<Vacancie>(this.baseUrl + '/Vacancie/GetOneVacancie/' + id);
+  }
+  deleteVacancies(id: number): Observable<Vacancie>{
+    return this.http.delete<Vacancie>(this.baseUrl + '/Vacancie/DeleteVacancie/' + id);
   }
 }

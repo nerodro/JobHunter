@@ -71,6 +71,7 @@ namespace VacancieRepository.VacancieLogic
             {
                 throw new ArgumentNullException("entity");
             }
+            _vacancyContext.Update(entity);
             await _vacancyContext.SaveChangesAsync();
         }
         public IEnumerable<T> GetAll()
