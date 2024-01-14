@@ -50,8 +50,13 @@ namespace CategoryAPI.Controllers
         [Authorize(Roles = "Admin,Moder")]
         public async Task<ActionResult<CategoryViewModel>> DeleteCategory(int id)
         {
-            await _categoryService.Delete(id);
-            return Ok("Категория успешно удалена");
+            var model = await _categoryService.GetCategory(id);
+            if (model != null)
+            {
+                await _categoryService.Delete(id);
+                return Ok("Категория успешно удалена");
+            }
+            return BadRequest();
         }
         [HttpGet("GetOneCategory/{id}")]
         [AllowAnonymous]
