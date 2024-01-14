@@ -32,7 +32,7 @@ namespace CategoryAPI.Controllers
         }
         [HttpPut("EditCategory/{id}")]
         [Authorize(Roles = "Admin,Moder")]
-        public async Task<ActionResult<CategoryViewModel>> EditCategory(int id, CategoryViewModel model)
+        public async Task<IActionResult> EditCategory(int id, CategoryViewModel model)
         {
             CategoryModel category = await _categoryService.GetCategory(id);
             if (ModelState.IsValid)
