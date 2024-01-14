@@ -36,8 +36,13 @@ namespace JobJunster.Tests.Language
         }
         [TestMethod]
         public async Task TestAdd_With_Spaces()
-        { 
-            _languageService.Setup(x => x.GetLanguage(1)).ReturnsAsync(new LanguageModel { Id = 1, Language = "  Roma  " });
+        {
+            LanguageViewModel viewModel = new LanguageViewModel()
+            {
+                Id = 1,
+                LanguageName = "  Roma  ",
+            };
+            var request = await _controller.CreateLanguage(viewModel) as CreatedAtActionResult;
             var response = await _controller.SingleLanguage(1) as ObjectResult;
             var item = response.Value as LanguageViewModel;
             if (item != null)
