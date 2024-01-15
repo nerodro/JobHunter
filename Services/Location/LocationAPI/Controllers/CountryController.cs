@@ -32,7 +32,7 @@ namespace LocationAPI.Controllers
         }
         [HttpPut("EditCountry/{id}")]
         [Authorize(Roles = "Admin,Moder")]
-        public async Task<ActionResult<CountryViewModel>> EditCountry(int id, CountryViewModel model)
+        public async Task<IActionResult> EditCountry(int id, CountryViewModel model)
         {
             CountryModel Country = await _Country.GetCountry(id);
             if (ModelState.IsValid)
@@ -50,8 +50,13 @@ namespace LocationAPI.Controllers
         [Authorize(Roles = "Admin,Moder")]
         public async Task<ActionResult<CountryViewModel>> DeleteCountry(int id)
         {
-            await _Country.DeleteCountry(id);
-            return Ok("Город успешно удален");
+            var model = await _Country.GetCountry(id);
+            if (model != null)
+            {
+                await _Country.DeleteCountry(id);
+                return Ok("Город успешно удален");
+            }
+            return BadRequest();
         }
         [HttpGet("GetOneCountry/{id}")]
         [AllowAnonymous]

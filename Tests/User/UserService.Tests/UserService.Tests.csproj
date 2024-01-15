@@ -23,6 +23,10 @@
     <ProjectReference Include="..\..\..\Services\Category\CategoryDomain\CategoryDomain.csproj" />
     <ProjectReference Include="..\..\..\Services\Category\CategoryRepository\CategoryRepository.csproj" />
     <ProjectReference Include="..\..\..\Services\Category\CategoryService\CategoryService.csproj" />
+    <ProjectReference Include="..\..\..\Services\Location\LocationAPI\LocationAPI.csproj" />
+    <ProjectReference Include="..\..\..\Services\Location\LocationDomain\LocationDomain.csproj" />
+    <ProjectReference Include="..\..\..\Services\Location\LocationRepository\LocationRepository.csproj" />
+    <ProjectReference Include="..\..\..\Services\Location\LocationService\LocationService.csproj" />
     <ProjectReference Include="..\..\..\Services\User\UserAPI\UserAPI.csproj" />
     <ProjectReference Include="..\..\..\Services\User\UserDomain\UserDomain.csproj" />
     <ProjectReference Include="..\..\..\Services\User\UserRepository\UserRepository.csproj" />
@@ -31,8 +35,6 @@
 
   <ItemGroup>
     <Folder Include="User\" />
-    <Folder Include="City\" />
-    <Folder Include="Country\" />
   </ItemGroup>
 
 </Project>
