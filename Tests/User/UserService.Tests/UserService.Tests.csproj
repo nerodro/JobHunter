@@ -10,6 +10,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="User\**" />
+    <EmbeddedResource Remove="User\**" />
+    <None Remove="User\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
     <PackageReference Include="Moq" Version="4.20.69" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.2.10" />
@@ -31,10 +37,6 @@
     <ProjectReference Include="..\..\..\Services\User\UserDomain\UserDomain.csproj" />
     <ProjectReference Include="..\..\..\Services\User\UserRepository\UserRepository.csproj" />
     <ProjectReference Include="..\..\..\Services\User\UserService\UserService.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="User\" />
   </ItemGroup>
 
 </Project>
