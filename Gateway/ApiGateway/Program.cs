@@ -37,17 +37,6 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod()
             .AllowAnyOrigin(); // –азрешить доступ из любого источника
     });
-    //options.AddPolicy("POLICY", builders =>
-    //{
-    //    builders
-    //        .AllowAnyHeader()
-    //        .AllowAnyMethod();
-    //    var orig = builder.Configuration.GetSection("AllowSpecificOrigin").Get<List<string>>();
-    //    if (orig != null)
-    //    {
-    //        builders.WithOrigins(orig.ToArray());
-    //    }
-    //});
 });
 
 var app = builder.Build();

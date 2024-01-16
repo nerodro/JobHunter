@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Trace;
 using RabbitMQ.Client;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
@@ -84,7 +86,6 @@ builder.Services.AddTransient<ICvService, CvService>();
 builder.Services.AddTransient<ILanguageService, LanguageService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen();
 builder.Services.AddGrpc();
 
 builder.Services.AddSwaggerGen(c =>
@@ -124,6 +125,22 @@ builder.Services.AddCors(options =>
             .AllowAnyOrigin(); // –азрешить доступ из любого источника
     });
 });
+
+builder.Services.AddOpenTelemetry()
+    .WithTracing(builder =>
+    {
+        builder.AddAspNetCoreInstrumentation();
+    }).WithMetrics(builder => builder
+        .AddAspNetCoreInstrumentation()
+        .AddPrometheusExporter()
+        .AddMeter("Microsoft.AspNetCore.Hosting", "Microsoft.AspNetCore.Server.Kestrel")
+        .AddView("http.server.request.duration",
+            new ExplicitBucketHistogramConfiguration
+            {
+                Boundaries = new double[] { 0, 0.005, 0.01, 0.025, 0.05,
+                       0.075, 0.1, 0.25, 0.5, 0.75, 1, 2.5, 5, 7.5, 10 }
+            }));
+
 var app = builder.Build();
 app.UseCors("POLICY");
 app.UseSwaggerUI(c =>
@@ -139,6 +156,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.MapPrometheusScrapingEndpoint();
 
 app.UseHttpsRedirection();
 
