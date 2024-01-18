@@ -10,6 +10,7 @@ namespace VacancieRepository.FavoriteLogic
     public interface IFavoriteLogic<T> where T : FavoriteVacancie
     {
         IEnumerable<T> GetAllForUser(int Id);
+        Task<T> Get(int id);
         IEnumerable<T> GetAll();
         Task Create(T entity);
         Task Delete(T entity);

@@ -58,5 +58,18 @@ namespace VacancieRepository.FavoriteLogic
         {
             return _dbSet.AsEnumerable().Where(x => x.UserId == Id).OrderByDescending(x => x.Id);
         }
+        public async Task<T> Get(int id)
+        {
+            if (id == 0)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            var vacancy = await _dbSet.SingleOrDefaultAsync(x => x.Id == id);
+            if (vacancy == null)
+            {
+                throw new ArgumentException($"Вакансий с Id {id}, не найдено");
+            }
+            return vacancy;
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace UserAPI.ServiceGrpc
 
             if (model == null)
             {
-                throw new RpcException(new Status(StatusCode.Cancelled, "Запрашиваемая категория не найдена"));
+                throw new RpcException(new Status(StatusCode.Cancelled, "Запрашиваемое резюме не найдено"));
             }
 
             CvGrpc Cv = new CvGrpc
