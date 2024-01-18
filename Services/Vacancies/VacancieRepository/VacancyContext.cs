@@ -12,9 +12,10 @@ namespace VacancieRepository
     {
         public DbSet<ResponseModel> Responses { get; set; }
         public DbSet<VacancieModel> Vacanies { get; set;}
+        public DbSet<FavoriteVacancie> Favorites { get; set; }
         public VacancyContext(DbContextOptions<VacancyContext> options) : base(options)
         {
-            //Database.Migrate();
+            Database.Migrate();
         }
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
