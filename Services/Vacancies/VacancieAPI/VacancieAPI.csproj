@@ -49,6 +49,7 @@
     <Protobuf Include="VacancieRpc\GrpcCompany.proto" GrpcServices="Client" />
     <Protobuf Include="VacancieRpc\GrpcCv.proto" GrpcServices="Client" />
     <Protobuf Include="VacancieRpc\GrpcLocation.proto" GrpcServices="Client" />
+    <Protobuf Include="VacancieRpc\GrpcUser.proto" GrpcServices="Client" />
   </ItemGroup>
 
 </Project>

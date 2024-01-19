@@ -48,6 +48,7 @@
     <Protobuf Include="ServiceGrpc\GrpcCategory.proto" GrpcServices="Client" />
     <Protobuf Include="ServiceGrpc\GrpcLocation.proto" GrpcServices="Client" />
     <Protobuf Include="ServiceGrpc\GrpcCv.proto" GrpcServices="Server" />
+    <Protobuf Include="ServiceGrpc\GrpcUser.proto" GrpcServices="Server" />
   </ItemGroup>
 
 </Project>

@@ -105,6 +105,7 @@ builder.Services.AddSingleton<IHostedService>(provider =>
 builder.Services.AddScoped<LocationRpc>();
 builder.Services.AddScoped<CompanyRpc>();
 builder.Services.AddScoped<CvRpc>();
+builder.Services.AddScoped<UserRpc>();
 builder.Services
     .AddGrpcClient<LocationServiceGrpc.LocationServiceGrpcClient>(o =>
     {
@@ -158,6 +159,7 @@ var app = builder.Build();
 app.MapGrpcService<LocationRpc>();
 app.MapGrpcService<CompanyRpc>();
 app.MapGrpcService<CvRpc>();
+app.MapGrpcService<UserRpc>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

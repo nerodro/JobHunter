@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+message UserGrpc {
+  int32 UserId = 1;
+  string UserName = 2;
+}
+
+service UserServiceGrpc {
+  rpc GetUserById (UserRequestGrpc) returns (UserResponseGrpc);
+}
+
+message UserRequestGrpc {
+  int32 UserId = 1;
+}
+
+message UserResponseGrpc {
+  UserGrpc User = 1;
+}
