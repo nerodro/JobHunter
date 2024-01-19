@@ -20,8 +20,10 @@ using VacancieAPI.RabbitMq;
 using VacancieAPI.ServiceGrpc;
 using VacancieAPI.VacancieRpc;
 using VacancieRepository;
+using VacancieRepository.FavoriteLogic;
 using VacancieRepository.ResponseLogic;
 using VacancieRepository.VacancieLogic;
+using VacancieService.Favorite;
 using VacancieService.ResponseService;
 using VacancieService.VacancieService;
 using VacancieService.VacancyService;
@@ -38,6 +40,7 @@ builder.Services.AddDbContext<VacancyContext>(options => options.UseNpgsql(conne
 
 builder.Services.AddScoped(typeof(IVacancieLogic<>), typeof(VacancieLogic<>));
 builder.Services.AddScoped(typeof(IResponseLogic<>), typeof(ResponseLogic<>));
+builder.Services.AddScoped(typeof(IFavoriteLogic<>), typeof(FavoriteLogic<>));
 
 
 
@@ -124,6 +127,7 @@ builder.Services
 
 builder.Services.AddScoped<IVacancieService, VacancyServices>();
 builder.Services.AddTransient<IResponseService, ResponseService>();
+builder.Services.AddScoped<IFavoriteService, FavoriteService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
