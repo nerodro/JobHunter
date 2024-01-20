@@ -41,6 +41,46 @@ namespace VacancieAPI.Controllers
             await _favorite.DeleteFavorite(id);
             return Ok("Вакансия удалена из избранной");
         }
+        [HttpGet("GetAllFavorite")]
+        [Authorize(Roles = "Admin,Moder")]
+        public IEnumerable<FavoriteViewModel> Index()
+        {
+            List<FavoriteViewModel> model = new List<FavoriteViewModel>();
+            if (_favorite != null)
+            {
+                _favorite.GetAll().ToList().ForEach(async u =>
+                {
+                    FavoriteViewModel favorite = new FavoriteViewModel
+                    {
+                        Id = u.Id,
+                        UserId= await GetUserId(u.UserId),
+                        VacancieId=u.VacancieId,
+                    };
+                    model.Add(favorite);
+                });
+            }
+            return model;
+        }
+        [HttpGet("GetAllFavorite")]
+        [Authorize(Roles = "Admin,Moder")]
+        public IEnumerable<FavoriteViewModel> GetForUser(int id)
+        {
+            List<FavoriteViewModel> model = new List<FavoriteViewModel>();
+            if (_favorite != null)
+            {
+                _favorite.GetAllForUser(id).ToList().ForEach(async u =>
+                {
+                    FavoriteViewModel favorite = new FavoriteViewModel
+                    {
+                        Id = u.Id,
+                        UserId = await GetUserId(u.UserId),
+                        VacancieId = u.VacancieId,
+                    };
+                    model.Add(favorite);
+                });
+            }
+            return model;
+        }
         private async Task<int> GetUserId(int id)
         {
             var user = await _userRpc.GetUser(id);
