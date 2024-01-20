@@ -18,7 +18,7 @@ namespace VacancieService.VacancyService
         }
         public IEnumerable<VacancieModel> GetAll()
         {
-            return _VacancieService.GetAll();
+            return _VacancieService.GetAll().OrderByDescending(x => x.Pinned);
         }
         public async Task<VacancieModel> GetVacancie(int id)
         {

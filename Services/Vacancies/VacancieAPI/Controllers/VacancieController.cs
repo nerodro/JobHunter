@@ -36,7 +36,8 @@ namespace VacancieAPI.Controllers
                 AboutWork = model.AboutWork.Trim(),
                 WorkName = model.WorkName.Trim(),
                 CompanyId = await GetCompanyId(model.CompanyId),
-                Salary = model.Salary
+                Salary = model.Salary,
+                Pinned = 0,
             };
             if (model.CompanyId != 0 && model.WorkName != null)
             {
@@ -121,6 +122,7 @@ namespace VacancieAPI.Controllers
                          CountryName = await GetCountryName(u.CountryId),
                          CityName = await GetCityName(u.CityId),
                           CompanyName = await GetCompanyName(u.CompanyId),
+                          Pinned = u.Pinned,
                     };
                     model.Add(Vacancie);
                 });

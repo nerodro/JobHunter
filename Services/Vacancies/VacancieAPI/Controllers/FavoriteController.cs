@@ -53,16 +53,16 @@ namespace VacancieAPI.Controllers
                     FavoriteViewModel favorite = new FavoriteViewModel
                     {
                         Id = u.Id,
-                        UserId= await GetUserId(u.UserId),
-                        VacancieId=u.VacancieId,
+                        UserId = await GetUserId(u.UserId),
+                        VacancieId = u.VacancieId,
                     };
                     model.Add(favorite);
                 });
             }
             return model;
         }
-        [HttpGet("GetAllFavorite")]
-        [Authorize(Roles = "Admin,Moder")]
+        [HttpGet("GetAllFavoriteForUser")]
+        [Authorize(Roles = "Admin,Moder,User")]
         public IEnumerable<FavoriteViewModel> GetForUser(int id)
         {
             List<FavoriteViewModel> model = new List<FavoriteViewModel>();

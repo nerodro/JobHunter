@@ -19,6 +19,7 @@ namespace VacancieDomain.Map
             entityTypeBuilder.Property(x => x.CityId).IsRequired();
             entityTypeBuilder.Property(x => x.CountryId).IsRequired();
             entityTypeBuilder.Property(x => x.Salary).IsRequired();
+            entityTypeBuilder.Property(x => x.Pinned).IsRequired();
         }
     }
 }
