@@ -43,5 +43,9 @@ namespace VacancieService.VacancyService
         {
             return _VacancieService.GetAll().Where(x => x.CompanyId == companyId);
         }
+        public IQueryable<VacancieModel> GetAllQuerie()
+        {
+            return _VacancieService.GetAllQuerie().OrderByDescending(x => x.Pinned);
+        }
     }
 }

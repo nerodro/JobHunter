@@ -1,5 +1,4 @@
-﻿using MassTransit;
-using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using RabbitMQ.Client;

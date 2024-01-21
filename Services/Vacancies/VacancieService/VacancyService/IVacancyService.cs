@@ -10,6 +10,7 @@ namespace VacancieService.VacancieService
     public interface IVacancieService
     {
         IEnumerable<VacancieModel> GetAll();
+        IQueryable<VacancieModel> GetAllQuerie();
         Task<VacancieModel> GetVacancie(int id);
         Task CreateVacancie(VacancieModel Vacancie);
         Task UpdateVacancie(VacancieModel Vacancie);

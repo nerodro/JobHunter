@@ -10,6 +10,7 @@ namespace VacancieRepository.VacancieLogic
     public interface IVacancieLogic<T> where T : VacancieModel
     {
         IEnumerable<T> GetAll();
+        IQueryable<T> GetAllQuerie();
         Task<T> Get(int id);
         Task Create(T entity);
         Task Update(T entity);

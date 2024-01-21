@@ -159,10 +159,5 @@ namespace VacancieAPI.Controllers
             var company = await _companyRpc.GetCompany(id);
             return company.CompanyName;
         }
-        private IConnection GetRabbitMqConnection()
-        {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
-            return factory.CreateConnection();
-        }
     }
 }

@@ -1,9 +1,5 @@
-using MassTransit;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -12,10 +8,7 @@ using ResponseAPI.RabbitMq;
 using ResponseRepository.ResponseLogic;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
-using UserRepository.Login;
-using UserRepository.Registration;
-using UserService.LoginService;
-using UserService.RegistrationService;
+using VacancieAPI.GraphQl;
 using VacancieAPI.RabbitMq;
 using VacancieAPI.ServiceGrpc;
 using VacancieAPI.VacancieRpc;
@@ -158,6 +151,9 @@ builder.Services.AddAuthentication(p =>
 }).AddCookie();
 builder.Services.AddGrpc();
 
+builder.Services.AddGraphQLServer().AddQueryType<Queries>().AddProjections();
+
+
 var app = builder.Build();
 
 app.MapGrpcService<LocationRpc>();
@@ -170,7 +166,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.MapGraphQL("/graphql");
 app.UseHttpsRedirection();
 app.UseCors(policy =>
 {

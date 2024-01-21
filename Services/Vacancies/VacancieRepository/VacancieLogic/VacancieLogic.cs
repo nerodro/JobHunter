@@ -78,5 +78,9 @@ namespace VacancieRepository.VacancieLogic
         {
             return _dbSet.AsEnumerable().OrderByDescending(x => x.Id);
         }
+        public IQueryable<T> GetAllQuerie()
+        {
+            return _dbSet.AsQueryable().OrderByDescending(x => x.Id);
+        }
     }
 }
