@@ -9,13 +9,6 @@ namespace VacancieAPI.GraphQl
 {
     public class Queries
     {
-        //private readonly LocationRpc _rpc;
-        private readonly CompanyRpc _companyRpc;
-        public Queries(LocationRpc rpc, CompanyRpc companyRpc)
-        {
-           // _rpc = rpc;
-            _companyRpc = companyRpc;
-        }
         [UseProjection]
         public IQueryable<VacancieViewModel> Read([Service] IVacancieService vacancieService)
         {
