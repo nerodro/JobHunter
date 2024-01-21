@@ -25,7 +25,7 @@ namespace CompanyAPI.ServiceGrpc
                 new GrpcChannelOptions { HttpHandler = handler });
             _rpc = new CategoryServiceGrpc.CategoryServiceGrpcClient(channel);
         }
-        public async Task<CategoryViewModel> GetCategory(int categoryId)
+        public CategoryViewModel GetCategory(int categoryId)
         {
             var request = new CategoryRequestGrpc
             {

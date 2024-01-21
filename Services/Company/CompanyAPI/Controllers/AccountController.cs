@@ -38,8 +38,8 @@ namespace UserAPI.Controllers
                 Email = model.Email.Trim(),
                 CompanyName = model.CompanyName.Trim(),
                 Phone = model.Phone,
-                CityId = await GetCityId(model.CityId),
-                CountryId = await GetCountryId(model.CountryId),
+                CityId =  GetCityId(model.CityId),
+                CountryId =  GetCountryId(model.CountryId),
                 RoleId = 3,
                 Password = HasPassword(model.Password),
                 CategoryId = model.CategoryId
@@ -108,24 +108,24 @@ namespace UserAPI.Controllers
             }
             return Convert.ToString(sb)!;
         }
-        private async Task<int> GetCityId(int id)
+        private int GetCityId(int id)
         {
-            var city = await _rpc.GetCityById(id);
+            var city = _rpc.GetCityById(id);
             return (int)city.Id;
         }
-        private async Task<int> GetCountryId(int id)
+        private int GetCountryId(int id)
         {
-            var country = await _rpc.GetCountryById(id);
+            var country = _rpc.GetCountryById(id);
             return (int)country.Id;
         }
-        private async Task<string> GetCountryName(int id)
+        private string GetCountryName(int id)
         {
-            var country = await _rpc.GetCountryById(id);
+            var country = _rpc.GetCountryById(id);
             return country.CountryName;
         }
-        private async Task<string> GetCityName(int id)
+        private string GetCityName(int id)
         {
-            var city = await _rpc.GetCityById(id);
+            var city = _rpc.GetCityById(id);
             return city.CityName;
         }
     }

@@ -36,11 +36,11 @@ namespace CompanyAPI.Controllers
             {
                 CompanyName = model.CompanyName.Trim(),
                 Email = model.Email.Trim(),
-                CityId = await GetCityId(model.CityId),
-                CountryId = await GetCountryId(model.CountryId),
+                CityId =  GetCityId(model.CityId),
+                CountryId = GetCountryId(model.CountryId),
                 Password = model.Password.Trim(),
                 Phone = model.Phone,
-                CategoryId = await GetCategoryId(model.CategoryId),
+                CategoryId =  GetCategoryId(model.CategoryId),
                 RoleId = model.RoleId,
             };
             if (model.CompanyName != null)
@@ -59,11 +59,11 @@ namespace CompanyAPI.Controllers
             {
                 Company.CompanyName = model.CompanyName.Trim();
                 Company.Email = model.Email.Trim();
-                Company.CityId = await GetCityId(model.CityId);
-                Company.CountryId = await GetCountryId(model.CountryId);
+                Company.CityId =  GetCityId(model.CityId);
+                Company.CountryId =  GetCountryId(model.CountryId);
                 Company.Password = model.Password.Trim();
                 Company.Phone = model.Phone;
-                Company.CategoryId = await GetCategoryId(model.CategoryId);
+                Company.CategoryId =  GetCategoryId(model.CategoryId);
                 if (model.CompanyName != null)
                 {
                     await _CompanyService.UpdateCompany(Company);
@@ -92,13 +92,13 @@ namespace CompanyAPI.Controllers
                     model.CompanyName = Company.CompanyName;
                     model.Id = Company.Id;
                     model.CountryId = Company.CountryId;
-                    model.CountryName = await GetCountryName(Company.CountryId);
+                    model.CountryName = GetCountryName(Company.CountryId);
                     model.CityId = Company.CityId;
-                    model.CityName = await GetCityName(Company.CityId);
+                    model.CityName =  GetCityName(Company.CityId);
                     model.Phone = Company.Phone;
                     model.Email = Company.Email;
                     model.CategoryId = Company.CategoryId;
-                    model.CategoryName = await GetCategoryName(Company.CategoryId);
+                    model.CategoryName =  GetCategoryName(Company.CategoryId);
                     return new ObjectResult(model);
                 }
                 return BadRequest("Компания не найдена");
@@ -113,7 +113,7 @@ namespace CompanyAPI.Controllers
             List<CompanyViewModel> model = new List<CompanyViewModel>();
             if (_CompanyService != null)
             {
-                _CompanyService.GetAllCompany().ToList().ForEach(async u =>
+                _CompanyService.GetAllCompany().ToList().ForEach( u =>
                 {
                     CompanyViewModel Company = new CompanyViewModel
                     {
@@ -124,9 +124,9 @@ namespace CompanyAPI.Controllers
                         Phone = u.Phone,
                         Email = u.Email,
                         CategoryId = u.CategoryId,
-                        CategoryName = await GetCategoryName(u.CategoryId),
-                        CityName = await GetCityName(u.CityId),
-                        CountryName = await GetCountryName(u.CountryId),
+                        CategoryName =  GetCategoryName(u.CategoryId),
+                        CityName =  GetCityName(u.CityId),
+                        CountryName =  GetCountryName(u.CountryId),
                     };
                     model.Add(Company);
                 });
@@ -152,8 +152,8 @@ namespace CompanyAPI.Controllers
         {
             VacancieViewModel vacancy = new VacancieViewModel
             {
-                CityId = await GetCityId(model.CityId),
-                CountryId = await GetCountryId(model.CountryId),
+                CityId =  GetCityId(model.CityId),
+                CountryId =  GetCountryId(model.CountryId),
                 AboutWork = model.AboutWork.Trim(),
                 WorkName = model.WorkName.Trim(),
                 CompanyId = model.CompanyId,
@@ -172,8 +172,8 @@ namespace CompanyAPI.Controllers
         {
             VacancieViewModel vacancy = new VacancieViewModel
             {
-                CityId = await GetCityId(model.CityId),
-                CountryId = await GetCountryId(model.CountryId),
+                CityId =  GetCityId(model.CityId),
+                CountryId =  GetCountryId(model.CountryId),
                 AboutWork = model.AboutWork.Trim(),
                 WorkName = model.WorkName.Trim(),
                 CompanyId = model.CompanyId,
@@ -201,34 +201,34 @@ namespace CompanyAPI.Controllers
             await _companyProducer.DeleteVacancieForCompany(id);
             return Ok("Вакансия успешно удалена");
         }
-        private async Task<int> GetCategoryId(int id)
+        private int GetCategoryId(int id)
         {
-            var category = await _rpc.GetCategory(id);
+            var category = _rpc.GetCategory(id);
             return (int)category.Id;
         }
-        private async Task<string> GetCategoryName(int id)
+        private string GetCategoryName(int id)
         {
-            var model = await _rpc.GetCategory(id);
+            var model = _rpc.GetCategory(id);
             return model.CategoryName;
         }
-        private async Task<int> GetCityId(int id)
+        private int GetCityId(int id)
         {
-            var city = await _Locrpc.GetCityById(id);
+            var city = _Locrpc.GetCityById(id);
             return (int)city.Id;
         }
-        private async Task<int> GetCountryId(int id)
+        private int GetCountryId(int id)
         {
-            var country = await _Locrpc.GetCountryById(id);
+            var country = _Locrpc.GetCountryById(id);
             return (int)country.Id;
         }
-        private async Task<string> GetCountryName(int id)
+        private string GetCountryName(int id)
         {
-            var country = await _Locrpc.GetCountryById(id);
+            var country = _Locrpc.GetCountryById(id);
             return country.CountryName;
         }
-        private async Task<string> GetCityName(int id)
+        private string GetCityName(int id)
         {
-            var city = await _Locrpc.GetCityById(id);
+            var city = _Locrpc.GetCityById(id);
             return city.CityName;
         }
     }
