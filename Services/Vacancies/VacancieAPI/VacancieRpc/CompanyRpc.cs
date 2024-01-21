@@ -22,22 +22,7 @@ namespace VacancieAPI.VacancieRpc
                 new GrpcChannelOptions { HttpHandler = handler });
             _rpc = new CompanyServiceGrpc.CompanyServiceGrpcClient(channel);
         }
-        public async Task<CompanyViewModel> GetCompany(int CompanyId)
-        {
-            var request = new CompanyRequestGrpc
-            {
-                CompanyId = CompanyId
-            };
-
-            var response = _rpc.GetCompanyById(request);
-            CompanyViewModel Company = new CompanyViewModel
-            {
-                Id = response.Company.CompanyId,
-                CompanyName = response.Company.CompanyName
-            };
-            return Company;
-        }
-        public CompanyViewModel GetCompanySync(int CompanyId)
+        public CompanyViewModel GetCompany(int CompanyId)
         {
             var request = new CompanyRequestGrpc
             {

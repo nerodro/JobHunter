@@ -22,7 +22,7 @@ namespace VacancieAPI.VacancieRpc
                 new GrpcChannelOptions { HttpHandler = handler });
             _rpc = new CvServiceGrpc.CvServiceGrpcClient(channel);
         }
-        public async Task<CvViewModel> GetCv(int CvId)
+        public CvViewModel GetCv(int CvId)
         {
             var request = new CvRequestGrpc
             {

@@ -25,7 +25,7 @@ namespace VacancieAPI.Controllers
             FavoriteVacancie favorite = new FavoriteVacancie
             {
                 VacancieId = model.VacancieId,
-                UserId = await GetUserId(model.UserId)
+                UserId = GetUserId(model.UserId)
             };
             if (model.VacancieId != 0 && model.UserId != 0)
             {
@@ -48,12 +48,12 @@ namespace VacancieAPI.Controllers
             List<FavoriteViewModel> model = new List<FavoriteViewModel>();
             if (_favorite != null)
             {
-                _favorite.GetAll().ToList().ForEach(async u =>
+                _favorite.GetAll().ToList().ForEach(u =>
                 {
                     FavoriteViewModel favorite = new FavoriteViewModel
                     {
                         Id = u.Id,
-                        UserId = await GetUserId(u.UserId),
+                        UserId = GetUserId(u.UserId),
                         VacancieId = u.VacancieId,
                     };
                     model.Add(favorite);
@@ -68,12 +68,12 @@ namespace VacancieAPI.Controllers
             List<FavoriteViewModel> model = new List<FavoriteViewModel>();
             if (_favorite != null)
             {
-                _favorite.GetAllForUser(id).ToList().ForEach(async u =>
+                _favorite.GetAllForUser(id).ToList().ForEach(u =>
                 {
                     FavoriteViewModel favorite = new FavoriteViewModel
                     {
                         Id = u.Id,
-                        UserId = await GetUserId(u.UserId),
+                        UserId = GetUserId(u.UserId),
                         VacancieId = u.VacancieId,
                     };
                     model.Add(favorite);
@@ -81,9 +81,9 @@ namespace VacancieAPI.Controllers
             }
             return model;
         }
-        private async Task<int> GetUserId(int id)
+        private int GetUserId(int id)
         {
-            var user = await _userRpc.GetUser(id);
+            var user = _userRpc.GetUser(id);
             return (int)user.Id;
         }
     }

@@ -10,7 +10,7 @@ namespace VacancieAPI.GraphQl
     public class Queries
     {
         [UseProjection]
-        public IQueryable<VacancieViewModel> Read([Service] IVacancieService vacancieService)
+        public IQueryable<VacancieViewModel> ReadAllVacancies([Service] IVacancieService vacancieService)
         {
             if (vacancieService != null)
             {
@@ -40,20 +40,20 @@ namespace VacancieAPI.GraphQl
         }
         private static string GetCountryName(int id)
         {
-            var rpc = new LocationRpc(); // Создание экземпляра LocationRpc
-            var country = rpc.GetCountryByIdSync(id);
+            var rpc = new LocationRpc();
+            var country = rpc.GetCountryById(id);
             return country.CountryName;
         }
         private static string GetCityName(int id)
         {
             var rpc = new LocationRpc();
-            var city =  rpc.GetCityByIdSync(id);
+            var city =  rpc.GetCityById(id);
             return city.CityName;
         }
         private static string GetCompanyName(int id)
         {
             var rpc = new CompanyRpc();
-            var company = rpc.GetCompanySync(id);
+            var company = rpc.GetCompany(id);
             return company.CompanyName;
         }
     }

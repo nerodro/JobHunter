@@ -28,7 +28,7 @@ namespace VacancieAPI.Controllers
         {
             ResponseModel language = new ResponseModel
             {
-                CvId = await GetCvId(model.CvId),
+                CvId = GetCvId(model.CvId),
                 VacancieId = model.VacancieId,
                 Message = model.Message.Trim(),
             };
@@ -75,7 +75,7 @@ namespace VacancieAPI.Controllers
                 {
                     model.Message = Response.Message;
                     model.CvId = Response.CvId;
-                    model.CvName = await GetCvName(Response.CvId);
+                    model.CvName =  GetCvName(Response.CvId);
                     model.VacancieId = Response.VacancieId;
                     model.VacancieName = await GetVacancieName(Response.VacancieId);
                     model.Id = Response.Id;
@@ -100,7 +100,7 @@ namespace VacancieAPI.Controllers
                         Message = u.Message,
                         CvId = u.CvId,
                         VacancieId = u.VacancieId,
-                        CvName = await GetCvName(u.CvId),
+                        CvName =  GetCvName(u.CvId),
                         VacancieName = await GetVacancieName(u.VacancieId),
                     };
                     model.Add(Response);
@@ -108,14 +108,14 @@ namespace VacancieAPI.Controllers
             }
             return model;
         }
-        private async Task<int> GetCvId(int id)
+        private int GetCvId(int id)
         {
-            var cv = await _rpc.GetCv(id);
+            var cv =  _rpc.GetCv(id);
             return (int)cv.Id;
         }
-        private async Task<string> GetCvName(int id)
+        private string GetCvName(int id)
         {
-            var cv = await _rpc.GetCv(id);
+            var cv =  _rpc.GetCv(id);
             return cv.CvName;
         }
         private async Task<string> GetVacancieName(int id)

@@ -22,7 +22,7 @@ namespace VacancieAPI.VacancieRpc
                 new GrpcChannelOptions { HttpHandler = handler });
             _rpc = new UserServiceGrpc.UserServiceGrpcClient(channel);
         }
-        public async Task<UserViewModel> GetUser(int UserId)
+        public UserViewModel GetUser(int UserId)
         {
             var request = new UserRequestGrpc
             {
