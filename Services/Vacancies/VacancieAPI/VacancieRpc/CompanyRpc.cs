@@ -37,6 +37,21 @@ namespace VacancieAPI.VacancieRpc
             };
             return Company;
         }
+        public CompanyViewModel GetCompanySync(int CompanyId)
+        {
+            var request = new CompanyRequestGrpc
+            {
+                CompanyId = CompanyId
+            };
+
+            var response = _rpc.GetCompanyById(request);
+            CompanyViewModel Company = new CompanyViewModel
+            {
+                Id = response.Company.CompanyId,
+                CompanyName = response.Company.CompanyName
+            };
+            return Company;
+        }
 
     }
 }

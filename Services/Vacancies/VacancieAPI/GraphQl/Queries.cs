@@ -34,7 +34,7 @@ namespace VacancieAPI.GraphQl
                     Salary = u.Salary,
                     CountryName = GetCountryName(u.CountryId),
                     CityName =  GetCityName(u.CityId),
-                    // CompanyName = await GetCompanyName(u.CompanyId),
+                    CompanyName = GetCompanyName(u.CompanyId),
                     Pinned = u.Pinned,
                 });
 
@@ -57,9 +57,10 @@ namespace VacancieAPI.GraphQl
             var city =  rpc.GetCityByIdSync(id);
             return city.CityName;
         }
-        private async Task<string> GetCompanyName(int id)
+        private static string GetCompanyName(int id)
         {
-            var company = await _companyRpc.GetCompany(id);
+            var rpc = new CompanyRpc();
+            var company = rpc.GetCompanySync(id);
             return company.CompanyName;
         }
     }
