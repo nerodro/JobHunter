@@ -27,8 +27,8 @@ namespace UserAPI.Controllers
                 Name = model.Name.Trim(),
                 Patronomyc = model.Patronomyc.Trim(),
                 Phone = model.Phone,
-                CityId = await GetCityId(model.CityId),
-                CountryId = await GetCountryId(model.CountryId),
+                CityId =  GetCityId(model.CityId),
+                CountryId =  GetCountryId(model.CountryId),
                 Surname = model.Surname.Trim(),
                 RoleId = model.RoleId,
                 Password = model.Password,
@@ -51,8 +51,8 @@ namespace UserAPI.Controllers
                 userEntity.Surname = model.Surname.Trim();
                 userEntity.Phone = model.Phone;
                 userEntity.Patronomyc = model.Patronomyc.Trim();
-                userEntity.CityId = await GetCityId(model.CityId);
-                userEntity.CountryId = await GetCountryId(model.CountryId);
+                userEntity.CityId =  GetCityId(model.CityId);
+                userEntity.CountryId = GetCountryId(model.CountryId);
                 userEntity.RoleId = model.RoleId;
                 if (model.Email != null && model.Name != null)
                 {
@@ -80,9 +80,9 @@ namespace UserAPI.Controllers
                 model.Surname = userEntity.Surname;
                 model.Phone = userEntity.Phone;
                 model.CityId = userEntity.CityId;
-                model.CityName = await GetCityName(model.CityId);
+                model.CityName =  GetCityName(model.CityId);
                 model.CountryId = userEntity.CountryId;
-                model.CountryName = await GetCountryName(model.CountryId);
+                model.CountryName =  GetCountryName(model.CountryId);
                 model.RoleId = userEntity.RoleId;
                 model.Email = userEntity.Email;
                 model.Patronomyc = userEntity.Patronomyc;
@@ -96,7 +96,7 @@ namespace UserAPI.Controllers
             List<UserViewModel> model = new List<UserViewModel>();
             if (_userService != null)
             {
-                _userService.GetAll().ToList().ForEach(async u =>
+                _userService.GetAll().ToList().ForEach( u =>
                 {
                     UserViewModel user = new UserViewModel
                     {
@@ -109,32 +109,32 @@ namespace UserAPI.Controllers
                         RoleId = u.RoleId,
                         Email = u.Email,
                         Patronomyc = u.Patronomyc,
-                        CountryName = await GetCountryName(u.CountryId),
-                        CityName = await GetCityName(u.CityId),
+                        CountryName =  GetCountryName(u.CountryId),
+                        CityName =  GetCityName(u.CityId),
                     };
                     model.Add(user);
                 });
             }
             return model;
         }
-        private async Task<int> GetCityId(int id)
+        private int GetCityId(int id)
         {
-            var city = await _rpc.GetCityById(id);
+            var city = _rpc.GetCityById(id);
             return (int)city.Id;
         }
-        private async Task<int> GetCountryId(int id)
+        private int GetCountryId(int id)
         {
-            var country = await _rpc.GetCountryById(id);
+            var country = _rpc.GetCountryById(id);
             return (int)country.Id;
         }
-        private async Task<string> GetCountryName(int id)
+        private string GetCountryName(int id)
         {
-            var country = await _rpc.GetCountryById(id);
+            var country = _rpc.GetCountryById(id);
             return country.CountryName;
         }
-        private async Task<string> GetCityName(int id)
+        private string GetCityName(int id)
         {
-            var city = await _rpc.GetCityById(id);
+            var city = _rpc.GetCityById(id);
             return city.CityName;
         }
     }

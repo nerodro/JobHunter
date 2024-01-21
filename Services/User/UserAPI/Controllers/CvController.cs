@@ -87,7 +87,7 @@ namespace UserAPI.Controllers
                     model.UserName = await GetUserName(model.UserId);
                     model.Id = CvEntity.Id;
                     model.CategoryId = CvEntity.CategoryId;
-                    model.CategoryName = await GetCategoryName(model.CategoryId);
+                    model.CategoryName = GetCategoryName(model.CategoryId);
                     model.Salary = CvEntity.Salary;
                     return new ObjectResult(model);
                 }
@@ -101,7 +101,7 @@ namespace UserAPI.Controllers
             List<CvViewModel> model = new List<CvViewModel>();
             if (_cvService != null)
             {
-                _cvService.GetAll().ToList().ForEach(async u =>
+                _cvService.GetAll().ToList().ForEach( u =>
                 {
                     CvViewModel cv = new CvViewModel
                     {
@@ -113,7 +113,7 @@ namespace UserAPI.Controllers
                         CategoryId = u.CategoryId,
                         Salary = u.Salary,
                     //    LanguageName = await GetLanguageName(u.LanguageId),
-                        CategoryName = await GetCategoryName(u.CategoryId),
+                        CategoryName = GetCategoryName(u.CategoryId),
                     };
                     model.Add(cv);
                 });
@@ -182,9 +182,9 @@ namespace UserAPI.Controllers
             int category = _rpc.GetCategoryById(id);
             return category;
         }
-        private async Task<string> GetCategoryName(int id)
+        private string GetCategoryName(int id)
         {
-            var model = await _rpc.GetCategoryModel(id);
+            var model = _rpc.GetCategoryModel(id);
             return model.CategoryName;
         }
         private async Task<string> GetLanguageName(int id)

@@ -35,7 +35,7 @@ namespace UserAPI.ServiceGrpc
             var response = _rpc.GetCategoryById(request);
             return (int)response.Category.CategoryId;
         }
-        public async Task<CategoryViewModel> GetCategoryModel(int categoryId)
+        public CategoryViewModel GetCategoryModel(int categoryId)
         {
             var request = new CategoryRequestGrpc
             {

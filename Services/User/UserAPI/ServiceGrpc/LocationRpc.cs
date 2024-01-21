@@ -23,7 +23,7 @@ namespace UserAPI.ServiceGrpc
                 new GrpcChannelOptions { HttpHandler = handler });
             _locationService = new LocationServiceGrpc.LocationServiceGrpcClient(channel);
         }
-        public async Task<CityViewModel> GetCityById(int CityId)
+        public CityViewModel GetCityById(int CityId)
         {
             var request = new CityRequestGrpc
             {
@@ -39,7 +39,7 @@ namespace UserAPI.ServiceGrpc
             };
             return model;
         }
-        public async Task<CountryViewModel> GetCountryById(int CountryId)
+        public CountryViewModel GetCountryById(int CountryId)
         {
             var request = new CountryRequestGrpc
             {
