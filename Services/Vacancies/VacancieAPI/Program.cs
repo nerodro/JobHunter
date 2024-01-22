@@ -151,7 +151,7 @@ builder.Services.AddAuthentication(p =>
 }).AddCookie();
 builder.Services.AddGrpc();
 
-builder.Services.AddGraphQLServer().AddQueryType<Queries>().AddProjections();
+builder.Services.AddGraphQLServer().AddQueryType<Queries>().AddMutationType<Mutation>().AddProjections().AddFiltering();
 
 
 var app = builder.Build();

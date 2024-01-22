@@ -10,6 +10,7 @@ namespace VacancieAPI.GraphQl
     public class Queries
     {
         [UseProjection]
+        [UseFiltering]
         public IQueryable<VacancieViewModel> ReadAllVacancies([Service] IVacancieService vacancieService)
         {
             if (vacancieService != null)
