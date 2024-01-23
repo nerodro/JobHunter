@@ -20,6 +20,7 @@ using VacancieService.Favorite;
 using VacancieService.ResponseService;
 using VacancieService.VacancieService;
 using VacancieService.VacancyService;
+using Microsoft.Extensions.Caching.Distributed;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -153,7 +154,10 @@ builder.Services.AddGrpc();
 
 builder.Services.AddGraphQLServer().AddQueryType<Queries>().AddMutationType<Mutation>().AddProjections().AddFiltering();
 
-
+builder.Services.AddStackExchangeRedisCache(options => {
+    options.Configuration = "localhost";
+    options.InstanceName = "local";
+});
 var app = builder.Build();
 
 app.MapGrpcService<LocationRpc>();
