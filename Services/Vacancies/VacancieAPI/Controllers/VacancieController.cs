@@ -111,7 +111,10 @@ namespace VacancieAPI.Controllers
                         return new ObjectResult(model);
                     }
                 }
-                else { return new ObjectResult(model); }
+                else 
+                { 
+                    return new ObjectResult(model);
+                }
                 return BadRequest("Вакансия не найдена");
             }
             return BadRequest();

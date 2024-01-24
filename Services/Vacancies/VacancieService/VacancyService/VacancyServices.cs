@@ -35,8 +35,15 @@ namespace VacancieService.VacancyService
         public async Task DeleteVacancie(int id)
         {
             VacancieModel Vacancie = await _VacancieService.Get(id);
-            await _VacancieService.Delete(Vacancie);
-            await _VacancieService.SaveChanges();
+            if(Vacancie != null)
+            {
+                await _VacancieService.Delete(Vacancie);
+                await _VacancieService.SaveChanges();
+            }
+            else
+            {
+                throw new NullReferenceException("Вакансия не существует");
+            }
         }
 
         public IEnumerable<VacancieModel> GetForCompany(int companyId)

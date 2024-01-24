@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using HotChocolate.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 using RabbitMQ.Client;
+using System.Text.Json;
 using VacancieAPI.VacancieRpc;
 using VacancieAPI.ViewModel;
 using VacancieDomain.Model;
@@ -16,11 +19,13 @@ namespace VacancieAPI.Controllers
         private readonly IResponseService _ResponseService;
         private readonly CvRpc _rpc;
         private readonly IVacancieService _VacancieService;
-        public ResponseController(IResponseService ResponseService, CvRpc cv, IVacancieService vacancie, IModel? _rabbitMqChannel)
+        IDistributedCache _cache;
+        public ResponseController(IResponseService ResponseService, CvRpc cv, IVacancieService vacancie, IModel? _rabbitMqChannel, IDistributedCache cache)
         {
             _ResponseService = ResponseService;
             _rpc = cv;
             _VacancieService = vacancie;
+            _cache = cache;
         }
         [HttpPost("CreateResponse")]
         [Authorize(Roles = "Admin,Moder,User")]
@@ -60,8 +65,14 @@ namespace VacancieAPI.Controllers
         [Authorize(Roles = "Admin,Moder,User")]
         public async Task<ActionResult<ResponseViewModel>> DeleteResponse(int id)
         {
-            await _ResponseService.DeleteResponse(id);
-            return Ok("Отклик успешно удален");
+            var model = await _ResponseService.GetResponse(id);
+            if ( model != null)
+            {
+                await _ResponseService.DeleteResponse(id);
+                return Ok("Отклик успешно удален");
+            }
+            return BadRequest(ModelState);
+            
         }
         [HttpGet("GetOneResponse/{id}")]
         [Authorize(Roles = "Admin,Moder,User")]
@@ -70,18 +81,32 @@ namespace VacancieAPI.Controllers
             ResponseViewModel model = new ResponseViewModel();
             if (id != 0)
             {
-                ResponseModel Response = await _ResponseService.GetResponse(id);
-                if (Response != null)
+                var responseId = await _cache.GetStringAsync(id.ToString());
+                if (responseId != null) model = JsonSerializer.Deserialize<ResponseViewModel>(responseId)!;
+                if (model.Id == 0)
                 {
-                    model.Message = Response.Message;
-                    model.CvId = Response.CvId;
-                    model.CvName =  GetCvName(Response.CvId);
-                    model.VacancieId = Response.VacancieId;
-                    model.VacancieName = await GetVacancieName(Response.VacancieId);
-                    model.Id = Response.Id;
+                    ResponseModel Response = await _ResponseService.GetResponse(id);
+                    if (Response != null)
+                    {
+                        model.Message = Response.Message;
+                        model.CvId = Response.CvId;
+                        model.CvName = GetCvName(Response.CvId);
+                        model.VacancieId = Response.VacancieId;
+                        model.VacancieName = await GetVacancieName(Response.VacancieId);
+                        model.Id = Response.Id;
+                        responseId = JsonSerializer.Serialize(model);
+                        await _cache.SetStringAsync(model.Id.ToString(), responseId, new DistributedCacheEntryOptions
+                        {
+                            AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1)
+                        });
+                        return new ObjectResult(model);
+                    }
+                    return BadRequest("Отклик не найден");
+                }
+                else
+                {
                     return new ObjectResult(model);
                 }
-                return BadRequest("Отклик не найден");
             }
             return BadRequest();
         }
