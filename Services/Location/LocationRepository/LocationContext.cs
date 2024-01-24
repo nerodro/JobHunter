@@ -14,7 +14,7 @@ namespace LocationRepository
         public DbSet<CityModel> Cities { get; set; }
         public LocationContext(DbContextOptions<LocationContext> options) : base(options)
         {
-            Database.Migrate();
+            //Database.Migrate();
             //Database.EnsureDeleted();
             //Database.EnsureCreated();
         }

@@ -155,7 +155,7 @@ builder.Services.AddGrpc();
 builder.Services.AddGraphQLServer().AddQueryType<Queries>().AddMutationType<Mutation>().AddProjections().AddFiltering();
 
 builder.Services.AddStackExchangeRedisCache(options => {
-    options.Configuration = "localhost";
+    options.Configuration = builder.Configuration["redis:connection"];
     options.InstanceName = "local";
 });
 var app = builder.Build();
