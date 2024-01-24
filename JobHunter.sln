@@ -68,6 +68,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deploy", "Deploy", "{4018A7
 		Deploy\deployment.yaml = Deploy\deployment.yaml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExportAPI", "Services\ExportAPI\ExportAPI.csproj", "{07E9DB09-C8D2-4128-A7B6-FDA902DFC024}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -157,6 +159,10 @@ Global
 		{7674BEC5-20E2-44B1-9510-85D5BAE113F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7674BEC5-20E2-44B1-9510-85D5BAE113F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7674BEC5-20E2-44B1-9510-85D5BAE113F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07E9DB09-C8D2-4128-A7B6-FDA902DFC024}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07E9DB09-C8D2-4128-A7B6-FDA902DFC024}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07E9DB09-C8D2-4128-A7B6-FDA902DFC024}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07E9DB09-C8D2-4128-A7B6-FDA902DFC024}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -188,6 +194,7 @@ Global
 		{E0D35E09-345A-4E26-BE5C-C1F6EE9D4C74} = {2FA719DF-D79A-4B9C-8736-3E28EA14ED33}
 		{2F58358D-8D82-4A36-BFF3-85C379E06398} = {2FA719DF-D79A-4B9C-8736-3E28EA14ED33}
 		{7674BEC5-20E2-44B1-9510-85D5BAE113F0} = {8490A967-E6D6-4670-879F-3033EE7205AA}
+		{07E9DB09-C8D2-4128-A7B6-FDA902DFC024} = {645AAE3B-B225-4B52-A322-6C01918CC1BD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C8FCC14C-0EC8-493C-905A-808C231F52A6}
