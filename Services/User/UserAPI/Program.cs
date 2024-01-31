@@ -122,7 +122,7 @@ builder.Services.AddCors(options =>
         builders
             .AllowAnyHeader()
             .AllowAnyMethod()
-            .AllowAnyOrigin(); // –азрешить доступ из любого источника
+            .AllowAnyOrigin(); 
     });
 });
 

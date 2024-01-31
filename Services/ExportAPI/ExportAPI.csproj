@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="RabbitMq\" />
+    <ProjectReference Include="..\User\UserRepository\UserRepository.csproj" />
   </ItemGroup>
 
 </Project>
