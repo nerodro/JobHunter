@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using ExportAPI.ExportPdf;
+using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
@@ -10,10 +11,12 @@ namespace ExportAPI.RabbitMq
     {
         private readonly IExportCv _exportCv;
         private IModel _rabbitMqChannel;
-        public ExportCv(IExportCv exportCv, IModel rabbitMqChannel)
+        private ExportClass _exportClass;
+        public ExportCv(IExportCv exportCv, IModel rabbitMqChannel, ExportClass exportClass)
         {
             _exportCv = exportCv;
             _rabbitMqChannel = rabbitMqChannel;
+            _exportClass = exportClass;
             _rabbitMqChannel.QueueDeclare("request_export_cv", false, false, false, null);
             _rabbitMqChannel.QueueDeclare("response_export_cv", false, false, false, null);
         }
@@ -24,6 +27,7 @@ namespace ExportAPI.RabbitMq
             {
                 var message = Encoding.UTF8.GetString(ea.Body.ToArray());
                 var request = JsonConvert.DeserializeObject<CvViewModel>(message)!;
+                var response = _exportClass.GeneratePdfCv(request);
 
             };
             _rabbitMqChannel.BasicConsume("request_export_cv", true, consumer);
