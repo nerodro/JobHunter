@@ -1,3 +1,4 @@
+using ExportAPI.RabbitMq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
@@ -6,6 +7,7 @@ using UserRepository.CvLogic;
 using UserRepository.LanguageLogic;
 using UserRepository.UserContext;
 using UserRepository.UserLogic;
+using VacancieAPI.RabbitMq;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,6 +39,25 @@ builder.Services.AddSingleton<IModel>(provider =>
 {
     var connection = provider.GetRequiredService<IConnection>();
     return connection.CreateModel();
+});
+
+builder.Services.AddSingleton<QueueListenerService>(provider =>
+{
+    var scopeFactory = provider.GetRequiredService<IServiceScopeFactory>();
+    using (var scope = scopeFactory.CreateScope())
+    {
+        var scopedProvider = scope.ServiceProvider;
+        var producer = scopedProvider.GetRequiredService<IExportCv>();
+
+        var listenerService = new QueueListenerService(producer);
+        return listenerService;
+    }
+});
+
+builder.Services.AddSingleton<IHostedService>(provider =>
+{
+    var listenerService = provider.GetRequiredService<QueueListenerService>();
+    return listenerService;
 });
 
 builder.Services.AddCors(options =>
