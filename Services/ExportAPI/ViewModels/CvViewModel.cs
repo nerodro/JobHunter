@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UserDomain.Models;
 
-namespace UserAPI.ViewModel
+namespace ExportAPI.ViewModel
 {
     public class CvViewModel
     {

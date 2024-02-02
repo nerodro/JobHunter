@@ -98,6 +98,23 @@ services:
     networks:
         - dev
 
+  exportapi:
+    image: ${DOCKER_REGISTRY-}exportapi
+    depends_on:
+        - "rabbit_mq"
+    build:
+      context: .
+      dockerfile: Services/ExportAPI/Dockerfile
+    ports:
+        - "50011:80"
+        - "50012:443"
+    environment:
+        - RabbitMQ__Hostname=rabbitmq
+        - RabbitMQ__Username=guest
+        - RabbitMQ__Password=guest
+    networks:
+        - dev
+
   app_db:
     image: postgres
     container_name: appdb
@@ -149,6 +166,8 @@ services:
       - 6379:6379
     networks:
       - dev
+
+
 
 
 volumes:

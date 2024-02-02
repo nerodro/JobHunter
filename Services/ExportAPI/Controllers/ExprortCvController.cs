@@ -4,7 +4,7 @@ namespace ExportAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ExprortCv : ControllerBase
+    public class ExprortCvController : ControllerBase
     {
     }
 }

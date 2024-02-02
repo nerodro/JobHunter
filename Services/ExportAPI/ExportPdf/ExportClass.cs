@@ -1,5 +1,4 @@
-﻿using UserAPI.ViewModel;
-
+﻿using ExportAPI.ViewModel;
 
 namespace ExportAPI.ExportPdf
 {
@@ -8,11 +7,7 @@ namespace ExportAPI.ExportPdf
         public Task GeneratePdfCv(CvViewModel cvViewModel)
         {
             var renderer = new ChromePdfRenderer();
-            var pdfFromUrl = renderer.RenderUrlAsPdf("https://getbootstrap.com/");
-            pdfFromUrl.SaveAs("website.pdf");
-            var pdfFromHtmlFile = renderer.RenderHtmlFileAsPdf("design.html");
-            pdfFromHtmlFile.SaveAs("markup.pdf");
-            var pdfFromHtmlString = renderer.RenderHtmlAsPdf(@"<p>Hello World + " + cvViewModel.CategoryName +"</p>", "C:/assets/");
+            var pdfFromHtmlString = renderer.RenderHtmlAsPdf(@"<p>Hello World + " + cvViewModel.CategoryName +"</p>").SaveAs("test.pdf");
             pdfFromHtmlString.SaveAs("markup_with_assets.pdf");
             return Task.CompletedTask;
         }

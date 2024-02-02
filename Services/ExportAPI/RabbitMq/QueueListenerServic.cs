@@ -1,6 +1,6 @@
 ﻿using ExportAPI.RabbitMq;
 
-namespace VacancieAPI.RabbitMq
+namespace ExportAPI.RabbitMq
 {
     public class QueueListenerService : IHostedService 
     {

@@ -19,13 +19,15 @@ namespace UserAPI.Controllers
         private readonly IUserService _userService;
         private readonly CategoryRpc _rpc;
         private readonly IResponseProducer _responseProducer;
-        public CvController(ICvService cvService, ILanguageService languageService, IUserService userService, CategoryRpc rpc, IResponseProducer producer, IModel? _rabbitMqChannel)
+        private readonly ICreateProducer _createProducer;
+        public CvController(ICvService cvService, ILanguageService languageService, IUserService userService, CategoryRpc rpc, IResponseProducer producer, IModel? _rabbitMqChannel, ICreateProducer createProducer)
         {
             _cvService = cvService;
             _languageService = languageService;
             _userService = userService;
             _rpc = rpc;
             _responseProducer = producer;
+            _createProducer = createProducer;
         }
         [HttpPost("CreateCv")]
         public async Task<IActionResult> CreateCv(CvViewModel model)
@@ -71,7 +73,7 @@ namespace UserAPI.Controllers
             return Ok("Резюме успешно удалено");
         }
         [HttpGet("GetOneCv/{id}")]
-        public async Task<ActionResult<CvViewModel>> UserCv(int id)
+        public async Task<IActionResult> UserCv(int id)
         {
             CvViewModel model = new CvViewModel();
             if (id != 0)
@@ -112,7 +114,7 @@ namespace UserAPI.Controllers
                         UserId = u.UserId,
                         CategoryId = u.CategoryId,
                         Salary = u.Salary,
-                    //    LanguageName = await GetLanguageName(u.LanguageId),
+                      //  LanguageName = await GetLanguageName(u.LanguageId),
                         CategoryName = GetCategoryName(u.CategoryId),
                     };
                     model.Add(cv);
@@ -176,6 +178,27 @@ namespace UserAPI.Controllers
         {
             await _responseProducer.DeleteResponseForUser(id);
             return Ok("Вакансия успешно удалена");
+        }
+        [HttpGet("GeneratePdfCv/{id}")]
+        public async Task<ActionResult<CvViewModel>> GeneratePdfCv(int id)
+        {
+            CvViewModel model = new CvViewModel();
+            CvModel CvEntity = await _cvService.GetCv(id);
+            if (CvEntity != null)
+            {
+                model.AboutMe = CvEntity.AboutMe;
+                model.JobNmae = CvEntity.JobNmae;
+                model.LanguageId = CvEntity.LanguageId;
+                model.LanguageName = await GetLanguageName(model.LanguageId);
+                model.UserId = CvEntity.UserId;
+                model.UserName = await GetUserName(model.UserId);
+                model.Id = CvEntity.Id;
+                model.CategoryId = CvEntity.CategoryId;
+                model.CategoryName = GetCategoryName(model.CategoryId);
+                model.Salary = CvEntity.Salary;
+            }
+            await _createProducer.GeneratePdfCv(model);
+            return Ok(model);
         }
         private int GetCategoryId(int id)
         {

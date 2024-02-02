@@ -1,4 +1,4 @@
-﻿namespace UserAPI.RabbitMq
+﻿namespace ExportAPI.RabbitMq
 {
     public class RabbitMQOptions
     {

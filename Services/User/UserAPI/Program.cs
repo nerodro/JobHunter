@@ -60,6 +60,7 @@ builder.Services.AddSingleton<IModel>(provider =>
 });
 
 builder.Services.AddScoped<IResponseProducer, ResponseProducer>();
+builder.Services.AddScoped<ICreateProducer, CreateProducer>();
 
 
 builder.Services.AddScoped<CategoryRpc>();

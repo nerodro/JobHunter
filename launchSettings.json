@@ -11,7 +11,8 @@
         "rabbit_mq": "StartWithoutDebugging",
         "userapi": "StartDebugging",
         "vacancieapi": "StartDebugging",
-        "apigateway": "StartDebugging"
+        "apigateway": "StartDebugging",
+        "exportapi": "StartDebugging"
       }
     }
   }
